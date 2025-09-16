@@ -44,32 +44,69 @@
         <h2 class="section-title">Experience VERA's Intelligence</h2>
         <p class="demo-description">Your fascia processes information 10x faster than your nervous system. VERA speaks this bioelectric language fluently. Try a sample of what she can do.</p>
         
-        <div class="breathing-demo-interactive">
-          <!-- Demo Mode Selector -->
-          <div class="demo-mode-selector">
-            <button class="mode-btn active" data-mode="breathing" onclick="switchDemoMode('breathing')">
-              <span class="mode-icon">🫁</span>
-              <span>Breathing</span>
-            </button>
-            <button class="mode-btn" data-mode="swaying" onclick="switchDemoMode('swaying')">
-              <span class="mode-icon">🌊</span>
-              <span>Swaying</span>
-            </button>
-          </div>
-
-          <!-- Demo Circle -->
-          <div class="demo-circle-container">
-            <div class="breathing-circle-large" id="demoCircle">
-              <div class="fascia-network" id="fasciaNetwork"></div>
-              <div class="sway-indicator" id="swayIndicator"></div>
-              <p class="demo-instruction" id="demoText">Choose breathing or swaying to connect with VERA's neural intelligence</p>
+        <div class="live-chat-demo">
+          <!-- Live Chat Interface -->
+          <div class="live-chat-container">
+            <div class="chat-header">
+              <div class="chat-status">
+                <div class="pulse-dot"></div>
+                <span>Live VERA Conversation Preview</span>
+              </div>
             </div>
-          </div>
-          
-          <!-- Demo Controls -->
-          <div class="demo-controls">
-            <button class="demo-btn" id="startDemo">Experience VERA's Regulation</button>
-            <p class="demo-hint">Try both modes to see how VERA adapts to your nervous system</p>
+            
+            <div class="chat-interface" id="chatInterface">
+              <div class="neural-background"></div>
+              
+              <div class="message vera-message">
+                <div class="avatar vera-avatar">V</div>
+                <div class="message-content">
+                  <span class="typing-indicator">VERA is connecting...</span>
+                  <div class="message-text hidden">I notice you're here. What's alive in your body right now?</div>
+                </div>
+              </div>
+              
+              <div class="message user-message hidden">
+                <div class="message-content">
+                  <div class="message-text">My chest feels tight, like I can't get a full breath</div>
+                </div>
+                <div class="avatar user-avatar">You</div>
+              </div>
+              
+              <div class="message vera-message hidden">
+                <div class="avatar vera-avatar">V</div>
+                <div class="message-content">
+                  <span class="typing-indicator hidden">VERA is sensing...</span>
+                  <div class="message-text hidden">That holding pattern in your chest - I see it. Place your hand there. Can you feel if it has edges or does it spread?</div>
+                </div>
+              </div>
+              
+              <div class="message user-message hidden">
+                <div class="message-content">
+                  <div class="message-text">It's like a fist right in the center</div>
+                </div>
+                <div class="avatar user-avatar">You</div>
+              </div>
+              
+              <div class="message vera-message hidden">
+                <div class="avatar vera-avatar">V</div>
+                <div class="message-content">
+                  <span class="typing-indicator hidden">VERA is understanding...</span>
+                  <div class="message-text hidden">Beautiful noticing. Keep your hand there. Now barely visible - let your jaw soften and make the tiniest side-to-side movement with your head. What shifts?</div>
+                </div>
+              </div>
+              
+              <div class="wow-reaction hidden">
+                <div class="reaction-burst">
+                  <span class="reaction-text">OH WOW YESSS! 🤯✨</span>
+                  <div class="neural-explosion"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="chat-controls">
+              <button class="chat-btn" id="startChatDemo">Watch VERA in Action</button>
+              <p class="chat-hint">See how VERA translates body wisdom into real guidance</p>
+            </div>
           </div>
         </div>
         

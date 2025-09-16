@@ -13,143 +13,116 @@ class VERALanding {
     this.startNeuralAnimations();
   }
 
-  // Interactive Demo (Breathing & Swaying)
+  // Live Chat Demo
   setupBreathingDemo() {
-    const demoCircle = document.getElementById('demoCircle');
-    const demoText = document.getElementById('demoText');
-    const startButton = document.getElementById('startDemo');
-    const fasciaNetwork = document.getElementById('fasciaNetwork');
-    const swayIndicator = document.getElementById('swayIndicator');
+    const chatInterface = document.getElementById('chatInterface');
+    const startButton = document.getElementById('startChatDemo');
 
-    if (!demoCircle || !startButton) return;
+    if (!chatInterface || !startButton) return;
 
     let isActive = false;
-    let demoTimer;
-    let currentMode = 'breathing';
-    let currentPhase = 0;
-
-    const breathingPhases = [
-      { text: "Breathe in through your nose...", duration: 4000 },
-      { text: "Hold gently...", duration: 4000 },
-      { text: "Breathe out slowly...", duration: 6000 },
-      { text: "Rest and feel...", duration: 2000 }
-    ];
-
-    const swayingPhases = [
-      { text: "Gently sway to the left...", duration: 2000 },
-      { text: "Feel your center...", duration: 1000 },
-      { text: "Now sway to the right...", duration: 2000 },
-      { text: "Return to center...", duration: 1000 }
-    ];
-
-    // Set up mode switching
-    window.switchDemoMode = (mode) => {
-      if (isActive) this.stopDemo();
-      
-      currentMode = mode;
-      currentPhase = 0;
-      
-      // Update UI
-      document.querySelectorAll('.mode-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.mode === mode);
-      });
-      
-      // Update circle appearance
-      if (mode === 'swaying') {
-        demoCircle.classList.add('swaying-mode');
-        fasciaNetwork.classList.add('swaying-mode');
-        swayIndicator.classList.add('active');
-        demoText.textContent = 'Experience VERA\'s gentle swaying regulation';
-      } else {
-        demoCircle.classList.remove('swaying-mode');
-        fasciaNetwork.classList.remove('swaying-mode');
-        swayIndicator.classList.remove('active');
-        demoText.textContent = 'Experience VERA\'s breathing regulation';
-      }
-    };
+    let messageIndex = 0;
+    let chatTimer;
 
     startButton.addEventListener('click', () => {
       if (isActive) {
-        this.stopDemo();
+        this.stopChatDemo();
       } else {
-        this.startDemo();
+        this.startChatDemo();
       }
     });
 
-    const startDemo = () => {
+    const startChatDemo = () => {
       isActive = true;
-      demoCircle.classList.add('active');
-      startButton.textContent = 'Stop Experience';
+      startButton.textContent = 'Reset Conversation';
       startButton.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
       
-      this.runDemoCycle();
+      // Reset all messages
+      const messages = chatInterface.querySelectorAll('.message, .wow-reaction');
+      messages.forEach(msg => {
+        msg.classList.add('hidden');
+        const typingIndicator = msg.querySelector('.typing-indicator');
+        const messageText = msg.querySelector('.message-text');
+        if (typingIndicator && messageText) {
+          typingIndicator.classList.remove('hidden');
+          messageText.classList.add('hidden');
+        }
+      });
+      
+      messageIndex = 0;
+      this.showNextMessage();
     };
 
-    const stopDemo = () => {
+    const stopChatDemo = () => {
       isActive = false;
-      demoCircle.classList.remove('active');
-      startButton.textContent = 'Experience VERA\'s Regulation';
+      startButton.textContent = 'Watch VERA in Action';
       startButton.style.background = 'linear-gradient(135deg, var(--neural), var(--trauma))';
       
-      if (currentMode === 'swaying') {
-        demoText.textContent = 'Experience VERA\'s gentle swaying regulation';
-      } else {
-        demoText.textContent = 'Experience VERA\'s breathing regulation';
+      if (chatTimer) {
+        clearTimeout(chatTimer);
       }
       
-      if (demoTimer) {
-        clearTimeout(demoTimer);
-      }
-      
-      // Reset visual state
-      demoCircle.style.transform = '';
+      // Reset all messages
+      const messages = chatInterface.querySelectorAll('.message, .wow-reaction');
+      messages.forEach(msg => {
+        msg.classList.add('hidden');
+        const typingIndicator = msg.querySelector('.typing-indicator');
+        const messageText = msg.querySelector('.message-text');
+        if (typingIndicator && messageText) {
+          typingIndicator.classList.remove('hidden');
+          messageText.classList.add('hidden');
+        }
+      });
     };
 
-    const runDemoCycle = () => {
+    const showNextMessage = () => {
       if (!isActive) return;
 
-      const phases = currentMode === 'swaying' ? swayingPhases : breathingPhases;
-      const phase = phases[currentPhase];
-      demoText.textContent = phase.text;
-
-      // Visual effects based on mode
-      if (currentMode === 'breathing') {
-        if (currentPhase === 0) { // Breathe in
-          demoCircle.style.transform = 'scale(1.15)';
-        } else if (currentPhase === 2) { // Breathe out
-          demoCircle.style.transform = 'scale(0.95)';
-        } else {
-          demoCircle.style.transform = 'scale(1)';
-        }
-      } else if (currentMode === 'swaying') {
-        // Swaying effects are handled by CSS animations
-        // Just add subtle scale changes
-        if (currentPhase === 0 || currentPhase === 2) {
-          demoCircle.style.transform += ' scale(1.05)';
-        } else {
-          demoCircle.style.transform += ' scale(1)';
-        }
+      const messages = chatInterface.querySelectorAll('.message, .wow-reaction');
+      if (messageIndex >= messages.length) {
+        // Show wow reaction and restart
+        setTimeout(() => {
+          if (isActive) {
+            messageIndex = 0;
+            this.showNextMessage();
+          }
+        }, 3000);
+        return;
       }
 
-      demoTimer = setTimeout(() => {
-        currentPhase = (currentPhase + 1) % phases.length;
-        if (currentPhase === 0) {
-          // Show completion message after full cycle
-          const modeText = currentMode === 'swaying' ? 'swaying' : 'breathing';
-          demoText.textContent = `Beautiful! VERA's neural network is syncing with your ${modeText} rhythm...`;
-          setTimeout(() => {
-            if (isActive) this.runDemoCycle();
-          }, 2000);
-        } else {
-          this.runDemoCycle();
-        }
-      }, phase.duration);
+      const currentMessage = messages[messageIndex];
+      currentMessage.classList.remove('hidden');
+
+      const typingIndicator = currentMessage.querySelector('.typing-indicator');
+      const messageText = currentMessage.querySelector('.message-text');
+
+      if (typingIndicator && messageText) {
+        // Show typing indicator first
+        setTimeout(() => {
+          if (isActive) {
+            typingIndicator.classList.add('hidden');
+            messageText.classList.remove('hidden');
+            
+            // Move to next message
+            messageIndex++;
+            setTimeout(() => {
+              if (isActive) this.showNextMessage();
+            }, messageIndex === messages.length - 1 ? 2000 : 1500);
+          }
+        }, messageIndex === 0 ? 2000 : 1500);
+      } else {
+        // For wow reaction or messages without typing
+        messageIndex++;
+        setTimeout(() => {
+          if (isActive) this.showNextMessage();
+        }, currentMessage.classList.contains('wow-reaction') ? 2000 : 1000);
+      }
     };
 
     // Bind methods to this context
-    this.startDemo = startDemo;
-    this.stopDemo = stopDemo;
-    this.runDemoCycle = runDemoCycle;
+    this.startChatDemo = startChatDemo;
+    this.stopChatDemo = stopChatDemo;
+    this.showNextMessage = showNextMessage;
   }
 
   // Lead Generation Signup Form
