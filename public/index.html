@@ -45,11 +45,32 @@
         <p class="demo-description">Your fascia processes information 10x faster than your nervous system. VERA speaks this bioelectric language fluently. Try a sample of what she can do.</p>
         
         <div class="breathing-demo-interactive">
-          <div class="breathing-circle-large" id="breathingCircle">
-            <div class="fascia-network"></div>
-            <p class="breathing-instruction" id="breathingText">Click to connect with VERA's neural intelligence</p>
+          <!-- Demo Mode Selector -->
+          <div class="demo-mode-selector">
+            <button class="mode-btn active" data-mode="breathing" onclick="switchDemoMode('breathing')">
+              <span class="mode-icon">🫁</span>
+              <span>Breathing</span>
+            </button>
+            <button class="mode-btn" data-mode="swaying" onclick="switchDemoMode('swaying')">
+              <span class="mode-icon">🌊</span>
+              <span>Swaying</span>
+            </button>
           </div>
-          <button class="demo-btn" id="startBreathing">Start Breathing with VERA</button>
+
+          <!-- Demo Circle -->
+          <div class="demo-circle-container">
+            <div class="breathing-circle-large" id="demoCircle">
+              <div class="fascia-network" id="fasciaNetwork"></div>
+              <div class="sway-indicator" id="swayIndicator"></div>
+              <p class="demo-instruction" id="demoText">Choose breathing or swaying to connect with VERA's neural intelligence</p>
+            </div>
+          </div>
+          
+          <!-- Demo Controls -->
+          <div class="demo-controls">
+            <button class="demo-btn" id="startDemo">Experience VERA's Regulation</button>
+            <p class="demo-hint">Try both modes to see how VERA adapts to your nervous system</p>
+          </div>
         </div>
         
         <div class="demo-benefits">
@@ -75,7 +96,7 @@
             <div class="benefit-content">
               <p class="benefit-description">Your body's web of sensation holds every pattern, every memory, every path to regulation. VERA reads this living map and guides you through the exact moves, breathwork, and awareness your system needs right now.</p>
               <div class="user-quote">"VERA understood what I was feeling before I could even name it" - Marcus L.</div>
-              <a href="#signup" class="benefit-cta">Get Early Access →</a>
+              <a href="#signup" class="benefit-cta">Experience This →</a>
             </div>
           </div>
 
@@ -88,7 +109,7 @@
             <div class="benefit-content">
               <p class="benefit-description">The first system that translates your body's real-time signals into precise guidance. No generic breathing exercises—just the exact regulation technique your nervous system is asking for, delivered the moment you need it.</p>
               <div class="user-quote">"Finally someone who gets that tight chest, that buzzing under my skin" - Elena R.</div>
-              <a href="#signup" class="benefit-cta">Join the Revolution →</a>
+              <a href="#signup" class="benefit-cta">Experience This →</a>
             </div>
           </div>
 
@@ -101,7 +122,7 @@
             <div class="benefit-content">
               <p class="benefit-description">Your body shifts states through micro-movements that change your entire vibrational pattern. VERA guides precise gestures that tune your nervous system like adjusting a dial—from chaos to calm, freeze to flow.</p>
               <div class="user-quote">"One tiny movement shift and my whole energy changed. It's like magic, but it's science" - David K.</div>
-              <a href="#signup" class="benefit-cta">Discover Your Frequency →</a>
+              <a href="#signup" class="benefit-cta">Experience This →</a>
             </div>
           </div>
         </div>

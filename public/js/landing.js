@@ -13,16 +13,20 @@ class VERALanding {
     this.startNeuralAnimations();
   }
 
-  // Interactive Breathing Demo
+  // Interactive Demo (Breathing & Swaying)
   setupBreathingDemo() {
-    const breathingCircle = document.getElementById('breathingCircle');
-    const breathingText = document.getElementById('breathingText');
-    const startButton = document.getElementById('startBreathing');
+    const demoCircle = document.getElementById('demoCircle');
+    const demoText = document.getElementById('demoText');
+    const startButton = document.getElementById('startDemo');
+    const fasciaNetwork = document.getElementById('fasciaNetwork');
+    const swayIndicator = document.getElementById('swayIndicator');
 
-    if (!breathingCircle || !startButton) return;
+    if (!demoCircle || !startButton) return;
 
-    let isBreathing = false;
-    let breathingTimer;
+    let isActive = false;
+    let demoTimer;
+    let currentMode = 'breathing';
+    let currentPhase = 0;
 
     const breathingPhases = [
       { text: "Breathe in through your nose...", duration: 4000 },
@@ -31,70 +35,121 @@ class VERALanding {
       { text: "Rest and feel...", duration: 2000 }
     ];
 
-    let currentPhase = 0;
+    const swayingPhases = [
+      { text: "Gently sway to the left...", duration: 2000 },
+      { text: "Feel your center...", duration: 1000 },
+      { text: "Now sway to the right...", duration: 2000 },
+      { text: "Return to center...", duration: 1000 }
+    ];
+
+    // Set up mode switching
+    window.switchDemoMode = (mode) => {
+      if (isActive) this.stopDemo();
+      
+      currentMode = mode;
+      currentPhase = 0;
+      
+      // Update UI
+      document.querySelectorAll('.mode-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+      });
+      
+      // Update circle appearance
+      if (mode === 'swaying') {
+        demoCircle.classList.add('swaying-mode');
+        fasciaNetwork.classList.add('swaying-mode');
+        swayIndicator.classList.add('active');
+        demoText.textContent = 'Experience VERA\'s gentle swaying regulation';
+      } else {
+        demoCircle.classList.remove('swaying-mode');
+        fasciaNetwork.classList.remove('swaying-mode');
+        swayIndicator.classList.remove('active');
+        demoText.textContent = 'Experience VERA\'s breathing regulation';
+      }
+    };
 
     startButton.addEventListener('click', () => {
-      if (isBreathing) {
-        this.stopBreathing();
+      if (isActive) {
+        this.stopDemo();
       } else {
-        this.startBreathing();
+        this.startDemo();
       }
     });
 
-    const startBreathing = () => {
-      isBreathing = true;
-      breathingCircle.classList.add('active');
-      startButton.textContent = 'Stop Breathing with VERA';
+    const startDemo = () => {
+      isActive = true;
+      demoCircle.classList.add('active');
+      startButton.textContent = 'Stop Experience';
       startButton.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
       
-      this.runBreathingCycle();
+      this.runDemoCycle();
     };
 
-    const stopBreathing = () => {
-      isBreathing = false;
-      breathingCircle.classList.remove('active');
-      startButton.textContent = 'Start Breathing with VERA';
+    const stopDemo = () => {
+      isActive = false;
+      demoCircle.classList.remove('active');
+      startButton.textContent = 'Experience VERA\'s Regulation';
       startButton.style.background = 'linear-gradient(135deg, var(--neural), var(--trauma))';
-      breathingText.textContent = 'Click to connect with VERA\'s neural intelligence';
       
-      if (breathingTimer) {
-        clearTimeout(breathingTimer);
+      if (currentMode === 'swaying') {
+        demoText.textContent = 'Experience VERA\'s gentle swaying regulation';
+      } else {
+        demoText.textContent = 'Experience VERA\'s breathing regulation';
       }
+      
+      if (demoTimer) {
+        clearTimeout(demoTimer);
+      }
+      
+      // Reset visual state
+      demoCircle.style.transform = '';
     };
 
-    const runBreathingCycle = () => {
-      if (!isBreathing) return;
+    const runDemoCycle = () => {
+      if (!isActive) return;
 
-      const phase = breathingPhases[currentPhase];
-      breathingText.textContent = phase.text;
+      const phases = currentMode === 'swaying' ? swayingPhases : breathingPhases;
+      const phase = phases[currentPhase];
+      demoText.textContent = phase.text;
 
-      // Visual breathing effect
-      if (currentPhase === 0) { // Breathe in
-        breathingCircle.style.transform = 'scale(1.2)';
-      } else if (currentPhase === 2) { // Breathe out
-        breathingCircle.style.transform = 'scale(0.9)';
-      } else {
-        breathingCircle.style.transform = 'scale(1)';
+      // Visual effects based on mode
+      if (currentMode === 'breathing') {
+        if (currentPhase === 0) { // Breathe in
+          demoCircle.style.transform = 'scale(1.15)';
+        } else if (currentPhase === 2) { // Breathe out
+          demoCircle.style.transform = 'scale(0.95)';
+        } else {
+          demoCircle.style.transform = 'scale(1)';
+        }
+      } else if (currentMode === 'swaying') {
+        // Swaying effects are handled by CSS animations
+        // Just add subtle scale changes
+        if (currentPhase === 0 || currentPhase === 2) {
+          demoCircle.style.transform += ' scale(1.05)';
+        } else {
+          demoCircle.style.transform += ' scale(1)';
+        }
       }
 
-      breathingTimer = setTimeout(() => {
-        currentPhase = (currentPhase + 1) % breathingPhases.length;
+      demoTimer = setTimeout(() => {
+        currentPhase = (currentPhase + 1) % phases.length;
         if (currentPhase === 0) {
           // Show completion message after full cycle
-          breathingText.textContent = "Beautiful! VERA's neural network is syncing with your nervous system...";
+          const modeText = currentMode === 'swaying' ? 'swaying' : 'breathing';
+          demoText.textContent = `Beautiful! VERA's neural network is syncing with your ${modeText} rhythm...`;
           setTimeout(() => {
-            if (isBreathing) this.runBreathingCycle();
+            if (isActive) this.runDemoCycle();
           }, 2000);
         } else {
-          this.runBreathingCycle();
+          this.runDemoCycle();
         }
       }, phase.duration);
     };
 
     // Bind methods to this context
-    this.startBreathing = startBreathing;
-    this.stopBreathing = stopBreathing;
-    this.runBreathingCycle = runBreathingCycle;
+    this.startDemo = startDemo;
+    this.stopDemo = stopDemo;
+    this.runDemoCycle = runDemoCycle;
   }
 
   // Lead Generation Signup Form
