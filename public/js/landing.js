@@ -19,116 +19,166 @@ class VERALanding {
     this.setupTechniquesDemo();
   }
 
-  // Live Chat Demo
+  // Interactive Live Chat
   setupChatDemo() {
     const chatInterface = document.getElementById('chatInterface');
-    const startButton = document.getElementById('startChatDemo');
+    const userInput = document.getElementById('userInput');
+    const sendButton = document.getElementById('sendMessage');
+    const questionsCounter = document.getElementById('questionsLeft');
 
-    if (!chatInterface || !startButton) return;
+    if (!chatInterface || !userInput || !sendButton) return;
 
-    let isActive = false;
-    let messageIndex = 0;
-    let chatTimer;
+    let questionsRemaining = 3;
 
-    startButton.addEventListener('click', () => {
-      if (isActive) {
-        this.stopChatDemo();
-      } else {
-        this.startChatDemo();
+    const veraResponses = {
+      'shoulders': "I feel that tension you're holding. Try this: Gently lift your shoulders up to your ears, hold for 3 seconds, then let them drop completely while exhaling slowly. Your fascia needs this release pattern.",
+      'anxious': "That restless energy - your nervous system is in hypervigilance. Place both hands on your chest, breathe in for 4 counts, hold for 4, exhale for 6. This tells your vagus nerve you're safe.",
+      'chest': "That tightness is your chest fascia contracting for protection. Try gentle neck side-to-side movements while placing one hand on your chest. This helps reset the tension pattern.",
+      'stress': "Your body is holding stress in multiple places. Start with 3 deep breaths, then gentle shoulder rolls backward. Your nervous system needs this grounding signal.",
+      'tired': "Fatigue often means your nervous system needs regulation, not just rest. Try gentle spine twists while seated - this activates your parasympathetic nervous system.",
+      'overwhelm': "I can sense that scattered feeling. Ground yourself: Press your feet firmly into the floor, lengthen your spine, and take 5 conscious breaths. This centers your nervous system.",
+      'default': "I understand what you're feeling. Your body is asking for gentle attention. Try slow, mindful movement and conscious breathing to help your nervous system find balance."
+    };
+
+    // Enable/disable send button based on input
+    userInput.addEventListener('input', () => {
+      sendButton.disabled = !userInput.value.trim() || questionsRemaining <= 0;
+    });
+
+    // Send message on Enter key
+    userInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' && !sendButton.disabled) {
+        sendMessage();
       }
     });
 
-    const startChatDemo = () => {
-      isActive = true;
-      startButton.textContent = 'Reset Conversation';
-      startButton.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
-      
-      // Reset all messages
-      const messages = chatInterface.querySelectorAll('.message, .wow-reaction');
-      messages.forEach(msg => {
-        msg.classList.add('hidden');
-        const typingIndicator = msg.querySelector('.typing-indicator');
-        const messageText = msg.querySelector('.message-text');
-        if (typingIndicator && messageText) {
-          typingIndicator.classList.remove('hidden');
-          messageText.classList.add('hidden');
-        }
-      });
-      
-      messageIndex = 0;
-      this.showNextMessage();
-    };
+    // Send button click
+    sendButton.addEventListener('click', sendMessage);
 
-    const stopChatDemo = () => {
-      isActive = false;
-      startButton.textContent = 'Watch VERA in Action';
-      startButton.style.background = 'linear-gradient(135deg, var(--neural), var(--trauma))';
-      
-      if (chatTimer) {
-        clearTimeout(chatTimer);
-      }
-      
-      // Reset all messages
-      const messages = chatInterface.querySelectorAll('.message, .wow-reaction');
-      messages.forEach(msg => {
-        msg.classList.add('hidden');
-        const typingIndicator = msg.querySelector('.typing-indicator');
-        const messageText = msg.querySelector('.message-text');
-        if (typingIndicator && messageText) {
-          typingIndicator.classList.remove('hidden');
-          messageText.classList.add('hidden');
-        }
-      });
-    };
+    function sendMessage() {
+      const message = userInput.value.trim();
+      if (!message || questionsRemaining <= 0) return;
 
-    const showNextMessage = () => {
-      if (!isActive) return;
+      // Add user message
+      addMessage(message, 'user');
+      
+      // Clear input
+      userInput.value = '';
+      sendButton.disabled = true;
 
-      const messages = chatInterface.querySelectorAll('.message, .wow-reaction');
-      if (messageIndex >= messages.length) {
-        // Show wow reaction and restart
+      // Show VERA typing and respond
+      setTimeout(() => {
+        showTypingIndicator();
         setTimeout(() => {
-          if (isActive) {
-            messageIndex = 0;
-            this.showNextMessage();
-          }
-        }, 3000);
-        return;
-      }
-
-      const currentMessage = messages[messageIndex];
-      currentMessage.classList.remove('hidden');
-
-      const typingIndicator = currentMessage.querySelector('.typing-indicator');
-      const messageText = currentMessage.querySelector('.message-text');
-
-      if (typingIndicator && messageText) {
-        // Show typing indicator first
-        setTimeout(() => {
-          if (isActive) {
-            typingIndicator.classList.add('hidden');
-            messageText.classList.remove('hidden');
-            
-            // Move to next message
-            messageIndex++;
+          hideTypingIndicator();
+          const response = generateVERAResponse(message);
+          addMessage(response, 'vera');
+          
+          questionsRemaining--;
+          updateQuestionsCounter();
+          
+          if (questionsRemaining <= 0) {
             setTimeout(() => {
-              if (isActive) this.showNextMessage();
-            }, messageIndex === messages.length - 1 ? 2000 : 1500);
+              addMessage("That's all for now! To continue exploring with VERA, sign up below for full access to personalized guidance.", 'vera');
+            }, 1500);
           }
-        }, messageIndex === 0 ? 2000 : 1500);
-      } else {
-        // For wow reaction or messages without typing
-        messageIndex++;
-        setTimeout(() => {
-          if (isActive) this.showNextMessage();
-        }, currentMessage.classList.contains('wow-reaction') ? 2000 : 1000);
-      }
-    };
+        }, 2000);
+      }, 500);
+    }
 
-    // Bind methods to this context
-    this.startChatDemo = startChatDemo;
-    this.stopChatDemo = stopChatDemo;
-    this.showNextMessage = showNextMessage;
+    function addMessage(text, sender) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${sender}-message`;
+      
+      const avatar = document.createElement('div');
+      avatar.className = `avatar ${sender}-avatar`;
+      avatar.textContent = sender === 'vera' ? 'V' : 'You';
+      
+      const content = document.createElement('div');
+      content.className = 'message-content';
+      
+      const messageText = document.createElement('div');
+      messageText.className = 'message-text';
+      messageText.textContent = text;
+      
+      content.appendChild(messageText);
+      
+      if (sender === 'vera') {
+        messageDiv.appendChild(avatar);
+        messageDiv.appendChild(content);
+      } else {
+        messageDiv.appendChild(content);
+        messageDiv.appendChild(avatar);
+      }
+      
+      chatInterface.appendChild(messageDiv);
+      chatInterface.scrollTop = chatInterface.scrollHeight;
+    }
+
+    function generateVERAResponse(userMessage) {
+      const message = userMessage.toLowerCase();
+      
+      if (message.includes('shoulder') || message.includes('tense') || message.includes('tight shoulder')) {
+        return veraResponses.shoulders;
+      } else if (message.includes('anxious') || message.includes('nervous') || message.includes('restless')) {
+        return veraResponses.anxious;
+      } else if (message.includes('chest') || message.includes('breath') || message.includes('tight chest')) {
+        return veraResponses.chest;
+      } else if (message.includes('stress') || message.includes('overwhelm') || message.includes('pressure')) {
+        return veraResponses.overwhelm;
+      } else if (message.includes('tired') || message.includes('fatigue') || message.includes('exhausted')) {
+        return veraResponses.tired;
+      } else {
+        return veraResponses.default;
+      }
+    }
+
+    function showTypingIndicator() {
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'message vera-message';
+      typingDiv.id = 'typingIndicator';
+      
+      const avatar = document.createElement('div');
+      avatar.className = 'avatar vera-avatar';
+      avatar.textContent = 'V';
+      
+      const content = document.createElement('div');
+      content.className = 'message-content';
+      
+      const typing = document.createElement('span');
+      typing.className = 'typing-indicator active';
+      typing.textContent = 'VERA is sensing';
+      
+      content.appendChild(typing);
+      typingDiv.appendChild(avatar);
+      typingDiv.appendChild(content);
+      
+      chatInterface.appendChild(typingDiv);
+      chatInterface.scrollTop = chatInterface.scrollHeight;
+    }
+
+    function hideTypingIndicator() {
+      const typingIndicator = document.getElementById('typingIndicator');
+      if (typingIndicator) {
+        typingIndicator.remove();
+      }
+    }
+
+    function updateQuestionsCounter() {
+      questionsCounter.textContent = `${questionsRemaining} question${questionsRemaining !== 1 ? 's' : ''} remaining`;
+      
+      if (questionsRemaining <= 0) {
+        userInput.disabled = true;
+        userInput.placeholder = "Chat session complete - sign up for unlimited access";
+      }
+    }
+
+    // Global function for quick questions
+    window.askQuickQuestion = (question) => {
+      if (questionsRemaining <= 0) return;
+      userInput.value = question;
+      sendMessage();
+    };
   }
 
   // Breathing & Swaying Techniques Demo

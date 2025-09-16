@@ -42,7 +42,7 @@
     <section id="vera-demo" class="demo-section">
       <div class="demo-container">
         <h2 class="section-title">Experience VERA's Intelligence</h2>
-        <p class="demo-description">Your fascia processes information 10x faster than your nervous system. VERA speaks this bioelectric language fluently. Try a sample of what she can do.</p>
+        <p class="demo-description">"Tell me what you're feeling—I'll translate what your body needs"</p>
         
         <!-- Live Chat Interface -->
         <div class="live-chat-demo">
@@ -50,7 +50,10 @@
             <div class="chat-header">
               <div class="chat-status">
                 <div class="pulse-dot"></div>
-                <span>Live VERA Conversation Preview</span>
+                <span>Live Chat with VERA</span>
+              </div>
+              <div class="questions-counter">
+                <span id="questionsLeft">3 questions remaining</span>
               </div>
             </div>
             
@@ -60,37 +63,22 @@
               <div class="message vera-message">
                 <div class="avatar vera-avatar">V</div>
                 <div class="message-content">
-                  <span class="typing-indicator hidden">VERA is connecting...</span>
-                  <div class="message-text">I notice you're here. What's alive in your body right now?</div>
-                </div>
-              </div>
-              
-              <div class="message user-message hidden">
-                <div class="message-content">
-                  <div class="message-text">My chest feels tight, like I can't get a full breath</div>
-                </div>
-                <div class="avatar user-avatar">You</div>
-              </div>
-              
-              <div class="message vera-message hidden">
-                <div class="avatar vera-avatar">V</div>
-                <div class="message-content">
-                  <span class="typing-indicator hidden">VERA is sensing...</span>
-                  <div class="message-text hidden">That holding pattern in your chest - I see it. Let me show you two techniques that work perfectly for this pattern.</div>
-                </div>
-              </div>
-              
-              <div class="wow-reaction hidden">
-                <div class="reaction-burst">
-                  <span class="reaction-text">Perfect! Let's try these techniques... 🌟</span>
-                  <div class="neural-explosion"></div>
+                  <div class="message-text">Hello! I'm VERA. Tell me what you're feeling in your body right now, and I'll translate what it needs. You have 3 questions to explore with me.</div>
                 </div>
               </div>
             </div>
             
-            <div class="chat-controls">
-              <button class="chat-btn" id="startChatDemo">Watch VERA in Action</button>
-              <p class="chat-hint">See how VERA translates body wisdom into techniques</p>
+            <div class="chat-input-area">
+              <div class="input-container">
+                <input type="text" id="userInput" placeholder="Type what you're feeling in your body..." maxlength="150">
+                <button id="sendMessage" disabled>Ask VERA</button>
+              </div>
+              <div class="quick-questions">
+                <span>Quick starts:</span>
+                <button class="quick-btn" onclick="askQuickQuestion('My shoulders are so tense')">Tense shoulders</button>
+                <button class="quick-btn" onclick="askQuickQuestion('I feel anxious and restless')">Feeling anxious</button>
+                <button class="quick-btn" onclick="askQuickQuestion('My chest feels tight')">Tight chest</button>
+              </div>
             </div>
           </div>
         </div>
