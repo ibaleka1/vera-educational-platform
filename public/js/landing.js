@@ -292,6 +292,38 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('🌟 Welcome to the future of nervous system regulation');
 });
 
+// Expandable Benefit Cards Function
+function toggleBenefit(header) {
+  const card = header.closest('.benefit-card');
+  const isExpanded = card.classList.contains('expanded');
+  
+  // Close all other cards first
+  document.querySelectorAll('.benefit-card').forEach(c => {
+    if (c !== card) {
+      c.classList.remove('expanded');
+    }
+  });
+  
+  // Toggle current card
+  if (isExpanded) {
+    card.classList.remove('expanded');
+  } else {
+    card.classList.add('expanded');
+    
+    // Track expansion for analytics
+    const title = header.querySelector('h4').textContent;
+    console.log('VERA Benefit Expanded:', title);
+    
+    // Optional: Auto-scroll to keep content in view
+    setTimeout(() => {
+      card.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'nearest' 
+      });
+    }, 200);
+  }
+}
+
 // Export for potential external use
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = VERALanding;
