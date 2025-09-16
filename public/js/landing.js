@@ -55,7 +55,7 @@ class VERALanding {
       breathingCircle.classList.remove('active');
       startButton.textContent = 'Start Breathing with VERA';
       startButton.style.background = 'linear-gradient(135deg, var(--neural), var(--trauma))';
-      breathingText.textContent = 'Click to begin regulation with VERA';
+      breathingText.textContent = 'Click to connect with VERA\'s neural intelligence';
       
       if (breathingTimer) {
         clearTimeout(breathingTimer);
@@ -81,7 +81,7 @@ class VERALanding {
         currentPhase = (currentPhase + 1) % breathingPhases.length;
         if (currentPhase === 0) {
           // Show completion message after full cycle
-          breathingText.textContent = "Beautiful! VERA is reading your nervous system coherence...";
+          breathingText.textContent = "Beautiful! VERA's neural network is syncing with your nervous system...";
           setTimeout(() => {
             if (isBreathing) this.runBreathingCycle();
           }, 2000);
