@@ -1,0 +1,54 @@
+{
+  "name": "vera-educational-platform",
+  "version": "1.0.0",
+  "description": "VERA - Regulate to Elevate | Eva Leka's 18-Year Combat Trauma Methodology",
+  "main": "public/index.html",
+  "type": "module",
+  "scripts": {
+    "dev": "node -p \"console.log('VERA Development Server'); console.log('Navigate to: http://localhost:3000')\" && npx http-server public -p 3000 -c-1",
+    "build": "echo 'VERA Platform built successfully'",
+    "start": "node -p \"console.log('Starting VERA Platform')\" && npx http-server public -p 8080",
+    "test": "echo 'Testing VERA Platform functionality'"
+  },
+  "keywords": [
+    "vera",
+    "eva-leka",
+    "trauma-recovery",
+    "nervous-system",
+    "regulate",
+    "elevate",
+    "breathing",
+    "grounding",
+    "bilateral-stimulation",
+    "journal",
+    "chat",
+    "frequencies"
+  ],
+  "author": "Eva Leka - Combat Trauma Specialist",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/vera-educational-platform.git"
+  },
+  "dependencies": {
+    "openai": "^4.20.0"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "vera": {
+    "methodology": "Eva Leka's 18-Year Combat Trauma Experience",
+    "framework": "5-Step VERA Process",
+    "tools": [
+      "Breathing Exercises",
+      "Bilateral Sway",
+      "Grounding Techniques", 
+      "Trauma-Informed Journal",
+      "Eva's Chat Support",
+      "Healing Frequencies"
+    ]
+  }
+}

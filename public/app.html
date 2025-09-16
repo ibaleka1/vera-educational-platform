@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>VERA - Your Session</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="VERA regulation session - breathing, bilateral sway, grounding, journaling, chat">
+  <link rel="stylesheet" href="/css/vera.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="session-info">
+        <div class="session-greeting">
+          <span class="greeting" id="greeting">Welcome back</span>
+          <span class="vera-status">VERA is here with you</span>
+        </div>
+        <a href="/" class="home-link">← Exit Session</a>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <!-- Tool Selection Grid -->
+      <div class="tools-grid" id="toolsGrid">
+        <div class="tool-card active" onclick="showTool('breathing')" id="breathingCard">
+          <div class="tool-icon">
+            <div class="breath-preview"></div>
+          </div>
+          <h3>Breathing</h3>
+          <p>Box • 4-7-8 • Coherent</p>
+        </div>
+
+        <div class="tool-card" onclick="showTool('sway')" id="swayCard">
+          <div class="tool-icon">
+            <div class="sway-preview"></div>
+          </div>
+          <h3>Bilateral Sway</h3>
+          <p>Side-to-side regulation</p>
+        </div>
+
+        <div class="tool-card" onclick="showTool('grounding')" id="groundingCard">
+          <div class="tool-icon">
+            <div class="grounding-icon">🌲</div>
+          </div>
+          <h3>Grounding</h3>
+          <p>5-4-3-2-1 Sensory</p>
+        </div>
+
+        <div class="tool-card" onclick="showTool('journal')" id="journalCard">
+          <div class="tool-icon">
+            <div class="journal-icon">📓</div>
+          </div>
+          <h3>Neural Journal</h3>
+          <p>Body-first prompts</p>
+        </div>
+
+        <div class="tool-card" onclick="showTool('chat')" id="chatCard">
+          <div class="tool-icon">
+            <div class="chat-icon">💬</div>
+          </div>
+          <h3>Chat with VERA</h3>
+          <p>Nervous system guidance</p>
+        </div>
+
+        <div class="tool-card" onclick="showTool('frequencies')" id="frequenciesCard">
+          <div class="tool-icon">
+            <div class="frequency-icon">🎵</div>
+          </div>
+          <h3>Frequencies</h3>
+          <p>Healing tones & music</p>
+        </div>
+      </div>
+
+      <!-- Breathing Exercise -->
+      <div id="breathingTool" class="tool-view active">
+        <div class="tool-header">
+          <h2>Breathing Exercise</h2>
+          <p class="tool-subtitle">Let your breath regulate your nervous system</p>
+        </div>
+        
+        <div class="breathing-container">
+          <div class="breathing-bubble" id="breathBubble">
+            <div class="breath-inner">
+              <span id="breathText">Ready</span>
+              <div class="breath-count" id="breathCount">4</div>
+            </div>
+          </div>
+          
+          <div class="breath-controls">
+            <button class="breath-type active" onclick="setBreathType('box')" id="boxBreath">
+              Box (4-4-4-4)
+            </button>
+            <button class="breath-type" onclick="setBreathType('478')" id="fourSevenEight">
+              4-7-8 Calm
+            </button>
+            <button class="breath-type" onclick="setBreathType('coherent')" id="coherent">
+              Coherent 5-5
+            </button>
+          </div>
+          
+          <button class="btn-primary" onclick="toggleBreathing()" id="breathButton">
+            Start Breathing
+          </button>
+        </div>
+      </div>
+
+      <!-- Bilateral Sway -->
+      <div id="swayTool" class="tool-view">
+        <div class="tool-header">
+          <h2>Bilateral Sway</h2>
+          <p class="tool-subtitle">Gentle side-to-side movement to regulate your system</p>
+        </div>
+        
+        <div class="sway-container">
+          <div class="sway-guide">
+            <div class="sway-circle" id="swayCircle"></div>
+            <div class="sway-trail"></div>
+          </div>
+          <div class="sway-instructions">
+            <p>Follow the circle with your body</p>
+            <p>Sway gently side to side</p>
+            <p>Let your nervous system find its rhythm</p>
+          </div>
+          <button class="btn-primary" onclick="toggleSway()" id="swayButton">
+            Start Swaying
+          </button>
+        </div>
+      </div>
+
+      <!-- Grounding -->
+      <div id="groundingTool" class="tool-view">
+        <div class="tool-header">
+          <h2>5-4-3-2-1 Grounding</h2>
+          <p class="tool-subtitle">Speak out loud to anchor yourself in the present</p>
+        </div>
+        
+        <div class="grounding-container">
+          <div class="grounding-image-container">
+            <div class="grounding-placeholder">
+              <span class="nature-emoji">🌲🌿🍃</span>
+            </div>
+          </div>
+          
+          <div class="grounding-steps">
+            <div class="grounding-step active" id="step1">
+              <div class="step-indicator">👁️</div>
+              <h3>Say out loud: 5 things you SEE</h3>
+              <p>Look around you right now. Name them.</p>
+            </div>
+            
+            <div class="grounding-step" id="step2">
+              <div class="step-indicator">✋</div>
+              <h3>Say out loud: 4 things you can TOUCH</h3>
+              <p>What textures are within reach?</p>
+            </div>
+            
+            <div class="grounding-step" id="step3">
+              <div class="step-indicator">👂</div>
+              <h3>Say out loud: 3 things you HEAR</h3>
+              <p>What sounds are present right now?</p>
+            </div>
+            
+            <div class="grounding-step" id="step4">
+              <div class="step-indicator">👃</div>
+              <h3>Say out loud: 2 things you SMELL</h3>
+              <p>What scents can you detect?</p>
+            </div>
+            
+            <div class="grounding-step" id="step5">
+              <div class="step-indicator">👅</div>
+              <h3>Say out loud: 1 thing you TASTE</h3>
+              <p>What taste is in your mouth?</p>
+            </div>
+          </div>
+          
+          <button class="btn-primary" onclick="nextGroundingStep()" id="groundingButton">
+            Next Step
+          </button>
+        </div>
+      </div>
+
+      <!-- Journal -->
+      <div id="journalTool" class="tool-view">
+        <div class="tool-header">
+          <h2>Nervous System Journal</h2>
+          <p class="tool-subtitle">Let your body speak through your hands</p>
+        </div>
+        
+        <div class="journal-container">
+          <div class="prompt-selector">
+            <button class="prompt-btn active" onclick="loadPrompt('body')">Body Scan</button>
+            <button class="prompt-btn" onclick="loadPrompt('abandonment')">Abandonment</button>
+            <button class="prompt-btn" onclick="loadPrompt('betrayal')">Betrayal</button>
+            <button class="prompt-btn" onclick="loadPrompt('rage')">Rage</button>
+            <button class="prompt-btn" onclick="loadPrompt('grief')">Grief</button>
+          </div>
+          
+          <div class="journal-prompt" id="journalPrompt">
+            Select a prompt to begin your nervous system dialogue...
+          </div>
+          
+          <textarea 
+            id="journalEntry" 
+            placeholder="Let your nervous system write... Don't edit, just flow."
+            rows="8"
+          ></textarea>
+          
+          <div class="journal-actions">
+            <button class="btn-secondary" onclick="clearJournal()">Clear</button>
+            <button class="btn-primary" onclick="saveJournal()">Save Entry</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat with VERA -->
+      <div id="chatTool" class="tool-view">
+        <div class="tool-header">
+          <h2>Chat with VERA</h2>
+          <p class="tool-subtitle">Real nervous system guidance from Eva's methodology</p>
+        </div>
+        
+        <div class="chat-container">
+          <div class="chat-messages" id="chatMessages">
+            <div class="message vera-message">
+              <div class="message-avatar">V</div>
+              <div class="message-content">
+                <p>Hi, I'm VERA and I am here with you.</p>
+                <p>What's happening in your body right now - chest, throat, gut, or skin? Start there.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="chat-input-container">
+            <input 
+              type="text" 
+              id="chatInput" 
+              placeholder="Tell VERA what your body is feeling..." 
+              onkeypress="if(event.key==='Enter')sendMessage()"
+              autocomplete="off"
+            >
+            <button class="send-btn" onclick="sendMessage()">Send</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frequencies -->
+      <div id="frequenciesTool" class="tool-view">
+        <div class="tool-header">
+          <h2>Healing Frequencies</h2>
+          <p class="tool-subtitle">Binaural beats and solfeggio tones for nervous system regulation</p>
+        </div>
+        
+        <div class="frequencies-container">
+          <div class="frequency-categories">
+            <button class="freq-category active" onclick="showFrequencyCategory('binaural')">
+              Binaural Beats
+            </button>
+            <button class="freq-category" onclick="showFrequencyCategory('solfeggio')">
+              Solfeggio Tones
+            </button>
+            <button class="freq-category" onclick="showFrequencyCategory('nature')">
+              Nature Sounds
+            </button>
+          </div>
+          
+          <div class="frequency-list" id="frequencyList">
+            <div class="frequency-item">
+              <div class="freq-info">
+                <h4>40Hz Focus</h4>
+                <p>Gamma waves for concentration</p>
+              </div>
+              <button class="play-btn" onclick="playFrequency('40hz')">Play</button>
+            </div>
+            
+            <div class="frequency-item">
+              <div class="freq-info">
+                <h4>10Hz Alpha</h4>
+                <p>Relaxed awareness</p>
+              </div>
+              <button class="play-btn" onclick="playFrequency('10hz')">Play</button>
+            </div>
+            
+            <div class="frequency-item">
+              <div class="freq-info">
+                <h4>6Hz Theta</h4>
+                <p>Deep relaxation</p>
+              </div>
+              <button class="play-btn" onclick="playFrequency('6hz')">Play</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/breathing.js"></script>
+  <script src="/js/grounding.js"></script>
+  <script src="/js/journal-prompts.js"></script>
+  <script src="/js/frequencies.js"></script>
+
+  <script>
+    // Tool switching
+    let currentTool = 'breathing';
+    
+    function showTool(toolName) {
+      // Hide all tools
+      document.querySelectorAll('.tool-view').forEach(view => {
+        view.classList.remove('active');
+      });
+      
+      // Hide all cards active state
+      document.querySelectorAll('.tool-card').forEach(card => {
+        card.classList.remove('active');
+      });
+      
+      // Show selected tool
+      document.getElementById(toolName + 'Tool').classList.add('active');
+      document.getElementById(toolName + 'Card').classList.add('active');
+      
+      currentTool = toolName;
+      
+      // Initialize tool if needed
+      if (toolName === 'chat' && !document.querySelector('.message.user-message')) {
+        initializeChat();
+      }
+    }
+
+    // Dynamic greeting
+    function updateGreeting() {
+      const hour = new Date().getHours();
+      let greeting = 'Welcome back';
+      
+      if (hour < 12) greeting = 'Good morning';
+      else if (hour < 17) greeting = 'Good afternoon';
+      else greeting = 'Good evening';
+      
+      document.getElementById('greeting').textContent = greeting;
+    }
+
+    updateGreeting();
+
+    // Chat functionality
+    let chatPending = false;
+
+    function initializeChat() {
+      const chatMessages = document.getElementById('chatMessages');
+      // Chat is already initialized with VERA's greeting
+    }
+
+    async function sendMessage() {
+      if (chatPending) return;
+      
+      const input = document.getElementById('chatInput');
+      const messages = document.getElementById('chatMessages');
+      const message = input.value.trim();
+      
+      if (!message) return;
+      
+      // Add user message
+      const userMessage = document.createElement('div');
+      userMessage.className = 'message user-message';
+      userMessage.innerHTML = `
+        <div class="message-content">
+          <p>${message}</p>
+        </div>
+        <div class="message-avatar">You</div>
+      `;
+      messages.appendChild(userMessage);
+      
+      input.value = '';
+      chatPending = true;
+      
+      // Add VERA typing indicator
+      const typingIndicator = document.createElement('div');
+      typingIndicator.className = 'message vera-message typing';
+      typingIndicator.innerHTML = `
+        <div class="message-avatar">V</div>
+        <div class="message-content">
+          <p>VERA is responding...</p>
+        </div>
+      `;
+      messages.appendChild(typingIndicator);
+      messages.scrollTop = messages.scrollHeight;
+      
+      try {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message })
+        });
+        
+        const data = await response.json();
+        
+        // Remove typing indicator
+        typingIndicator.remove();
+        
+        // Add VERA response
+        const veraMessage = document.createElement('div');
+        veraMessage.className = 'message vera-message';
+        veraMessage.innerHTML = `
+          <div class="message-avatar">V</div>
+          <div class="message-content">
+            <p>${data.reply || 'I\'m here with you. Your nervous system is speaking - I\'m listening.'}</p>
+          </div>
+        `;
+        messages.appendChild(veraMessage);
+        
+      } catch (error) {
+        typingIndicator.remove();
+        
+        // Add error message
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'message vera-message';
+        errorMessage.innerHTML = `
+          <div class="message-avatar">V</div>
+          <div class="message-content">
+            <p>I'm having trouble connecting right now. Your nervous system is still brilliant - I'll be back soon.</p>
+          </div>
+        `;
+        messages.appendChild(errorMessage);
+      } finally {
+        chatPending = false;
+        messages.scrollTop = messages.scrollHeight;
+      }
+    }
+
+    // Initialize animations
+    document.addEventListener('DOMContentLoaded', function() {
+      // Start breath preview animation
+      const breathPreview = document.querySelector('.breath-preview');
+      if (breathPreview) {
+        setInterval(() => {
+          breathPreview.style.transform = 'scale(1.2)';
+          setTimeout(() => {
+            breathPreview.style.transform = 'scale(1)';
+          }, 2000);
+        }, 4000);
+      }
+      
+      // Start sway preview animation
+      const swayPreview = document.querySelector('.sway-preview');
+      if (swayPreview) {
+        swayPreview.style.animation = 'sway 3s ease-in-out infinite';
+      }
+    });
+  </script>
+</body>
+</html>
