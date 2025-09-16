@@ -2,9 +2,14 @@
 <html lang="en">
 <head>
   <title>VERA - Regulate to Elevate</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="VERA: Revolutionary nervous system companion speaking from the intelligence of your fascia. 100X more intuitive than Alexa for nervous system regulation.">
-  <link rel="stylesheet" href="/css/vera.css">
+  <meta name="theme-color" content="#8b5cf6">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="preload" href="/css/vera.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/css/vera.css"></noscript>
 </head>
 <body>
   <div class="landing-container">
@@ -381,6 +386,6 @@
   </div>
 
   <!-- VERA Revolutionary Interface JavaScript -->
-  <script src="/js/landing.js"></script>
+  <script src="/js/landing.js" defer></script>
 </body>
 </html>
