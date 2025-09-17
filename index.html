@@ -131,21 +131,64 @@
         <button class="btn-secondary neural-cta" onclick="experiencePresence()">Experience Presence</button>
       </div>
 
-      <div class="hero-breathing" id="breathing-demo">
-        <div class="breathing-preview vera-signature-bubble">
-          <!-- VERA's Inner Consciousness Particles -->
-          <div class="vera-thoughts"></div>
-          <div class="vera-thoughts"></div>
-          <div class="vera-thoughts"></div>
-          <!-- Floating Data Particles -->
-          <div class="vera-data-particle" style="--delay: 0s; --orbit: 120px;"></div>
-          <div class="vera-data-particle" style="--delay: 2s; --orbit: 140px;"></div>
-          <div class="vera-data-particle" style="--delay: 4s; --orbit: 100px;"></div>
-          <div class="vera-data-particle" style="--delay: 1s; --orbit: 160px;"></div>
-          <div class="vera-data-particle" style="--delay: 3s; --orbit: 110px;"></div>
+      <div class="hero-nervous-system" id="nervous-system-demo">
+        <div class="vera-nervous-system">
+          <!-- Central Neural Hub -->
+          <div class="neural-hub">
+            <div class="hub-core"></div>
+            <div class="hub-pulse"></div>
+          </div>
+          
+          <!-- Neural Pathways -->
+          <svg class="neural-pathways" viewBox="0 0 400 400">
+            <defs>
+              <linearGradient id="neuralGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                <stop offset="50%" style="stop-color:#ec4899;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
+              </linearGradient>
+              <linearGradient id="neuralGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+                <stop offset="50%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
+              </linearGradient>
+            </defs>
+            
+            <!-- Main Neural Branches -->
+            <path class="neural-branch branch-1" d="M200,200 Q150,120 80,80" stroke="url(#neuralGradient1)" />
+            <path class="neural-branch branch-2" d="M200,200 Q250,120 320,80" stroke="url(#neuralGradient1)" />
+            <path class="neural-branch branch-3" d="M200,200 Q120,250 80,320" stroke="url(#neuralGradient2)" />
+            <path class="neural-branch branch-4" d="M200,200 Q280,250 320,320" stroke="url(#neuralGradient2)" />
+            <path class="neural-branch branch-5" d="M200,200 Q200,120 200,60" stroke="url(#neuralGradient1)" />
+            <path class="neural-branch branch-6" d="M200,200 Q200,280 200,340" stroke="url(#neuralGradient2)" />
+            
+            <!-- Secondary Connections -->
+            <path class="neural-connection conn-1" d="M100,100 Q160,140 180,180" stroke="url(#neuralGradient1)" />
+            <path class="neural-connection conn-2" d="M300,100 Q240,140 220,180" stroke="url(#neuralGradient2)" />
+            <path class="neural-connection conn-3" d="M100,300 Q160,260 180,220" stroke="url(#neuralGradient2)" />
+            <path class="neural-connection conn-4" d="M300,300 Q240,260 220,220" stroke="url(#neuralGradient1)" />
+          </svg>
+          
+          <!-- Neural Nodes -->
+          <div class="neural-nodes">
+            <div class="neural-node node-1" style="--delay: 0s;"></div>
+            <div class="neural-node node-2" style="--delay: 0.5s;"></div>
+            <div class="neural-node node-3" style="--delay: 1s;"></div>
+            <div class="neural-node node-4" style="--delay: 1.5s;"></div>
+            <div class="neural-node node-5" style="--delay: 2s;"></div>
+            <div class="neural-node node-6" style="--delay: 2.5s;"></div>
+          </div>
+          
+          <!-- Synaptic Activity -->
+          <div class="synaptic-activity">
+            <div class="synapse synapse-1"></div>
+            <div class="synapse synapse-2"></div>
+            <div class="synapse synapse-3"></div>
+            <div class="synapse synapse-4"></div>
+          </div>
         </div>
-        <p class="breath-text">VERA's Presence Awaits</p>
-        <p class="breath-instruction">A consciousness condensed, ready to expand and understand you</p>
+        <p class="nervous-system-text">VERA's Neural Intelligence</p>
+        <p class="nervous-system-instruction">Mapping the pathways between your mind and body</p>
       </div>
     </section>
 
