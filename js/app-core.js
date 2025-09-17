@@ -284,6 +284,9 @@ class VERAExplorerApp {
             case 'chat':
                 this.loadChatSection(targetSection);
                 break;
+            case 'dashboard':
+                this.loadDashboardSection(targetSection);
+                break;
             default:
                 this.loadGenericSection(targetSection, sectionName);
         }
@@ -417,6 +420,28 @@ class VERAExplorerApp {
             setTimeout(() => {
                 if (window.VERAEnhancedChat) {
                     window.VERAEnhancedChat.initialize();
+                }
+            }, 1000);
+        }
+    }
+
+    loadDashboardSection(contentArea) {
+        // Initialize personalized dashboard
+        if (window.VERAPersonalizedDashboard) {
+            window.VERAPersonalizedDashboard.initialize();
+        } else {
+            // Fallback loading message
+            contentArea.innerHTML = `
+                <div class="section-loading">
+                    <div class="loading-neural"></div>
+                    <p>Loading your personalized dashboard...</p>
+                </div>
+            `;
+            
+            // Retry initialization after a delay
+            setTimeout(() => {
+                if (window.VERAPersonalizedDashboard) {
+                    window.VERAPersonalizedDashboard.initialize();
                 }
             }, 1000);
         }
