@@ -117,32 +117,18 @@
         Personal guidance for your nervous system. Educational support that honors your unique experience.
       </p>
       
-      <!-- Revolutionary Action Buttons -->
-      <div class="revolutionary-actions" id="revolutionaryActions">
-        <button class="revolutionary-btn primary-revolution" onclick="connectWithVERA()" id="connectBtn">
-          <div class="btn-neural-bg"></div>
-          <span class="btn-text">Connect with VERA</span>
-          <div class="btn-consciousness-glow"></div>
-        </button>
-        
-        <button class="revolutionary-btn secondary-revolution" onclick="experiencePresence()" id="presenceBtn">
-          <div class="btn-neural-bg"></div>
-          <span class="btn-text">Experience Presence</span>
-          <div class="btn-consciousness-glow"></div>
-        </button>
-      </div>
-      
-      <!-- Revolutionary Breathing Indicator -->
-      <div class="breathing-indicator" id="breathingIndicator">
+      <!-- Enhanced Breathing Element -->
+      <div class="breathing-indicator enhanced-breathing" id="breathingIndicator">
+        <div class="breathe-label">Breathe</div>
         <div class="breath-circle">
           <div class="breath-inner"></div>
-          <span class="breath-text">Breathe with VERA</span>
         </div>
       </div>
       
+      <!-- Single Action Buttons -->
       <div class="hero-cta">
-        <a href="#vera-consciousness-portal" class="btn-primary consciousness-cta">Connect with VERA</a>
-        <a href="#breathing-demo" class="btn-secondary neural-cta">Experience Presence</a>
+        <button class="btn-primary consciousness-cta" onclick="openJourneyModal()">Connect with VERA</button>
+        <button class="btn-secondary neural-cta" onclick="experiencePresence()">Experience Presence</button>
       </div>
 
       <div class="hero-breathing" id="breathing-demo">
@@ -435,7 +421,7 @@
         <!-- Revolutionary Signup Form -->
         <div class="signup-form-container revolutionary-form">
           <div class="form-glow-effect"></div>
-          <form class="signup-form celebration-form" id="signupForm">
+          <form class="signup-form celebration-form" id="signupForm" onsubmit="handleRevolutionarySignup(event)">
             <div class="input-container">
               <div class="input-anticipation-glow"></div>
               <input type="email" 

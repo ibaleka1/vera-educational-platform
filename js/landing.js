@@ -3270,43 +3270,37 @@ function removeButtonAura(button) {
 function connectWithVERA() {
   console.log('🌟 Connecting with VERA...');
   
-  // Create connection animation
-  const connectBtn = document.getElementById('connectBtn');
-  if (connectBtn) {
-    connectBtn.style.animation = 'connectionPulse 1s ease-out';
-    
-    setTimeout(() => {
-      connectBtn.style.animation = '';
-      // Redirect to consciousness chat interface
-      window.location.href = 'chat.html';
-    }, 1000);
-  }
+  // Create beautiful neural burst animation
+  createNeuralBurstAnimation();
+  
+  // Redirect to premium chat with animation delay
+  setTimeout(() => {
+    window.location.href = 'premium-chat.html';
+  }, 2000);
 }
 
 function experiencePresence() {
   console.log('🧘 Experiencing presence...');
   
-  const presenceBtn = document.getElementById('presenceBtn');
-  if (presenceBtn) {
-    presenceBtn.style.animation = 'presenceExpansion 1.5s ease-out';
-    
-    // Start breathing mode automatically
-    if (!breathingActive) {
-      toggleBreathingMode();
-    }
-    
-    // Scroll to consciousness showcase
-    setTimeout(() => {
-      presenceBtn.style.animation = '';
-      const consciousnessSection = document.querySelector('.consciousness-showcase');
-      if (consciousnessSection) {
-        consciousnessSection.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'start' 
-        });
-      }
-    }, 1500);
+  // Create presence expansion effect
+  createPresenceExpansionEffect();
+  
+  // Start breathing mode automatically
+  const breathingElement = document.getElementById('breathingIndicator');
+  if (breathingElement && !breathingActive) {
+    toggleBreathingMode();
   }
+  
+  // Scroll to consciousness showcase
+  setTimeout(() => {
+    const consciousnessSection = document.querySelector('.consciousness-showcase') || document.getElementById('capabilities');
+    if (consciousnessSection) {
+      consciousnessSection.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
+    }
+  }, 1500);
 }
 
 // Add revolutionary button animations
@@ -3539,6 +3533,129 @@ function generateBasicVERAResponse(userMessage) {
   return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
 }
 
+function createNeuralBurstAnimation() {
+  const burst = document.createElement('div');
+  burst.className = 'neural-burst-animation';
+  burst.innerHTML = `
+    <div class="burst-center"></div>
+    <div class="neural-rays"></div>
+    <div class="consciousness-ripples"></div>
+  `;
+  
+  burst.style.cssText = `
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    pointer-events: none;
+    z-index: 9999;
+  `;
+  
+  document.body.appendChild(burst);
+  
+  // Remove after animation
+  setTimeout(() => {
+    if (burst.parentNode) {
+      burst.parentNode.removeChild(burst);
+    }
+  }, 3000);
+}
+
+function createPresenceExpansionEffect() {
+  const expansion = document.createElement('div');
+  expansion.className = 'presence-expansion-effect';
+  expansion.innerHTML = `
+    <div class="expansion-wave"></div>
+    <div class="expansion-wave"></div>
+    <div class="expansion-wave"></div>
+  `;
+  
+  expansion.style.cssText = `
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    pointer-events: none;
+    z-index: 9999;
+  `;
+  
+  document.body.appendChild(expansion);
+  
+  // Remove after animation
+  setTimeout(() => {
+    if (expansion.parentNode) {
+      expansion.parentNode.removeChild(expansion);
+    }
+  }, 2500);
+}
+
+function handleRevolutionarySignup(event) {
+  event.preventDefault();
+  
+  const email = document.getElementById('revolutionaryEmail').value;
+  const submitBtn = event.target.querySelector('button[type="submit"]');
+  const originalText = submitBtn.querySelector('.btn-text').textContent;
+  
+  // Show celebration animation
+  createSignupCelebrationEffect();
+  
+  // Update button state
+  submitBtn.querySelector('.btn-text').textContent = 'Activating VERA...';
+  submitBtn.disabled = true;
+  
+  // Simulate signup process with beautiful feedback
+  setTimeout(() => {
+    submitBtn.querySelector('.btn-text').textContent = 'Welcome to the Revolution!';
+    
+    // Show success message after animation
+    setTimeout(() => {
+      openJourneyModal();
+      // Reset form after modal opens
+      event.target.reset();
+      submitBtn.querySelector('.btn-text').textContent = originalText;
+      submitBtn.disabled = false;
+    }, 2000);
+  }, 2000);
+}
+
+function createSignupCelebrationEffect() {
+  const celebration = document.createElement('div');
+  celebration.className = 'signup-celebration-effect';
+  celebration.innerHTML = `
+    <div class="celebration-burst"></div>
+    <div class="celebration-particles"></div>
+    <div class="celebration-text">🎉 Welcome to VERA! 🎉</div>
+  `;
+  
+  celebration.style.cssText = `
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    pointer-events: none;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  `;
+  
+  document.body.appendChild(celebration);
+  
+  // Remove after animation
+  setTimeout(() => {
+    if (celebration.parentNode) {
+      celebration.parentNode.removeChild(celebration);
+    }
+  }, 4000);
+}
+
 // Add CSS for typing indicator and user messages
 const basicChatStyles = document.createElement('style');
 basicChatStyles.textContent = `
@@ -3588,6 +3705,165 @@ basicChatStyles.textContent = `
   .user-content {
     max-width: 70%;
     margin-left: auto;
+  }
+  
+  /* Neural Burst Animation */
+  .neural-burst-animation .burst-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, #8b5cf6, #10b981);
+    border-radius: 50%;
+    animation: burstExplosion 2s ease-out;
+  }
+  
+  .neural-burst-animation .neural-rays::before,
+  .neural-burst-animation .neural-rays::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: 100px;
+    background: linear-gradient(to top, transparent, #8b5cf6, transparent);
+    animation: raysSpin 2s ease-out;
+  }
+  
+  .neural-burst-animation .neural-rays::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+  
+  .neural-burst-animation .consciousness-ripples::before,
+  .neural-burst-animation .consciousness-ripples::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid rgba(139, 92, 246, 0.6);
+    border-radius: 50%;
+    animation: rippleExpand 2s ease-out;
+  }
+  
+  .neural-burst-animation .consciousness-ripples::after {
+    animation-delay: 0.5s;
+  }
+  
+  @keyframes burstExplosion {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+    50% { transform: translate(-50%, -50%) scale(2); opacity: 0.8; }
+    100% { transform: translate(-50%, -50%) scale(4); opacity: 0; }
+  }
+  
+  @keyframes raysSpin {
+    0% { transform: translate(-50%, -50%) rotate(0deg) scale(0); }
+    50% { transform: translate(-50%, -50%) rotate(180deg) scale(1); }
+    100% { transform: translate(-50%, -50%) rotate(360deg) scale(0); }
+  }
+  
+  @keyframes rippleExpand {
+    0% { width: 50px; height: 50px; opacity: 1; }
+    100% { width: 300px; height: 300px; opacity: 0; }
+  }
+  
+  /* Presence Expansion Effect */
+  .presence-expansion-effect .expansion-wave {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid rgba(16, 185, 129, 0.4);
+    border-radius: 50%;
+    animation: waveExpansion 2.5s ease-out;
+  }
+  
+  .presence-expansion-effect .expansion-wave:nth-child(2) {
+    animation-delay: 0.5s;
+  }
+  
+  .presence-expansion-effect .expansion-wave:nth-child(3) {
+    animation-delay: 1s;
+  }
+  
+  @keyframes waveExpansion {
+    0% { 
+      width: 30px; 
+      height: 30px; 
+      opacity: 1; 
+      border-width: 3px;
+    }
+    100% { 
+      width: 300px; 
+      height: 300px; 
+      opacity: 0; 
+      border-width: 0px;
+    }
+  }
+  
+  /* Signup Celebration Effect */
+  .signup-celebration-effect .celebration-burst {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle, #ec4899, #8b5cf6, #10b981);
+    border-radius: 50%;
+    animation: celebrationBurst 3s ease-out;
+  }
+  
+  .signup-celebration-effect .celebration-particles::before,
+  .signup-celebration-effect .celebration-particles::after {
+    content: '✨';
+    position: absolute;
+    font-size: 2rem;
+    animation: particleFloat 3s ease-out;
+  }
+  
+  .signup-celebration-effect .celebration-particles::before {
+    top: 20%;
+    left: 20%;
+    animation-delay: 0.5s;
+  }
+  
+  .signup-celebration-effect .celebration-particles::after {
+    top: 20%;
+    right: 20%;
+    animation-delay: 1s;
+  }
+  
+  .signup-celebration-effect .celebration-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 80px;
+    text-shadow: 0 0 20px rgba(139, 92, 246, 0.8);
+    animation: celebrationText 3s ease-out;
+  }
+  
+  @keyframes celebrationBurst {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+    50% { transform: translate(-50%, -50%) scale(3); opacity: 0.8; }
+    100% { transform: translate(-50%, -50%) scale(5); opacity: 0; }
+  }
+  
+  @keyframes particleFloat {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+  }
+  
+  @keyframes celebrationText {
+    0% { opacity: 0; transform: translateY(20px) scale(0.8); }
+    20% { opacity: 1; transform: translateY(0) scale(1.1); }
+    80% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-20px) scale(0.9); }
   }
 `;
 document.head.appendChild(basicChatStyles);
