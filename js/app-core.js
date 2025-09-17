@@ -1322,8 +1322,10 @@ class VERACore {
     }
 }
 
-// Initialize VERACore
+// Initialize VERACore immediately
+console.log('🚀 Creating VERACore instance...');
 window.VERACore = new VERACore();
+console.log('✅ VERACore instance created:', window.VERACore);
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
@@ -1331,13 +1333,26 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize VERACore first
     if (window.VERACore) {
+        console.log('🔧 Initializing VERACore...');
         window.VERACore.init();
+    } else {
+        console.error('❌ VERACore not found!');
     }
     
     // Initialize main app
     if (!window.veraApp) {
+        console.log('🏗️ Creating VERAExplorerApp...');
         window.veraApp = new VERAExplorerApp();
     }
+    
+    // Test navigation
+    console.log('🧪 Testing VERACore methods:');
+    console.log('showSection method:', typeof window.VERACore.showSection);
+    
+    // Make sure navigation works
+    setTimeout(() => {
+        console.log('🎯 VERACore ready for navigation!');
+    }, 1000);
 });
 
 // Utility functions for basic interactions

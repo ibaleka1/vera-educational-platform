@@ -16,30 +16,6 @@
         <canvas id="neuralCanvas"></canvas>
     </div>
 
-    <!-- Presentation Demo Controls -->
-    <div id="demoControls" class="demo-controls">
-        <div class="demo-header">
-            <h3>VERA Presentation Demo</h3>
-            <div class="device-indicator" id="deviceIndicator">Desktop</div>
-        </div>
-        
-        <div class="demo-sections">
-            <button onclick="presentationDemo.showOverview()" class="demo-btn">Platform Overview</button>
-            <button onclick="presentationDemo.showBreathing()" class="demo-btn">Breathing</button>
-            <button onclick="presentationDemo.showGrounding()" class="demo-btn">Grounding</button>
-            <button onclick="presentationDemo.showJournal()" class="demo-btn">Journal</button>
-            <button onclick="presentationDemo.showChat()" class="demo-btn">AI Chat</button>
-            <button onclick="presentationDemo.showDashboard()" class="demo-btn">Analytics</button>
-            <button onclick="presentationDemo.showPricing()" class="demo-btn">Pricing</button>
-        </div>
-        
-        <div class="demo-actions">
-            <button onclick="presentationDemo.simulateUserJourney()" class="demo-action-btn">User Journey</button>
-            <button onclick="presentationDemo.highlightFeatures()" class="demo-action-btn">Highlight Features</button>
-            <button onclick="presentationDemo.toggleDemoMode()" class="demo-toggle-btn" id="demoToggle">Demo Mode: ON</button>
-        </div>
-    </div>
-
     <!-- Main App Container -->
     <div class="app-container">
         <!-- Side Navigation Panel -->
@@ -72,11 +48,11 @@
                 <div class="nav-section">
                     <h3>Regulation Library</h3>
                     <ul class="nav-list">
-                        <li><a href="#breathing" class="nav-item" data-section="breathing" data-tier-feature="breathing" onclick="VERACore.showSection('breathing'); createNeuralIcon('breathing', this); setNeuralCoherence()">
+                        <li><a href="#breathing" class="nav-item" data-section="breathing" data-tier-feature="breathing" onclick="window.VERACore.showSection('breathing'); return false;">
                             <div class="nav-neural" data-icon-type="breathing"></div>
                             <span>Breathing Exercises</span>
                         </a></li>
-                        <li><a href="#grounding" class="nav-item" data-section="grounding" data-tier-feature="grounding" onclick="VERACore.showSection('grounding'); createNeuralIcon('grounding', this); setNeuralRegulation()">
+                        <li><a href="#grounding" class="nav-item" data-section="grounding" data-tier-feature="grounding" onclick="window.VERACore.showSection('grounding'); return false;">
                             <div class="nav-neural" data-icon-type="grounding"></div>
                             <span>Grounding Techniques</span>
                         </a></li>
@@ -86,11 +62,11 @@
                 <div class="nav-section">
                     <h3>Your Journey</h3>
                     <ul class="nav-list">
-                        <li><a href="#journal" class="nav-item" data-section="journal" onclick="VERACore.showSection('journal'); createNeuralIcon('journal', this)">
+                        <li><a href="#journal" class="nav-item" data-section="journal" onclick="window.VERACore.showSection('journal'); return false;">
                             <div class="nav-neural" data-icon-type="journal"></div>
                             <span>Nervous System Journal</span>
                         </a></li>
-                        <li><a href="#chat" class="nav-item" data-section="chat" onclick="VERACore.showSection('chat'); createNeuralIcon('chat', this)">
+                        <li><a href="#chat" class="nav-item" data-section="chat" onclick="window.VERACore.showSection('chat'); return false;">
                             <div class="nav-neural" data-icon-type="chat"></div>
                             <span>Chat with VERA</span>
                             <div class="chat-counter" id="chatCounter">7/10</div>
@@ -101,11 +77,11 @@
                 <div class="nav-section">
                     <h3>Your Account</h3>
                     <ul class="nav-list">
-                        <li><a href="#progress" class="nav-item" data-section="progress">
+                        <li><a href="#progress" class="nav-item" data-section="progress" onclick="window.VERACore.showSection('progress'); return false;">
                             <div class="nav-neural"></div>
                             <span>Progress Tracking</span>
                         </a></li>
-                        <li><a href="#settings" class="nav-item" data-section="settings">
+                        <li><a href="#settings" class="nav-item" data-section="settings" onclick="window.VERACore.showSection('settings'); return false;">
                             <div class="nav-neural"></div>
                             <span>Settings</span>
                         </a></li>
@@ -157,19 +133,19 @@
                         <div class="quick-regulation">
                             <h3>Quick Regulation</h3>
                             <div class="quick-options">
-                                <button class="quick-option" onclick="VERACore.showSection('breathing')">
+                                <button class="quick-option" onclick="window.VERACore.showSection('breathing')">
                                     <div class="option-neural pulse-neural"></div>
                                     <span>5-Minute Breathing</span>
                                 </button>
-                                <button class="quick-option" onclick="VERACore.showSection('grounding')">
+                                <button class="quick-option" onclick="window.VERACore.showSection('grounding')">
                                     <div class="option-neural wave-neural"></div>
                                     <span>Instant Grounding</span>
                                 </button>
-                                <button class="quick-option" onclick="VERACore.showSection('chat')">
+                                <button class="quick-option" onclick="window.VERACore.showSection('chat')">
                                     <div class="option-neural glow-neural"></div>
                                     <span>Chat with VERA</span>
                                 </button>
-                                <button class="quick-option" onclick="VERACore.showSection('journal')">
+                                <button class="quick-option" onclick="window.VERACore.showSection('journal')">
                                     <div class="option-neural neural-journal"></div>
                                     <span>Neural Journal</span>
                                 </button>
@@ -247,6 +223,5 @@
     <script src="js/enhanced-chat.js"></script>
     <script src="js/personalized-dashboard.js"></script>
     <script src="js/trial-management.js"></script>
-    <script src="js/presentation-demo.js"></script>
 </body>
 </html>
