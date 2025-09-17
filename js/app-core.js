@@ -385,20 +385,19 @@ class VERAExplorerApp {
     }
 
     loadJournalSection(contentArea) {
-        if (contentArea.children.length === 0 || contentArea.querySelector('.section-loading')) {
+        // Initialize journal if not already loaded
+        if (!window.nsJournal) {
             contentArea.innerHTML = `
-                <div class="journal-interface">
-                    <div class="journal-header">
-                        <h2>Your Nervous System Journal</h2>
-                        <p class="journal-subtitle">Track your regulation journey</p>
-                    </div>
-                    <div class="section-loading">
-                        <div class="loading-neural"></div>
-                        <p>Coming soon: Daily prompts and mood tracking</p>
-                    </div>
+                <div class="section-loading">
+                    <div class="loading-neural"></div>
+                    <p>Loading nervous system journal...</p>
                 </div>
             `;
+            return;
         }
+
+        contentArea.innerHTML = window.nsJournal.createJournalInterface();
+        window.nsJournal.setupEventListeners();
     }
 
     loadChatSection(contentArea) {
