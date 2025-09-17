@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VERA - Your Nervous System Companion</title>
+  <meta name="description" content="AI-powered nervous system regulation and educational platform">
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="css/vera.css" as="style">
+  <link rel="stylesheet" href="css/vera.css">
+  
+  <!-- Inline critical CSS for immediate rendering -->
+  <style>
+    /* DEFENSIVE PROGRAMMING - ERROR-PROOF IMPLEMENTATION */
+    :root {
+      --primary-purple: #6B46C1;
+      --dark-purple: #342E6C;
+      --neural-blue: #00D4FF;
+      --activation-pink: #FF6B9D;
+      --balance-gold: #FFD700;
+      --calm-green: #00FF88;
+      --deep-navy: #0A0B1E;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, var(--primary-purple), var(--dark-purple));
+      min-height: 100vh;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* App Container - Single Page Application */
+    .app-container {
+      position: relative;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    /* View Sections */
+    .view-section {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      min-height: 100vh;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1;
+    }
+
+    .view-section.active-view {
+      opacity: 1;
+      transform: translateX(0);
+      z-index: 10;
+    }
+
+    .hero-section.active-view {
+      position: relative;
+      transform: none;
+      opacity: 1;
+    }
+
+    /* Starfield Background - Consistent across all views */
+    .starfield {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .starfield::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent);
+      background-repeat: repeat;
+      background-size: 200px 200px;
+      animation: starMove 20s linear infinite;
+    }
+
+    @keyframes starMove {
+      from { transform: translateY(0px); }
+      to { transform: translateY(-200px); }
+    }
+
+    /* Section Headers */
+    .section-header {
+      position: relative;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .back-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-height: 44px;
+      font-size: 1rem;
+    }
+
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateX(-5px);
+    }
+
+    /* Hero Section Styles */
+    .hero-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      max-width: 1200px;
+      width: 100%;
+      align-items: center;
+      z-index: 10;
+      position: relative;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--neural-blue), var(--activation-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.2rem, 3vw, 1.5rem);
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border-radius: 2rem;
+      border: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-height: 44px;
+      min-width: 150px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-purple), var(--neural-blue));
+      color: white;
+      box-shadow: 0 10px 30px rgba(107, 70, 193, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(107, 70, 193, 0.6);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+    }
+
+    /* Consciousness Orb */
+    .consciousness-orb {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: 0 auto;
+    }
+
+    .orb-core {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, var(--neural-blue), var(--activation-pink));
+      border-radius: 50%;
+      animation: coreGlow 3s ease-in-out infinite alternate;
+    }
+
+    .orb-rings {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .ring {
+      position: absolute;
+      border: 2px solid transparent;
+      border-radius: 50%;
+      animation: ringRotate 10s linear infinite;
+    }
+
+    .ring-1 {
+      width: 200px;
+      height: 200px;
+      border-color: rgba(0, 212, 255, 0.3);
+      animation-duration: 8s;
+    }
+
+    .ring-2 {
+      width: 250px;
+      height: 250px;
+      border-color: rgba(255, 107, 157, 0.3);
+      animation-duration: 12s;
+      animation-direction: reverse;
+    }
+
+    .ring-3 {
+      width: 300px;
+      height: 300px;
+      border-color: rgba(255, 215, 0, 0.3);
+      animation-duration: 15s;
+    }
+
+    @keyframes coreGlow {
+      0% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.5); }
+      100% { box-shadow: 0 0 40px rgba(255, 107, 157, 0.8); }
+    }
+
+    @keyframes ringRotate {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* Mobile-first responsive */
+    @media (max-width: 767px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+      }
+      
+      .consciousness-orb {
+        width: 200px;
+        height: 200px;
+      }
+      
+      .orb-core {
+        width: 80px;
+        height: 80px;
+      }
+      
+      .ring-1 { width: 140px; height: 140px; }
+      .ring-2 { width: 170px; height: 170px; }
+      .ring-3 { width: 200px; height: 200px; }
+      
+      .hero-actions {
+        justify-content: center;
+      }
+      
+      .section-header {
+        padding: 1rem;
+      }
+    }
+
+    /* Loading state */
+    .loading {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Single Page Application Container -->
+  <div class="app-container" id="appContainer">
+    
+    <!-- Hero/Landing Section -->
+    <section id="heroSection" class="hero-section active-view">
+      <div class="starfield"></div>
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="hero-title">
+            Welcome to <span style="color: var(--neural-blue);">VERA</span>
+          </h1>
+          <p class="hero-subtitle">
+            Your AI companion for nervous system regulation and educational support
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" onclick="navigateToSection('chat')">
+              Chat with VERA
+            </button>
+            <button class="btn btn-secondary" onclick="navigateToSection('techniques')">
+              Explore Techniques
+            </button>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="consciousness-orb">
+            <div class="orb-rings">
+              <div class="ring ring-1"></div>
+              <div class="ring ring-2"></div>
+              <div class="ring ring-3"></div>
+            </div>
+            <div class="orb-core"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chat Section -->
+    <section id="chatSection" class="chat-section view-section">
+      <div class="starfield"></div>
+      <div class="section-header">
+        <button class="back-btn" onclick="navigateToSection('hero')">← Back</button>
+        <h2>Chat with VERA</h2>
+      </div>
+      
+      <div style="max-width: 800px; margin: 0 auto; padding: 2rem; position: relative; z-index: 10;">
+        <div style="background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(10px); border-radius: 1.5rem; padding: 2rem;">
+          
+          <!-- Chat Header -->
+          <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding: 1rem; background: rgba(0, 212, 255, 0.1); border-radius: 1rem;">
+            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--neural-blue), var(--activation-pink)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; animation: pulse 2s ease-in-out infinite;">
+              V
+            </div>
+            <div>
+              <h3 style="margin: 0; font-size: 1.3rem;">VERA</h3>
+              <p style="margin: 0; opacity: 0.8; font-size: 0.9rem;">Your Nervous System Companion</p>
+            </div>
+          </div>
+          
+          <!-- Messages Area -->
+          <div id="chatMessages" style="max-height: 400px; overflow-y: auto; margin-bottom: 2rem; padding: 1rem; background: rgba(0, 0, 0, 0.2); border-radius: 1rem;">
+            <div style="display: flex; gap: 0.75rem; margin-bottom: 1.5rem;">
+              <div style="width: 30px; height: 30px; background: linear-gradient(135deg, var(--neural-blue), var(--activation-pink)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; flex-shrink: 0;">V</div>
+              <div style="background: rgba(0, 212, 255, 0.2); border: 1px solid rgba(0, 212, 255, 0.3); padding: 1rem 1.25rem; border-radius: 1.25rem; max-width: 70%;">
+                <p style="margin: 0;">Hello! I'm VERA, your nervous system companion. I can sense you're here to explore regulation techniques. What's bringing you here today?</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Input Area -->
+          <div style="margin-bottom: 2rem;">
+            <div style="display: flex; gap: 0.75rem; margin-bottom: 1rem;">
+              <button id="voiceBtn" style="width: 44px; height: 44px; background: var(--primary-purple); border: none; border-radius: 0.75rem; color: white; cursor: pointer; font-size: 1.2rem;" title="Use voice">🎤</button>
+              <input type="text" id="messageInput" placeholder="Type your message..." maxlength="500" style="flex: 1; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 1.5rem; padding: 0.75rem 1.25rem; color: white; font-size: 1rem; outline: none;">
+              <button onclick="sendMessage()" style="width: 44px; height: 44px; background: var(--primary-purple); border: none; border-radius: 50%; color: white; cursor: pointer; font-size: 1.2rem;">→</button>
+            </div>
+            
+            <!-- Quick Response Buttons -->
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
+              <button class="quick-btn" onclick="sendQuickMessage('I feel anxious')" style="background: rgba(0, 212, 255, 0.2); border: 1px solid rgba(0, 212, 255, 0.3); border-radius: 1.25rem; padding: 0.5rem 1rem; color: white; cursor: pointer; min-height: 44px; font-size: 0.875rem;">I feel anxious</button>
+              <button class="quick-btn" onclick="sendQuickMessage('I need grounding')" style="background: rgba(0, 212, 255, 0.2); border: 1px solid rgba(0, 212, 255, 0.3); border-radius: 1.25rem; padding: 0.5rem 1rem; color: white; cursor: pointer; min-height: 44px; font-size: 0.875rem;">I need grounding</button>
+              <button class="quick-btn" onclick="sendQuickMessage('Help me relax')" style="background: rgba(0, 212, 255, 0.2); border: 1px solid rgba(0, 212, 255, 0.3); border-radius: 1.25rem; padding: 0.5rem 1rem; color: white; cursor: pointer; min-height: 44px; font-size: 0.875rem;">Help me relax</button>
+            </div>
+          </div>
+          
+          <!-- Continue Button (appears after interaction) -->
+          <div style="text-align: center;">
+            <button id="continueBtn" class="btn btn-primary" onclick="navigateToSection('techniques')" style="opacity: 0; transition: opacity 0.5s ease;">
+              Continue to Techniques →
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Techniques Selection Section -->
+    <section id="techniquesSection" class="techniques-section view-section">
+      <div class="starfield"></div>
+      <div class="section-header">
+        <button class="back-btn" onclick="navigateToSection('chat')">← Back to Chat</button>
+        <h2>Choose Your Experience</h2>
+      </div>
+      
+      <div style="max-width: 1000px; margin: 0 auto; padding: 4rem 2rem; position: relative; z-index: 10;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem;">
+          
+          <!-- Neural Breathing Card -->
+          <div onclick="navigateToSection('breathing')" style="background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(10px); border-radius: 2rem; padding: 3rem; text-align: center; cursor: pointer; transition: all 0.4s ease; border: 2px solid transparent; position: relative; overflow: hidden;">
+            <div style="width: 150px; height: 150px; margin: 0 auto 2rem; position: relative;">
+              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; background: radial-gradient(circle, var(--neural-blue), var(--activation-pink)); border-radius: 50%; animation: breathPulse 3s ease-in-out infinite;"></div>
+              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 120px; height: 120px; border: 2px solid rgba(0, 212, 255, 0.3); border-radius: 50%; animation: breathRing 4s ease-in-out infinite;"></div>
+            </div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--neural-blue);">Neural Breathing</h3>
+            <p style="opacity: 0.8; margin-bottom: 2rem;">Guided breathwork for nervous system regulation with VERA's voice guidance</p>
+            <div style="font-size: 2rem; color: var(--activation-pink);">→</div>
+          </div>
+          
+          <!-- Fascia Swaying Card -->
+          <div onclick="navigateToSection('swaying')" style="background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(10px); border-radius: 2rem; padding: 3rem; text-align: center; cursor: pointer; transition: all 0.4s ease; border: 2px solid transparent; position: relative; overflow: hidden;">
+            <div style="width: 150px; height: 150px; margin: 0 auto 2rem; position: relative;">
+              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; background: radial-gradient(circle, var(--activation-pink), var(--balance-gold)); border-radius: 50%;"></div>
+              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 120px; height: 120px; border: 2px solid rgba(255, 107, 157, 0.3); border-radius: 50%; animation: swayOrbit 6s linear infinite;"></div>
+            </div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--activation-pink);">Fascia Swaying</h3>
+            <p style="opacity: 0.8; margin-bottom: 2rem;">Gentle movement for tissue release with soothing background music</p>
+            <div style="font-size: 2rem; color: var(--balance-gold);">→</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Breathing Exercise Section -->
+    <section id="breathingSection" class="breathing-section view-section">
+      <div class="starfield"></div>
+      <div class="section-header">
+        <button class="back-btn" onclick="navigateToSection('techniques')">← Back to Techniques</button>
+        <h2>Neural Breathing Experience</h2>
+      </div>
+      
+      <div style="display: flex; align-items: center; justify-content: center; min-height: 80vh; padding: 2rem; position: relative; z-index: 10;">
+        <div style="text-align: center; max-width: 600px;">
+          
+          <!-- Large Breathing Orb -->
+          <div id="breathingOrb" style="width: 300px; height: 300px; margin: 0 auto 3rem; position: relative;">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 200px; height: 200px; background: radial-gradient(circle, var(--neural-blue), var(--activation-pink), var(--balance-gold)); border-radius: 50%; transition: all 4s cubic-bezier(0.4, 0, 0.6, 1);"></div>
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 250px; height: 250px; border: 3px solid rgba(0, 212, 255, 0.4); border-radius: 50%; animation: breathGlow 4s ease-in-out infinite;"></div>
+          </div>
+          
+          <!-- Breathing Instructions -->
+          <div style="margin-bottom: 3rem;">
+            <h3 id="breathingPhase" style="font-size: 2rem; margin-bottom: 1rem; color: var(--neural-blue);">Get Ready</h3>
+            <p id="breathingCounter" style="font-size: 3rem; font-weight: bold; color: white;">4</p>
+            <p style="opacity: 0.8; font-size: 1.1rem;">Follow the orb and VERA's guidance</p>
+          </div>
+          
+          <!-- Controls -->
+          <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <button id="startBreathingBtn" class="btn btn-primary" onclick="startBreathingExercise()">Start Breathing</button>
+            <button id="pauseBreathingBtn" class="btn btn-secondary" onclick="pauseBreathingExercise()" style="display: none;">Pause</button>
+            <button id="completeBreathingBtn" class="btn btn-primary" onclick="completeBreathingExercise()" style="display: none;">Complete & Continue</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Swaying Exercise Section -->
+    <section id="swayingSection" class="swaying-section view-section">
+      <div class="starfield"></div>
+      <div class="section-header">
+        <button class="back-btn" onclick="navigateToSection('techniques')">← Back to Techniques</button>
+        <h2>Fascia Swaying Experience</h2>
+      </div>
+      
+      <div style="display: flex; align-items: center; justify-content: center; min-height: 80vh; padding: 2rem; position: relative; z-index: 10;">
+        <div style="text-align: center; max-width: 600px;">
+          
+          <!-- Swaying Visualization -->
+          <div id="swayingOrb" style="width: 300px; height: 300px; margin: 0 auto 3rem; position: relative;">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 200px; height: 200px; background: radial-gradient(circle, var(--activation-pink), var(--balance-gold), var(--calm-green)); border-radius: 50%; transition: all 3s ease-in-out;"></div>
+            <div id="swayOrbit" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 250px; height: 250px; border: 3px solid rgba(255, 107, 157, 0.4); border-radius: 50%;"></div>
+          </div>
+          
+          <!-- Swaying Instructions -->
+          <div style="margin-bottom: 3rem;">
+            <h3 id="swayingPhase" style="font-size: 2rem; margin-bottom: 1rem; color: var(--activation-pink);">Get Ready</h3>
+            <p id="swayingDirection" style="font-size: 1.5rem; color: white; margin-bottom: 1rem;">Center</p>
+            <p style="opacity: 0.8; font-size: 1.1rem;">Gently sway your body left, center, right with the visualization</p>
+          </div>
+          
+          <!-- Controls -->
+          <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <button id="startSwayingBtn" class="btn btn-primary" onclick="startSwayingExercise()">Start Swaying</button>
+            <button id="pauseSwayingBtn" class="btn btn-secondary" onclick="pauseSwayingExercise()" style="display: none;">Pause</button>
+            <button id="completeSwayingBtn" class="btn btn-primary" onclick="completeSwayingExercise()" style="display: none;">Complete & Continue</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Signup/Tiers Section -->
+    <section id="signupSection" class="signup-section view-section">
+      <div class="starfield"></div>
+      <div class="section-header">
+        <button class="back-btn" onclick="navigateToSection('techniques')">← Back to Techniques</button>
+        <h2>Choose Your VERA Journey</h2>
+      </div>
+      
+      <div style="max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; position: relative; z-index: 10;">
+        <div style="text-align: center; margin-bottom: 4rem;">
+          <h3 style="font-size: 1.5rem; margin-bottom: 1rem; opacity: 0.9;">Ready to deepen your nervous system regulation practice?</h3>
+          <p style="opacity: 0.8;">Choose a tier that matches your journey</p>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+          
+          <!-- Explorer Tier -->
+          <div style="background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(10px); border-radius: 2rem; padding: 2.5rem; text-align: center; border: 2px solid rgba(0, 212, 255, 0.3);">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--neural-blue);">Explorer</h3>
+            <p style="font-size: 2rem; font-weight: bold; margin-bottom: 0.5rem;">$29/mo</p>
+            <p style="opacity: 0.8; margin-bottom: 2rem; font-size: 0.9rem;">Perfect for beginning your regulation journey</p>
+            <ul style="text-align: left; margin-bottom: 2rem; opacity: 0.9; font-size: 0.9rem;">
+              <li style="margin-bottom: 0.5rem;">• Basic breathing techniques</li>
+              <li style="margin-bottom: 0.5rem;">• Chat with VERA</li>
+              <li style="margin-bottom: 0.5rem;">• Daily regulation exercises</li>
+              <li style="margin-bottom: 0.5rem;">• Progress tracking</li>
+            </ul>
+            <button class="btn btn-primary" onclick="selectTier('explorer')" style="width: 100%;">Choose Explorer</button>
+          </div>
+          
+          <!-- Regulator Tier -->
+          <div style="background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(10px); border-radius: 2rem; padding: 2.5rem; text-align: center; border: 2px solid rgba(255, 107, 157, 0.5); position: relative; overflow: hidden;">
+            <div style="position: absolute; top: -5px; right: 1rem; background: var(--activation-pink); color: white; padding: 0.5rem 1rem; border-radius: 0 0 1rem 1rem; font-size: 0.8rem; font-weight: bold;">POPULAR</div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--activation-pink);">Regulator</h3>
+            <p style="font-size: 2rem; font-weight: bold; margin-bottom: 0.5rem;">$59/mo</p>
+            <p style="opacity: 0.8; margin-bottom: 2rem; font-size: 0.9rem;">Advanced tools for deeper regulation</p>
+            <ul style="text-align: left; margin-bottom: 2rem; opacity: 0.9; font-size: 0.9rem;">
+              <li style="margin-bottom: 0.5rem;">• Everything in Explorer</li>
+              <li style="margin-bottom: 0.5rem;">• Advanced breathing patterns</li>
+              <li style="margin-bottom: 0.5rem;">• Fascia release techniques</li>
+              <li style="margin-bottom: 0.5rem;">• Personalized programs</li>
+              <li style="margin-bottom: 0.5rem;">• VERA voice guidance</li>
+            </ul>
+            <button class="btn btn-primary" onclick="selectTier('regulator')" style="width: 100%; background: linear-gradient(135deg, var(--activation-pink), var(--balance-gold));">Choose Regulator</button>
+          </div>
+          
+          <!-- Integrator Tier -->
+          <div style="background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(10px); border-radius: 2rem; padding: 2.5rem; text-align: center; border: 2px solid rgba(255, 215, 0, 0.3);">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--balance-gold);">Integrator</h3>
+            <p style="font-size: 2rem; font-weight: bold; margin-bottom: 0.5rem;">$99/mo</p>
+            <p style="opacity: 0.8; margin-bottom: 2rem; font-size: 0.9rem;">Complete nervous system mastery</p>
+            <ul style="text-align: left; margin-bottom: 2rem; opacity: 0.9; font-size: 0.9rem;">
+              <li style="margin-bottom: 0.5rem;">• Everything in Regulator</li>
+              <li style="margin-bottom: 0.5rem;">• 1-on-1 VERA sessions</li>
+              <li style="margin-bottom: 0.5rem;">• Custom program design</li>
+              <li style="margin-bottom: 0.5rem;">• Advanced biometric tracking</li>
+              <li style="margin-bottom: 0.5rem;">• Priority support</li>
+            </ul>
+            <button class="btn btn-primary" onclick="selectTier('integrator')" style="width: 100%; background: linear-gradient(135deg, var(--balance-gold), var(--calm-green));">Choose Integrator</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Success Modal -->
+  <div id="successModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); display: none; align-items: center; justify-content: center; z-index: 1000;">
+    <div style="background: linear-gradient(135deg, var(--primary-purple), var(--dark-purple)); border-radius: 2rem; padding: 3rem; max-width: 500px; margin: 2rem; text-align: center; border: 2px solid rgba(0, 212, 255, 0.3);">
+      <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--neural-blue), var(--activation-pink)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; margin: 0 auto 2rem; animation: pulse 2s ease-in-out infinite;">✓</div>
+      <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--neural-blue);">Welcome to VERA!</h3>
+      <p style="opacity: 0.9; margin-bottom: 2rem; font-size: 1.1rem;">Your nervous system regulation journey begins now. Check your email to access your personalized VERA platform.</p>
+      <button class="btn btn-primary" onclick="closeSuccessModal()">Continue</button>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // VERA Single Page Application - ERROR-PROOF IMPLEMENTATION
+    class VERAApp {
+      constructor() {
+        this.currentSection = 'hero';
+        this.chatMessageCount = 0;
+        this.breathingActive = false;
+        this.swayingActive = false;
+        
+        try {
+          this.initializeApp();
+        } catch (error) {
+          console.error('VERA App initialization error:', error);
+        }
+      }
+
+      initializeApp() {
+        // Initialize voice recognition if available
+        this.initializeVoiceRecognition();
+        
+        // Add Enter key listener for chat input
+        const messageInput = document.getElementById('messageInput');
+        if (messageInput) {
+          messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') this.sendMessage();
+          });
+        }
+
+        // Add breathing and swaying animations
+        this.initializeAnimations();
+      }
+
+      initializeVoiceRecognition() {
+        try {
+          if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            this.recognition = new SpeechRecognition();
+            this.recognition.continuous = false;
+            this.recognition.interimResults = false;
+            this.recognition.lang = 'en-US';
+
+            const voiceBtn = document.getElementById('voiceBtn');
+            if (voiceBtn) {
+              voiceBtn.addEventListener('click', () => this.toggleVoice());
+            }
+
+            this.recognition.onresult = (event) => {
+              const transcript = event.results[0][0].transcript;
+              const messageInput = document.getElementById('messageInput');
+              if (messageInput) {
+                messageInput.value = transcript;
+                this.sendMessage();
+              }
+            };
+          }
+        } catch (error) {
+          console.error('Voice recognition setup error:', error);
+        }
+      }
+
+      initializeAnimations() {
+        // Breathing animation styles
+        const style = document.createElement('style');
+        style.textContent = `
+          @keyframes breathPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.2); }
+          }
+          
+          @keyframes breathRing {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.6; }
+          }
+          
+          @keyframes breathGlow {
+            0%, 100% { box-shadow: 0 0 30px rgba(0, 212, 255, 0.3); }
+            50% { box-shadow: 0 0 60px rgba(255, 107, 157, 0.6); }
+          }
+          
+          @keyframes swayOrbit {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+          }
+          
+          @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+
+      navigateToSection(sectionName) {
+        try {
+          // Remove active class from all sections
+          document.querySelectorAll('.view-section, .hero-section').forEach(section => {
+            section.classList.remove('active-view');
+          });
+
+          // Add active class to target section
+          const targetSection = document.getElementById(sectionName + 'Section');
+          if (targetSection) {
+            targetSection.classList.add('active-view');
+            this.currentSection = sectionName;
+          }
+
+          // Special handling for specific sections
+          if (sectionName === 'chat') {
+            this.initializeChat();
+          }
+        } catch (error) {
+          console.error('Navigation error:', error);
+        }
+      }
+
+      initializeChat() {
+        // Reset chat if needed
+        this.chatMessageCount = 0;
+        const continueBtn = document.getElementById('continueBtn');
+        if (continueBtn) {
+          continueBtn.style.opacity = '0';
+        }
+      }
+
+      sendMessage() {
+        try {
+          const messageInput = document.getElementById('messageInput');
+          const message = messageInput.value.trim();
+          
+          if (message) {
+            this.addMessage(message, 'user');
+            messageInput.value = '';
+            
+            // Generate VERA response
+            setTimeout(() => {
+              const response = this.generateVERAResponse(message);
+              this.addMessage(response, 'vera');
+              this.showContinueButton();
+            }, 1000);
+          }
+        } catch (error) {
+          console.error('Send message error:', error);
+        }
+      }
+
+      sendQuickMessage(message) {
+        try {
+          this.addMessage(message, 'user');
+          
+          setTimeout(() => {
+            const response = this.generateVERAResponse(message);
+            this.addMessage(response, 'vera');
+            this.showContinueButton();
+          }, 1000);
+        } catch (error) {
+          console.error('Quick message error:', error);
+        }
+      }
+
+      addMessage(text, sender) {
+        try {
+          const messagesContainer = document.getElementById('chatMessages');
+          if (!messagesContainer) return;
+
+          const messageDiv = document.createElement('div');
+          
+          if (sender === 'vera') {
+            messageDiv.innerHTML = `
+              <div style="display: flex; gap: 0.75rem; margin-bottom: 1.5rem;">
+                <div style="width: 30px; height: 30px; background: linear-gradient(135deg, var(--neural-blue), var(--activation-pink)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; flex-shrink: 0;">V</div>
+                <div style="background: rgba(0, 212, 255, 0.2); border: 1px solid rgba(0, 212, 255, 0.3); padding: 1rem 1.25rem; border-radius: 1.25rem; max-width: 70%;">
+                  <p style="margin: 0;">${text}</p>
+                </div>
+              </div>
+            `;
+          } else {
+            messageDiv.innerHTML = `
+              <div style="display: flex; justify-content: flex-end; margin-bottom: 1.5rem;">
+                <div style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); padding: 1rem 1.25rem; border-radius: 1.25rem; max-width: 70%;">
+                  <p style="margin: 0;">${text}</p>
+                </div>
+              </div>
+            `;
+          }
+          
+          messagesContainer.appendChild(messageDiv);
+          messagesContainer.scrollTop = messagesContainer.scrollHeight;
+          
+          this.chatMessageCount++;
+        } catch (error) {
+          console.error('Add message error:', error);
+        }
+      }
+
+      generateVERAResponse(message) {
+        const lowercaseMessage = message.toLowerCase();
+        
+        if (lowercaseMessage.includes('anxious') || lowercaseMessage.includes('anxiety')) {
+          return "I can sense the anxiety in your nervous system. Let's work together to find regulation. Your breath is a powerful tool - would you like to explore some breathing techniques?";
+        }
+        
+        if (lowercaseMessage.includes('grounding') || lowercaseMessage.includes('ground')) {
+          return "Grounding reconnects you to safety and presence. I can guide you through techniques that help your nervous system remember it's safe. Shall we explore some movement-based grounding?";
+        }
+        
+        if (lowercaseMessage.includes('relax') || lowercaseMessage.includes('calm')) {
+          return "Relaxation is your nervous system's natural state when it feels safe. I can help you access this through breathwork and gentle movement. Both are available for you to explore.";
+        }
+        
+        const responses = [
+          "Thank you for sharing that with me. Your nervous system is communicating something important. Would you like to explore breathing or movement techniques?",
+          "I hear you. Every sensation and feeling carries wisdom from your nervous system. Let's discover some techniques that can support you right now.",
+          "Your nervous system is always working to keep you safe. Sometimes it just needs gentle guidance to find balance. Ready to explore some regulation techniques?"
+        ];
+        
+        return responses[Math.floor(Math.random() * responses.length)];
+      }
+
+      showContinueButton() {
+        if (this.chatMessageCount >= 2) {
+          const continueBtn = document.getElementById('continueBtn');
+          if (continueBtn) {
+            continueBtn.style.opacity = '1';
+          }
+        }
+      }
+
+      toggleVoice() {
+        try {
+          if (this.recognition) {
+            this.recognition.start();
+          }
+        } catch (error) {
+          console.error('Voice toggle error:', error);
+        }
+      }
+
+      // Breathing Exercise Methods
+      startBreathingExercise() {
+        try {
+          this.breathingActive = true;
+          this.breathingCycle = 0;
+          this.breathingPhase = 0; // 0: inhale, 1: hold, 2: exhale, 3: hold
+          
+          const startBtn = document.getElementById('startBreathingBtn');
+          const pauseBtn = document.getElementById('pauseBreathingBtn');
+          const completeBtn = document.getElementById('completeBreathingBtn');
+          
+          if (startBtn) startBtn.style.display = 'none';
+          if (pauseBtn) pauseBtn.style.display = 'inline-block';
+          if (completeBtn) completeBtn.style.display = 'inline-block';
+          
+          this.runBreathingCycle();
+        } catch (error) {
+          console.error('Breathing start error:', error);
+        }
+      }
+
+      runBreathingCycle() {
+        if (!this.breathingActive) return;
+        
+        const phases = [
+          { name: 'Inhale', duration: 4, color: 'var(--neural-blue)' },
+          { name: 'Hold', duration: 4, color: 'var(--activation-pink)' },
+          { name: 'Exhale', duration: 6, color: 'var(--calm-green)' },
+          { name: 'Hold', duration: 2, color: 'var(--balance-gold)' }
+        ];
+        
+        const currentPhase = phases[this.breathingPhase];
+        const phaseElement = document.getElementById('breathingPhase');
+        const counterElement = document.getElementById('breathingCounter');
+        
+        if (phaseElement) phaseElement.textContent = currentPhase.name;
+        if (phaseElement) phaseElement.style.color = currentPhase.color;
+        
+        let count = currentPhase.duration;
+        
+        const countdown = setInterval(() => {
+          if (!this.breathingActive) {
+            clearInterval(countdown);
+            return;
+          }
+          
+          if (counterElement) counterElement.textContent = count;
+          count--;
+          
+          if (count < 0) {
+            clearInterval(countdown);
+            this.breathingPhase = (this.breathingPhase + 1) % 4;
+            
+            if (this.breathingPhase === 0) {
+              this.breathingCycle++;
+            }
+            
+            if (this.breathingCycle < 5) {
+              setTimeout(() => this.runBreathingCycle(), 500);
+            } else {
+              this.completeBreathingExercise();
+            }
+          }
+        }, 1000);
+      }
+
+      pauseBreathingExercise() {
+        this.breathingActive = false;
+        
+        const startBtn = document.getElementById('startBreathingBtn');
+        const pauseBtn = document.getElementById('pauseBreathingBtn');
+        
+        if (startBtn) {
+          startBtn.style.display = 'inline-block';
+          startBtn.textContent = 'Resume';
+        }
+        if (pauseBtn) pauseBtn.style.display = 'none';
+      }
+
+      completeBreathingExercise() {
+        this.breathingActive = false;
+        
+        const phaseElement = document.getElementById('breathingPhase');
+        const counterElement = document.getElementById('breathingCounter');
+        
+        if (phaseElement) {
+          phaseElement.textContent = 'Complete!';
+          phaseElement.style.color = 'var(--calm-green)';
+        }
+        if (counterElement) counterElement.textContent = '✓';
+        
+        setTimeout(() => {
+          this.navigateToSection('signup');
+        }, 2000);
+      }
+
+      // Swaying Exercise Methods
+      startSwayingExercise() {
+        try {
+          this.swayingActive = true;
+          this.swayingCycle = 0;
+          this.swayingPosition = 1; // 0: left, 1: center, 2: right
+          
+          const startBtn = document.getElementById('startSwayingBtn');
+          const pauseBtn = document.getElementById('pauseSwayingBtn');
+          const completeBtn = document.getElementById('completeSwayingBtn');
+          
+          if (startBtn) startBtn.style.display = 'none';
+          if (pauseBtn) pauseBtn.style.display = 'inline-block';
+          if (completeBtn) completeBtn.style.display = 'inline-block';
+          
+          this.runSwayingCycle();
+        } catch (error) {
+          console.error('Swaying start error:', error);
+        }
+      }
+
+      runSwayingCycle() {
+        if (!this.swayingActive) return;
+        
+        const positions = ['Left', 'Center', 'Right', 'Center'];
+        const colors = ['var(--activation-pink)', 'var(--balance-gold)', 'var(--calm-green)', 'var(--neural-blue)'];
+        
+        const currentPosition = positions[this.swayingPosition];
+        const phaseElement = document.getElementById('swayingPhase');
+        const directionElement = document.getElementById('swayingDirection');
+        
+        if (phaseElement) {
+          phaseElement.textContent = 'Sway ' + currentPosition;
+          phaseElement.style.color = colors[this.swayingPosition];
+        }
+        if (directionElement) {
+          directionElement.textContent = currentPosition;
+          directionElement.style.color = colors[this.swayingPosition];
+        }
+        
+        setTimeout(() => {
+          if (this.swayingActive) {
+            this.swayingPosition = (this.swayingPosition + 1) % 4;
+            
+            if (this.swayingPosition === 1 && this.swayingCycle > 0) {
+              this.swayingCycle++;
+            } else if (this.swayingPosition === 1) {
+              this.swayingCycle = 1;
+            }
+            
+            if (this.swayingCycle < 8) {
+              this.runSwayingCycle();
+            } else {
+              this.completeSwayingExercise();
+            }
+          }
+        }, 3000);
+      }
+
+      pauseSwayingExercise() {
+        this.swayingActive = false;
+        
+        const startBtn = document.getElementById('startSwayingBtn');
+        const pauseBtn = document.getElementById('pauseSwayingBtn');
+        
+        if (startBtn) {
+          startBtn.style.display = 'inline-block';
+          startBtn.textContent = 'Resume';
+        }
+        if (pauseBtn) pauseBtn.style.display = 'none';
+      }
+
+      completeSwayingExercise() {
+        this.swayingActive = false;
+        
+        const phaseElement = document.getElementById('swayingPhase');
+        const directionElement = document.getElementById('swayingDirection');
+        
+        if (phaseElement) {
+          phaseElement.textContent = 'Complete!';
+          phaseElement.style.color = 'var(--calm-green)';
+        }
+        if (directionElement) directionElement.textContent = 'Well Done';
+        
+        setTimeout(() => {
+          this.navigateToSection('signup');
+        }, 2000);
+      }
+
+      selectTier(tier) {
+        try {
+          // Show success modal
+          const modal = document.getElementById('successModal');
+          if (modal) {
+            modal.style.display = 'flex';
+          }
+          
+          // Here you would typically integrate with payment processing
+          console.log('Selected tier:', tier);
+        } catch (error) {
+          console.error('Tier selection error:', error);
+        }
+      }
+
+      closeSuccessModal() {
+        const modal = document.getElementById('successModal');
+        if (modal) {
+          modal.style.display = 'none';
+        }
+        
+        // Reset to hero section
+        this.navigateToSection('hero');
+      }
+    }
+
+    // Global functions for onclick handlers
+    function navigateToSection(section) {
+      if (window.veraApp) {
+        window.veraApp.navigateToSection(section);
+      }
+    }
+
+    function sendMessage() {
+      if (window.veraApp) {
+        window.veraApp.sendMessage();
+      }
+    }
+
+    function sendQuickMessage(message) {
+      if (window.veraApp) {
+        window.veraApp.sendQuickMessage(message);
+      }
+    }
+
+    function startBreathingExercise() {
+      if (window.veraApp) {
+        window.veraApp.startBreathingExercise();
+      }
+    }
+
+    function pauseBreathingExercise() {
+      if (window.veraApp) {
+        window.veraApp.pauseBreathingExercise();
+      }
+    }
+
+    function completeBreathingExercise() {
+      if (window.veraApp) {
+        window.veraApp.completeBreathingExercise();
+      }
+    }
+
+    function startSwayingExercise() {
+      if (window.veraApp) {
+        window.veraApp.startSwayingExercise();
+      }
+    }
+
+    function pauseSwayingExercise() {
+      if (window.veraApp) {
+        window.veraApp.pauseSwayingExercise();
+      }
+    }
+
+    function completeSwayingExercise() {
+      if (window.veraApp) {
+        window.veraApp.completeSwayingExercise();
+      }
+    }
+
+    function selectTier(tier) {
+      if (window.veraApp) {
+        window.veraApp.selectTier(tier);
+      }
+    }
+
+    function closeSuccessModal() {
+      if (window.veraApp) {
+        window.veraApp.closeSuccessModal();
+      }
+    }
+
+    // Initialize VERA App when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        window.veraApp = new VERAApp();
+      } catch (error) {
+        console.error('VERA App failed to initialize:', error);
+      }
+    });
+  </script>
+
+  <!-- Additional JavaScript for enhanced functionality -->
+  <script src="js/landing.js"></script>
+</body>
+</html>
