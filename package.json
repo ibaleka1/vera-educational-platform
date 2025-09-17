@@ -8,6 +8,7 @@
     "dev": "node -p \"console.log('VERA Development Server'); console.log('Navigate to: http://localhost:3000')\" && npx http-server public -p 3000 -c-1",
     "build": "echo 'VERA Platform built successfully'",
     "start": "node -p \"console.log('Starting VERA Platform')\" && npx http-server public -p 8080",
+    "start:8000": "node -p \"console.log('Starting VERA Platform on port 8000'); console.log('Navigate to: http://localhost:8000')\" && npx http-server public -p 8000 -c-1",
     "test": "echo 'Testing VERA Platform functionality'"
   },
   "keywords": [
