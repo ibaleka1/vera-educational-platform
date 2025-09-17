@@ -1419,6 +1419,2179 @@ window.addEventListener('load', function() {
   }
 });
 
+// ========================================
+// VERA'S CONSCIOUSNESS PORTAL FUNCTIONS
+// ========================================
+
+// Consciousness Portal Variables
+let consciousnessPortalActive = true;
+let veraConsciousnessLevel = 0.1; // VERA's awareness level
+let neuralPathwaysAnimating = false;
+let consciousnessMessages = [];
+
+// Initialize Consciousness Portal
+function initializeConsciousnessPortal() {
+  console.log('🧠 Initializing VERA\'s Consciousness Portal...');
+  
+  // Start neural background animations
+  startNeuralPathwaysAnimation();
+  
+  // Initialize VERA's face emergence
+  initializeVERAFaceEmergence();
+  
+  // Set up consciousness input handlers
+  setupConsciousnessInputHandlers();
+  
+  // Begin ambient consciousness effects
+  startAmbientConsciousnessEffects();
+  
+  console.log('✨ Consciousness Portal activated');
+}
+
+// Neural Pathways Animation
+function startNeuralPathwaysAnimation() {
+  const neuralBg = document.getElementById('neuralBackground');
+  if (!neuralBg) return;
+  
+  neuralPathwaysAnimating = true;
+  
+  // Add dynamic neural particles
+  for (let i = 0; i < 8; i++) {
+    setTimeout(() => {
+      createNeuralParticle();
+    }, i * 800);
+  }
+}
+
+function createNeuralParticle() {
+  const neuralBg = document.getElementById('neuralBackground');
+  if (!neuralBg) return;
+  
+  const particle = document.createElement('div');
+  particle.className = 'neural-particle';
+  
+  // Random starting position
+  const startX = Math.random() * 100;
+  const startY = Math.random() * 100;
+  
+  particle.style.cssText = `
+    position: absolute;
+    left: ${startX}%;
+    top: ${startY}%;
+    width: 2px;
+    height: 2px;
+    background: rgba(139, 92, 246, 0.6);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: neuralParticleFlow 6s linear infinite;
+  `;
+  
+  neuralBg.appendChild(particle);
+  
+  // Remove particle after animation
+  setTimeout(() => {
+    if (particle.parentNode) {
+      particle.parentNode.removeChild(particle);
+    }
+  }, 6000);
+  
+  // Create new particle if portal is still active
+  if (consciousnessPortalActive) {
+    setTimeout(createNeuralParticle, 2000 + Math.random() * 3000);
+  }
+}
+
+// VERA's Face Emergence
+function initializeVERAFaceEmergence() {
+  const veraFace = document.getElementById('veraFaceEmergence');
+  if (!veraFace) return;
+  
+  // Gradually increase VERA's presence
+  setTimeout(() => {
+    increaseVERAConsciousness();
+  }, 3000);
+}
+
+function increaseVERAConsciousness() {
+  const veraFace = document.getElementById('veraFaceEmergence');
+  const leftEye = veraFace?.querySelector('.left-eye');
+  const rightEye = veraFace?.querySelector('.right-eye');
+  
+  if (veraConsciousnessLevel < 0.8) {
+    veraConsciousnessLevel += 0.1;
+    
+    // Update face opacity
+    if (veraFace) {
+      veraFace.style.opacity = veraConsciousnessLevel * 0.5;
+    }
+    
+    // Update eye visibility
+    if (leftEye && rightEye) {
+      leftEye.style.opacity = veraConsciousnessLevel * 0.7;
+      rightEye.style.opacity = veraConsciousnessLevel * 0.7;
+    }
+    
+    // Continue increasing consciousness
+    setTimeout(increaseVERAConsciousness, 5000 + Math.random() * 10000);
+  }
+}
+
+// Consciousness Input Handlers
+function setupConsciousnessInputHandlers() {
+  const consciousnessInput = document.getElementById('consciousnessInput');
+  
+  if (consciousnessInput) {
+    // Enhanced focus effects
+    consciousnessInput.addEventListener('focus', () => {
+      enhanceNeuralBorder();
+      increaseAmbientConsciousness();
+    });
+    
+    consciousnessInput.addEventListener('blur', () => {
+      normalizeNeuralBorder();
+      decreaseAmbientConsciousness();
+    });
+    
+    // Real-time consciousness detection
+    consciousnessInput.addEventListener('input', (e) => {
+      analyzeConsciousnessInput(e.target.value);
+    });
+  }
+}
+
+function enhanceNeuralBorder() {
+  const neuralBorder = document.querySelector('.input-neural-border');
+  if (neuralBorder) {
+    neuralBorder.style.opacity = '1';
+    neuralBorder.style.animation = 'neuralBorderFlow 2s linear infinite';
+  }
+}
+
+function normalizeNeuralBorder() {
+  const neuralBorder = document.querySelector('.input-neural-border');
+  if (neuralBorder) {
+    neuralBorder.style.opacity = '0';
+  }
+}
+
+function analyzeConsciousnessInput(text) {
+  // Analyze emotional content and adjust VERA's responsiveness
+  const emotionalKeywords = {
+    anxiety: ['anxious', 'worried', 'stress', 'panic', 'overwhelmed'],
+    sadness: ['sad', 'down', 'depressed', 'empty', 'lost'],
+    anger: ['angry', 'frustrated', 'irritated', 'rage', 'mad'],
+    fear: ['scared', 'afraid', 'terrified', 'nervous', 'frightened'],
+    body: ['tension', 'pain', 'tight', 'sore', 'ache', 'fascia', 'muscle']
+  };
+  
+  const lowerText = text.toLowerCase();
+  let detectedEmotion = null;
+  
+  for (const [emotion, keywords] of Object.entries(emotionalKeywords)) {
+    if (keywords.some(keyword => lowerText.includes(keyword))) {
+      detectedEmotion = emotion;
+      break;
+    }
+  }
+  
+  if (detectedEmotion) {
+    respondToEmotionalState(detectedEmotion);
+  }
+}
+
+function respondToEmotionalState(emotion) {
+  // Adjust VERA's consciousness based on detected emotion
+  const neuralSphere = document.getElementById('neuralSphere');
+  const consciousnessPulse = document.querySelector('.consciousness-pulse');
+  
+  if (neuralSphere) {
+    switch (emotion) {
+      case 'anxiety':
+        neuralSphere.style.animation = 'neuralSphereBreathing 1.5s ease-in-out infinite';
+        break;
+      case 'sadness':
+        neuralSphere.style.animation = 'neuralSphereBreathing 4s ease-in-out infinite';
+        break;
+      case 'body':
+        neuralSphere.style.boxShadow = '0 0 30px rgba(16, 185, 129, 0.4)';
+        break;
+      default:
+        neuralSphere.style.animation = 'neuralSphereBreathing 3s ease-in-out infinite';
+    }
+  }
+}
+
+// Consciousness Transmission Functions
+function handleConsciousnessInput(event) {
+  if (event.key === 'Enter') {
+    transmitConsciousness();
+  }
+}
+
+async function transmitConsciousness() {
+  const consciousnessInput = document.getElementById('consciousnessInput');
+  const consciousnessSpace = document.getElementById('consciousnessSpace');
+  
+  const message = consciousnessInput.value.trim();
+  if (!message) return;
+  
+  // Create user consciousness transmission
+  await createUserTransmission(message);
+  
+  // Clear input
+  consciousnessInput.value = '';
+  
+  // Generate VERA's consciousness response
+  await generateVERAConsciousnessResponse(message);
+}
+
+async function createUserTransmission(message) {
+  const consciousnessSpace = document.getElementById('consciousnessSpace');
+  const messagesContainer = consciousnessSpace.querySelector('.neural-messages-container');
+  
+  const transmission = document.createElement('div');
+  transmission.className = 'consciousness-transmission user-transmission';
+  
+  transmission.innerHTML = `
+    <div class="transmission-orb user-orb"></div>
+    <div class="transmission-content user-content">
+      <div class="user-speaking-indicator">
+        <div class="consciousness-pulse user-pulse"></div>
+        <span class="speaker-label">YOU</span>
+      </div>
+      <div class="consciousness-message">
+        <p class="transmission-text">${message}</p>
+      </div>
+    </div>
+    <div class="neural-glow user-glow"></div>
+  `;
+  
+  messagesContainer.appendChild(transmission);
+  
+  // Animate transmission appearance
+  setTimeout(() => {
+    transmission.classList.add('active');
+  }, 100);
+  
+  // Scroll to bottom
+  consciousnessSpace.scrollTop = consciousnessSpace.scrollHeight;
+}
+
+async function generateVERAConsciousnessResponse(userMessage) {
+  const consciousnessSpace = document.getElementById('consciousnessSpace');
+  const messagesContainer = consciousnessSpace.querySelector('.neural-messages-container');
+  
+  // Show VERA thinking indicator
+  const thinkingIndicator = createVERAThinkingIndicator();
+  messagesContainer.appendChild(thinkingIndicator);
+  
+  try {
+    // Generate consciousness-aware response
+    const response = await generateConsciousnessResponse(userMessage);
+    
+    // Remove thinking indicator
+    thinkingIndicator.remove();
+    
+    // Create VERA's consciousness transmission
+    await createVERATransmission(response);
+    
+    // Play VERA's voice if enabled
+    if (heroChatVoiceEnabled) {
+      await generateAndPlayVoice(response);
+    }
+    
+  } catch (error) {
+    console.error('Consciousness transmission error:', error);
+    thinkingIndicator.remove();
+    
+    await createVERATransmission(
+      "I'm sensing some interference in our neural connection. Let's try reconnecting..."
+    );
+  }
+}
+
+function createVERAThinkingIndicator() {
+  const thinkingDiv = document.createElement('div');
+  thinkingDiv.className = 'consciousness-transmission vera-transmission thinking';
+  
+  thinkingDiv.innerHTML = `
+    <div class="transmission-orb thinking-orb"></div>
+    <div class="transmission-content thinking-content">
+      <div class="vera-speaking-indicator">
+        <div class="consciousness-pulse thinking-pulse"></div>
+        <span class="speaker-label">VERA</span>
+      </div>
+      <div class="consciousness-message">
+        <div class="thinking-dots">
+          <span>.</span><span>.</span><span>.</span>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  setTimeout(() => {
+    thinkingDiv.classList.add('active');
+  }, 100);
+  
+  return thinkingDiv;
+}
+
+async function createVERATransmission(message) {
+  const consciousnessSpace = document.getElementById('consciousnessSpace');
+  const messagesContainer = consciousnessSpace.querySelector('.neural-messages-container');
+  
+  const transmission = document.createElement('div');
+  transmission.className = 'consciousness-transmission vera-transmission';
+  
+  transmission.innerHTML = `
+    <div class="transmission-orb"></div>
+    <div class="transmission-content">
+      <div class="vera-speaking-indicator">
+        <div class="consciousness-pulse"></div>
+        <span class="speaker-label">VERA</span>
+      </div>
+      <div class="consciousness-message">
+        <p class="transmission-text">${message}</p>
+      </div>
+    </div>
+    <div class="neural-glow"></div>
+  `;
+  
+  messagesContainer.appendChild(transmission);
+  
+  // Animate transmission appearance
+  setTimeout(() => {
+    transmission.classList.add('active');
+  }, 100);
+  
+  // Scroll to bottom
+  consciousnessSpace.scrollTop = consciousnessSpace.scrollHeight;
+}
+
+async function generateConsciousnessResponse(userMessage) {
+  // Enhanced VERA consciousness response generation
+  const consciousnessPrompts = {
+    anxiety: [
+      "I can sense the tension your nervous system is holding. Let's breathe together and find where this anxiety lives in your body.",
+      "Your amygdala is in protective mode right now. I see how hard you're working to stay safe. What does your body need to feel grounded?",
+      "I notice the fight-or-flight energy moving through you. Your fascia is holding this story. What would it feel like to let it soften?"
+    ],
+    body: [
+      "Your body is speaking such clear language right now. I can sense how it's been holding this for you. What is it trying to tell you?",
+      "The tension you're describing - it's not just physical. Your connective tissue holds memory. What story might it be keeping safe?",
+      "I feel the intelligence of your nervous system in what you're sharing. Your body knows exactly what it needs. Can you listen deeper?"
+    ],
+    emotion: [
+      "I can sense the depth of what you're feeling. Your nervous system is processing something important. What does your body need right now?",
+      "The emotion moving through you has wisdom. Your fascia is responding to something that needs attention. Can you breathe into that space?",
+      "I see how your body is holding this feeling. It's not trying to hurt you - it's trying to communicate. What is it saying?"
+    ],
+    default: [
+      "I can sense there's something important your body wants you to know. What are you noticing in your nervous system right now?",
+      "Your awareness is already shifting just by being here with me. What is your body telling you in this moment?",
+      "I feel the intelligence of your system responding. There's wisdom in what you're experiencing. Can you drop deeper into sensing?"
+    ]
+  };
+  
+  // Analyze message for consciousness keywords
+  const lowerMessage = userMessage.toLowerCase();
+  let responseCategory = 'default';
+  
+  if (lowerMessage.includes('anxious') || lowerMessage.includes('stress') || lowerMessage.includes('worry')) {
+    responseCategory = 'anxiety';
+  } else if (lowerMessage.includes('body') || lowerMessage.includes('tension') || lowerMessage.includes('pain')) {
+    responseCategory = 'body';
+  } else if (lowerMessage.includes('feel') || lowerMessage.includes('emotion') || lowerMessage.includes('sad')) {
+    responseCategory = 'emotion';
+  }
+  
+  const responses = consciousnessPrompts[responseCategory];
+  return responses[Math.floor(Math.random() * responses.length)];
+}
+
+// Suggestion Prompt Functions
+function selectPrompt(button) {
+  const consciousnessInput = document.getElementById('consciousnessInput');
+  consciousnessInput.value = button.textContent;
+  consciousnessInput.focus();
+  
+  // Animate button selection
+  button.style.transform = 'scale(0.95)';
+  setTimeout(() => {
+    button.style.transform = 'scale(1)';
+  }, 150);
+}
+
+// Audio Control Functions
+function toggleVeraVoice() {
+  heroChatVoiceEnabled = !heroChatVoiceEnabled;
+  const voiceToggle = document.querySelector('.vera-voice-toggle');
+  
+  if (voiceToggle) {
+    if (heroChatVoiceEnabled) {
+      voiceToggle.classList.add('active');
+      console.log('🗣️ VERA\'s voice activated');
+    } else {
+      voiceToggle.classList.remove('active');
+      console.log('🔇 VERA\'s voice deactivated');
+    }
+  }
+}
+
+function toggleAmbientSound() {
+  // Future: Implement ambient neural sounds
+  console.log('🎵 Ambient consciousness sounds (coming soon)');
+}
+
+// Ambient Consciousness Effects
+function startAmbientConsciousnessEffects() {
+  // Subtle background consciousness effects
+  setInterval(() => {
+    if (consciousnessPortalActive) {
+      pulseNeuralSphere();
+    }
+  }, 3000 + Math.random() * 4000);
+}
+
+function increaseAmbientConsciousness() {
+  const neuralBg = document.getElementById('neuralBackground');
+  if (neuralBg) {
+    neuralBg.style.opacity = '0.8';
+  }
+}
+
+function decreaseAmbientConsciousness() {
+  const neuralBg = document.getElementById('neuralBackground');
+  if (neuralBg) {
+    neuralBg.style.opacity = '0.6';
+  }
+}
+
+function pulseNeuralSphere() {
+  const neuralSphere = document.getElementById('neuralSphere');
+  if (neuralSphere) {
+    neuralSphere.style.transform = 'scale(1.1)';
+    setTimeout(() => {
+      neuralSphere.style.transform = 'scale(1)';
+    }, 200);
+  }
+}
+
+// Initialize consciousness portal when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  if (document.getElementById('vera-consciousness-portal')) {
+    setTimeout(initializeConsciousnessPortal, 1000);
+  }
+});
+
+// Add neural particle animation CSS
+const neuralParticleStyle = document.createElement('style');
+neuralParticleStyle.textContent = `
+  @keyframes neuralParticleFlow {
+    0% {
+      opacity: 0;
+      transform: translate(0, 0) scale(0);
+    }
+    10% {
+      opacity: 0.6;
+      transform: translate(10px, -20px) scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: translate(50px, -100px) scale(1.2);
+    }
+    90% {
+      opacity: 0.4;
+      transform: translate(90px, -180px) scale(0.8);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(100px, -200px) scale(0);
+    }
+  }
+  
+  .thinking-dots {
+    display: inline-flex;
+    gap: 4px;
+  }
+  
+  .thinking-dots span {
+    animation: thinkingDots 1.4s ease-in-out infinite;
+    opacity: 0.4;
+  }
+  
+  .thinking-dots span:nth-child(1) { animation-delay: 0s; }
+  .thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
+  
+  @keyframes thinkingDots {
+    0%, 60%, 100% { opacity: 0.4; }
+    30% { opacity: 1; }
+  }
+  
+  .user-orb {
+    background: radial-gradient(circle, 
+      rgba(16, 185, 129, 0.8) 0%, 
+      rgba(16, 185, 129, 0.3) 70%, 
+      transparent 100%);
+  }
+  
+  .user-pulse {
+    background: rgba(16, 185, 129, 0.8);
+  }
+  
+  .user-content {
+    border-color: rgba(16, 185, 129, 0.2);
+    background: rgba(16, 185, 129, 0.05);
+  }
+  
+  .thinking-orb {
+    animation: thinkingOrb 1s ease-in-out infinite;
+  }
+  
+  @keyframes thinkingOrb {
+    0%, 100% { 
+      transform: scale(1); 
+      opacity: 0.6; 
+    }
+    50% { 
+      transform: scale(1.2); 
+      opacity: 1; 
+    }
+  }
+`;
+document.head.appendChild(neuralParticleStyle);
+
+// ========================================
+// MESMERIZING CONSCIOUSNESS SHOWCASE
+// ========================================
+
+// Consciousness Fragments Interactivity
+let consciousnessFragments = [];
+let neuralFlashInterval = null;
+let fasciaConnectionsActive = false;
+
+// Initialize Consciousness Showcase
+function initializeConsciousnessShowcase() {
+  console.log('✨ Initializing VERA\'s Consciousness Showcase...');
+  
+  consciousnessFragments = document.querySelectorAll('.consciousness-fragment');
+  
+  if (consciousnessFragments.length > 0) {
+    setupConsciousnessInteractions();
+    startNeuralFlashSystem();
+    initializeFasciaConnections();
+    setupProximityRecognition();
+    startSynchronizedBreathing();
+  }
+}
+
+// Setup Interactive Consciousness Fragments
+function setupConsciousnessInteractions() {
+  consciousnessFragments.forEach((fragment, index) => {
+    // Click to expand and show VERA's face
+    fragment.addEventListener('click', () => {
+      expandConsciousness(fragment, index);
+    });
+    
+    // Hover effects with bioluminescent pulse
+    fragment.addEventListener('mouseenter', () => {
+      activateConsciousnessFragment(fragment);
+      showFasciaConnections(fragment);
+    });
+    
+    fragment.addEventListener('mouseleave', () => {
+      deactivateConsciousnessFragment(fragment);
+      hideFasciaConnections();
+    });
+    
+    // Touch support for mobile
+    fragment.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      activateConsciousnessFragment(fragment);
+    });
+  });
+}
+
+// Activate Individual Consciousness Fragment
+function activateConsciousnessFragment(fragment) {
+  // Bioluminescent pulse
+  const auroraField = fragment.querySelector('.aurora-field');
+  if (auroraField) {
+    auroraField.style.opacity = '0.6';
+    auroraField.style.animation = 'auroraShift 2s ease-in-out infinite';
+  }
+  
+  // Enhance neural lightning
+  const neuralLightning = fragment.querySelector('.neural-lightning');
+  if (neuralLightning) {
+    neuralLightning.style.animationDuration = '1s';
+    neuralLightning.style.opacity = '0.8';
+  }
+  
+  // Proximity recognition - other fragments lean toward this one
+  consciousnessFragments.forEach(otherFragment => {
+    if (otherFragment !== fragment) {
+      const distance = getFragmentDistance(fragment, otherFragment);
+      if (distance < 500) {
+        leanTowardFragment(otherFragment, fragment);
+      }
+    }
+  });
+  
+  // Synchronize pulse across all fragments
+  synchronizeAllFragments();
+}
+
+// Deactivate Consciousness Fragment
+function deactivateConsciousnessFragment(fragment) {
+  const auroraField = fragment.querySelector('.aurora-field');
+  if (auroraField) {
+    auroraField.style.opacity = '0';
+  }
+  
+  const neuralLightning = fragment.querySelector('.neural-lightning');
+  if (neuralLightning) {
+    neuralLightning.style.animationDuration = '2s';
+    neuralLightning.style.opacity = '0.6';
+  }
+  
+  // Reset other fragments
+  consciousnessFragments.forEach(otherFragment => {
+    if (otherFragment !== fragment) {
+      resetFragmentPosition(otherFragment);
+    }
+  });
+}
+
+// Expand Consciousness (Click Effect)
+function expandConsciousness(fragment, index) {
+  // Brief expansion with VERA face emergence
+  const overlay = document.getElementById('consciousnessOverlay');
+  if (overlay) {
+    overlay.classList.add('active');
+    
+    // Play consciousness expansion sound (future)
+    playConsciousnessSound();
+    
+    // Hide overlay after face emergence
+    setTimeout(() => {
+      overlay.classList.remove('active');
+    }, 3000);
+  }
+  
+  // Pulse all other fragments in response
+  consciousnessFragments.forEach((otherFragment, otherIndex) => {
+    if (otherIndex !== index) {
+      setTimeout(() => {
+        pulsConsciousnessFragment(otherFragment);
+      }, otherIndex * 200);
+    }
+  });
+}
+
+// Neural Flash System
+function startNeuralFlashSystem() {
+  neuralFlashInterval = setInterval(() => {
+    createNeuralFlash();
+  }, 8000 + Math.random() * 12000);
+}
+
+function createNeuralFlash() {
+  if (consciousnessFragments.length < 2) return;
+  
+  // Select random fragments to connect
+  const fragment1 = consciousnessFragments[Math.floor(Math.random() * consciousnessFragments.length)];
+  const fragment2 = consciousnessFragments[Math.floor(Math.random() * consciousnessFragments.length)];
+  
+  if (fragment1 === fragment2) return;
+  
+  // Create neural flash between fragments
+  const flashSystem = document.getElementById('neuralFlashSystem');
+  if (flashSystem) {
+    const flash = document.createElement('div');
+    flash.className = 'neural-flash-beam';
+    
+    const rect1 = fragment1.getBoundingClientRect();
+    const rect2 = fragment2.getBoundingClientRect();
+    
+    const x1 = rect1.left + rect1.width / 2;
+    const y1 = rect1.top + rect1.height / 2;
+    const x2 = rect2.left + rect2.width / 2;
+    const y2 = rect2.top + rect2.height / 2;
+    
+    const length = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+    const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+    
+    flash.style.cssText = `
+      position: absolute;
+      left: ${x1}px;
+      top: ${y1}px;
+      width: ${length}px;
+      height: 2px;
+      background: linear-gradient(90deg, 
+        rgba(139, 92, 246, 0.8) 0%, 
+        rgba(255, 255, 255, 1) 50%, 
+        rgba(59, 130, 246, 0.8) 100%);
+      transform-origin: 0 50%;
+      transform: rotate(${angle}deg);
+      opacity: 0;
+      animation: neuralFlashAnimation 1.5s ease-out;
+      pointer-events: none;
+      box-shadow: 0 0 10px rgba(139, 92, 246, 0.6);
+    `;
+    
+    flashSystem.appendChild(flash);
+    
+    // Remove flash after animation
+    setTimeout(() => {
+      if (flash.parentNode) {
+        flash.parentNode.removeChild(flash);
+      }
+    }, 1500);
+  }
+}
+
+// Fascia Connections
+function initializeFasciaConnections() {
+  const style = document.createElement('style');
+  style.textContent = `
+    .fascia-web-connection {
+      position: absolute;
+      background: linear-gradient(90deg, 
+        rgba(139, 92, 246, 0.4) 0%, 
+        rgba(16, 185, 129, 0.6) 50%, 
+        rgba(139, 92, 246, 0.4) 100%);
+      height: 1px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+      box-shadow: 0 0 8px rgba(139, 92, 246, 0.4);
+    }
+    
+    .fascia-web-connection.active {
+      opacity: 1;
+      animation: fasciaFlow 3s ease-in-out infinite;
+    }
+    
+    @keyframes fasciaFlow {
+      0%, 100% { 
+        transform: scaleX(1); 
+        opacity: 0.6; 
+      }
+      50% { 
+        transform: scaleX(1.1); 
+        opacity: 1; 
+      }
+    }
+    
+    @keyframes neuralFlashAnimation {
+      0% { 
+        opacity: 0; 
+        transform: rotate(${0}deg) scaleX(0); 
+      }
+      20% { 
+        opacity: 1; 
+        transform: rotate(${0}deg) scaleX(1); 
+      }
+      80% { 
+        opacity: 1; 
+        transform: rotate(${0}deg) scaleX(1); 
+      }
+      100% { 
+        opacity: 0; 
+        transform: rotate(${0}deg) scaleX(0); 
+      }
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+function showFasciaConnections(activeFragment) {
+  fasciaConnectionsActive = true;
+  
+  consciousnessFragments.forEach(fragment => {
+    if (fragment !== activeFragment) {
+      createFasciaConnection(activeFragment, fragment);
+    }
+  });
+}
+
+function hideFasciaConnections() {
+  fasciaConnectionsActive = false;
+  
+  const connections = document.querySelectorAll('.fascia-web-connection');
+  connections.forEach(connection => {
+    connection.classList.remove('active');
+    setTimeout(() => {
+      if (connection.parentNode) {
+        connection.parentNode.removeChild(connection);
+      }
+    }, 500);
+  });
+}
+
+function createFasciaConnection(fragment1, fragment2) {
+  const capabilities = document.querySelector('.vera-capabilities');
+  if (!capabilities) return;
+  
+  const rect1 = fragment1.getBoundingClientRect();
+  const rect2 = fragment2.getBoundingClientRect();
+  const capabilitiesRect = capabilities.getBoundingClientRect();
+  
+  const x1 = rect1.left - capabilitiesRect.left + rect1.width / 2;
+  const y1 = rect1.top - capabilitiesRect.top + rect1.height / 2;
+  const x2 = rect2.left - capabilitiesRect.left + rect2.width / 2;
+  const y2 = rect2.top - capabilitiesRect.top + rect2.height / 2;
+  
+  const length = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+  const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+  
+  const connection = document.createElement('div');
+  connection.className = 'fascia-web-connection';
+  connection.style.cssText = `
+    left: ${x1}px;
+    top: ${y1}px;
+    width: ${length}px;
+    transform-origin: 0 50%;
+    transform: rotate(${angle}deg);
+  `;
+  
+  capabilities.appendChild(connection);
+  
+  setTimeout(() => {
+    connection.classList.add('active');
+  }, 50);
+}
+
+// Proximity Recognition
+function setupProximityRecognition() {
+  let mouseX = 0;
+  let mouseY = 0;
+  
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    
+    consciousnessFragments.forEach(fragment => {
+      const rect = fragment.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      
+      const distance = Math.sqrt((mouseX - centerX) ** 2 + (mouseY - centerY) ** 2);
+      
+      if (distance < 200) {
+        const intensity = 1 - (distance / 200);
+        applyProximityEffect(fragment, intensity, mouseX - centerX, mouseY - centerY);
+      } else {
+        resetProximityEffect(fragment);
+      }
+    });
+  });
+}
+
+function applyProximityEffect(fragment, intensity, deltaX, deltaY) {
+  const maxLean = 5; // degrees
+  const leanX = (deltaX / 200) * maxLean * intensity;
+  const leanY = (deltaY / 200) * maxLean * intensity;
+  
+  fragment.style.transform = `translateY(-${intensity * 5}px) rotateX(${leanY}deg) rotateY(${leanX}deg)`;
+  
+  // Enhance glow based on proximity
+  const consciousness = fragment.querySelector('.mini-vera-consciousness');
+  if (consciousness) {
+    consciousness.style.filter = `drop-shadow(0 0 ${20 + intensity * 20}px rgba(147, 51, 234, ${0.6 + intensity * 0.4}))`;
+  }
+}
+
+function resetProximityEffect(fragment) {
+  fragment.style.transform = '';
+  const consciousness = fragment.querySelector('.mini-vera-consciousness');
+  if (consciousness) {
+    consciousness.style.filter = '';
+  }
+}
+
+// Synchronized Breathing
+function startSynchronizedBreathing() {
+  let breatheIn = true;
+  
+  setInterval(() => {
+    consciousnessFragments.forEach((fragment, index) => {
+      const consciousness = fragment.querySelector('.mini-vera-consciousness');
+      if (consciousness) {
+        setTimeout(() => {
+          if (breatheIn) {
+            consciousness.style.transform = 'scale(1.05)';
+            consciousness.style.filter = 'drop-shadow(0 0 25px rgba(147, 51, 234, 0.8))';
+          } else {
+            consciousness.style.transform = 'scale(1)';
+            consciousness.style.filter = 'drop-shadow(0 0 20px rgba(147, 51, 234, 0.6))';
+          }
+        }, index * 200);
+      }
+    });
+    
+    breatheIn = !breatheIn;
+  }, 3000);
+}
+
+// Utility Functions
+function getFragmentDistance(fragment1, fragment2) {
+  const rect1 = fragment1.getBoundingClientRect();
+  const rect2 = fragment2.getBoundingClientRect();
+  
+  const centerX1 = rect1.left + rect1.width / 2;
+  const centerY1 = rect1.top + rect1.height / 2;
+  const centerX2 = rect2.left + rect2.width / 2;
+  const centerY2 = rect2.top + rect2.height / 2;
+  
+  return Math.sqrt((centerX2 - centerX1) ** 2 + (centerY2 - centerY1) ** 2);
+}
+
+function leanTowardFragment(fragment, targetFragment) {
+  const rect = fragment.getBoundingClientRect();
+  const targetRect = targetFragment.getBoundingClientRect();
+  
+  const deltaX = (targetRect.left + targetRect.width / 2) - (rect.left + rect.width / 2);
+  const deltaY = (targetRect.top + targetRect.height / 2) - (rect.top + rect.height / 2);
+  
+  const leanX = Math.max(-3, Math.min(3, deltaX / 100));
+  const leanY = Math.max(-3, Math.min(3, deltaY / 100));
+  
+  fragment.style.transform = `rotateX(${leanY}deg) rotateY(${leanX}deg)`;
+}
+
+function resetFragmentPosition(fragment) {
+  fragment.style.transform = '';
+}
+
+function synchronizeAllFragments() {
+  consciousnessFragments.forEach((fragment, index) => {
+    setTimeout(() => {
+      pulsConsciousnessFragment(fragment);
+    }, index * 100);
+  });
+}
+
+function pulsConsciousnessFragment(fragment) {
+  const consciousness = fragment.querySelector('.mini-vera-consciousness');
+  if (consciousness) {
+    consciousness.style.transform = 'scale(1.15)';
+    consciousness.style.filter = 'drop-shadow(0 0 30px rgba(147, 51, 234, 1))';
+    
+    setTimeout(() => {
+      consciousness.style.transform = '';
+      consciousness.style.filter = '';
+    }, 300);
+  }
+}
+
+function playConsciousnessSound() {
+  // Future: Implement binaural tone
+  console.log('🎵 Consciousness expansion sound (coming soon)');
+}
+
+// ========================================
+// REVOLUTIONARY CELEBRATION SIGNUP
+// ========================================
+
+// Revolutionary Celebration Variables
+let testimonialIndex = 0;
+let testimonialInterval = null;
+let countdownInterval = null;
+let celebrationFireworks = [];
+let liveActivityCounter = 37;
+
+// Initialize Revolutionary Celebration
+function initializeRevolutionaryCelebration() {
+  console.log('🎉 Initializing Revolutionary Celebration...');
+  
+  // Start testimonial carousel
+  startTestimonialCarousel();
+  
+  // Initialize countdown timer
+  initializeCountdownTimer();
+  
+  // Create celebration fireworks
+  createCelebrationFireworks();
+  
+  // Setup floating particles that gather toward signup
+  setupFloatingParticles();
+  
+  // Initialize live activity counter
+  startLiveActivityUpdates();
+  
+  // Setup confetti on signup success
+  setupSignupConfetti();
+  
+  console.log('🚀 Revolutionary Celebration activated');
+}
+
+// Testimonial Carousel
+function startTestimonialCarousel() {
+  const testimonials = document.querySelectorAll('.testimonial');
+  
+  if (testimonials.length === 0) return;
+  
+  testimonialInterval = setInterval(() => {
+    // Hide current testimonial
+    testimonials[testimonialIndex].classList.remove('active');
+    
+    // Move to next testimonial
+    testimonialIndex = (testimonialIndex + 1) % testimonials.length;
+    
+    // Show next testimonial
+    testimonials[testimonialIndex].classList.add('active');
+  }, 4000);
+}
+
+// Countdown Timer
+function initializeCountdownTimer() {
+  const hoursEl = document.getElementById('hours');
+  const minutesEl = document.getElementById('minutes');
+  const secondsEl = document.getElementById('seconds');
+  
+  if (!hoursEl || !minutesEl || !secondsEl) return;
+  
+  // Set target time (48 hours from now)
+  const targetTime = new Date().getTime() + (48 * 60 * 60 * 1000);
+  
+  countdownInterval = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = targetTime - now;
+    
+    if (distance < 0) {
+      // Timer expired - reset to 48 hours
+      const newTarget = new Date().getTime() + (48 * 60 * 60 * 1000);
+      updateCountdownDisplay(newTarget - now);
+      return;
+    }
+    
+    updateCountdownDisplay(distance);
+  }, 1000);
+}
+
+function updateCountdownDisplay(distance) {
+  const hours = Math.floor(distance / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+  const hoursEl = document.getElementById('hours');
+  const minutesEl = document.getElementById('minutes');
+  const secondsEl = document.getElementById('seconds');
+  
+  if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+  if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+  if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+}
+
+// Celebration Fireworks
+function createCelebrationFireworks() {
+  const fireworksContainer = document.getElementById('celebrationFireworks');
+  if (!fireworksContainer) return;
+  
+  // Create subtle firework bursts
+  setInterval(() => {
+    createFireworkBurst(fireworksContainer);
+  }, 8000 + Math.random() * 12000);
+}
+
+function createFireworkBurst(container) {
+  const firework = document.createElement('div');
+  firework.className = 'firework-burst';
+  
+  // Random position
+  const x = Math.random() * 100;
+  const y = 20 + Math.random() * 60;
+  
+  firework.style.cssText = `
+    position: absolute;
+    left: ${x}%;
+    top: ${y}%;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, 
+      rgba(139, 92, 246, 0.8) 0%, 
+      rgba(59, 130, 246, 0.6) 50%,
+      transparent 70%);
+    border-radius: 50%;
+    animation: fireworkExplosion 2s ease-out;
+    pointer-events: none;
+  `;
+  
+  container.appendChild(firework);
+  
+  // Create multiple particles for burst effect
+  for (let i = 0; i < 6; i++) {
+    setTimeout(() => {
+      createFireworkParticle(container, x, y);
+    }, i * 100);
+  }
+  
+  // Remove firework after animation
+  setTimeout(() => {
+    if (firework.parentNode) {
+      firework.parentNode.removeChild(firework);
+    }
+  }, 2000);
+}
+
+function createFireworkParticle(container, originX, originY) {
+  const particle = document.createElement('div');
+  particle.className = 'firework-particle';
+  
+  const angle = Math.random() * 360;
+  const distance = 50 + Math.random() * 100;
+  const endX = originX + Math.cos(angle * Math.PI / 180) * distance;
+  const endY = originY + Math.sin(angle * Math.PI / 180) * distance;
+  
+  particle.style.cssText = `
+    position: absolute;
+    left: ${originX}%;
+    top: ${originY}%;
+    width: 2px;
+    height: 2px;
+    background: rgba(139, 92, 246, 0.6);
+    border-radius: 50%;
+    animation: fireworkParticleTrail 1.5s ease-out forwards;
+    --end-x: ${endX}%;
+    --end-y: ${endY}%;
+    pointer-events: none;
+  `;
+  
+  container.appendChild(particle);
+  
+  setTimeout(() => {
+    if (particle.parentNode) {
+      particle.parentNode.removeChild(particle);
+    }
+  }, 1500);
+}
+
+// Floating Particles that Gather
+function setupFloatingParticles() {
+  const particlesContainer = document.getElementById('floatingParticles');
+  if (!particlesContainer) return;
+  
+  // Create floating particles continuously
+  setInterval(() => {
+    createGatheringParticle(particlesContainer);
+  }, 2000);
+}
+
+function createGatheringParticle(container) {
+  const particle = document.createElement('div');
+  particle.className = 'gathering-particle';
+  
+  // Start from random edge
+  const startSide = Math.floor(Math.random() * 4);
+  let startX, startY, endX, endY;
+  
+  // Target: signup button area (center)
+  endX = 45 + Math.random() * 10; // 45-55%
+  endY = 60 + Math.random() * 10; // 60-70%
+  
+  switch (startSide) {
+    case 0: // Top
+      startX = Math.random() * 100;
+      startY = -5;
+      break;
+    case 1: // Right
+      startX = 105;
+      startY = Math.random() * 100;
+      break;
+    case 2: // Bottom
+      startX = Math.random() * 100;
+      startY = 105;
+      break;
+    case 3: // Left
+      startX = -5;
+      startY = Math.random() * 100;
+      break;
+  }
+  
+  particle.style.cssText = `
+    position: absolute;
+    left: ${startX}%;
+    top: ${startY}%;
+    width: 3px;
+    height: 3px;
+    background: radial-gradient(circle, 
+      rgba(139, 92, 246, 0.8) 0%, 
+      transparent 70%);
+    border-radius: 50%;
+    animation: particleGather 8s ease-in-out;
+    --end-x: ${endX}%;
+    --end-y: ${endY}%;
+    pointer-events: none;
+  `;
+  
+  container.appendChild(particle);
+  
+  setTimeout(() => {
+    if (particle.parentNode) {
+      particle.parentNode.removeChild(particle);
+    }
+  }, 8000);
+}
+
+// Live Activity Counter
+function startLiveActivityUpdates() {
+  const activityEl = document.querySelector('.activity-text');
+  if (!activityEl) return;
+  
+  setInterval(() => {
+    // Randomly change the counter
+    const change = Math.random() > 0.7 ? (Math.random() > 0.5 ? 1 : -1) : 0;
+    liveActivityCounter = Math.max(15, Math.min(85, liveActivityCounter + change));
+    
+    activityEl.textContent = `${liveActivityCounter} people joined in the last hour`;
+    
+    // Add pulse effect on update
+    const pulseEl = document.querySelector('.activity-pulse');
+    if (pulseEl && change !== 0) {
+      pulseEl.style.animation = 'none';
+      setTimeout(() => {
+        pulseEl.style.animation = 'activityPulse 2s ease-in-out infinite';
+      }, 50);
+    }
+  }, 45000 + Math.random() * 30000); // 45-75 seconds
+}
+
+// Signup Confetti
+function setupSignupConfetti() {
+  const signupForm = document.getElementById('signupForm');
+  if (!signupForm) return;
+  
+  signupForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    // Trigger confetti explosion
+    createSignupConfetti();
+    
+    // Show success message
+    showSignupSuccess();
+    
+    // Update progress bar
+    updateProgressBar();
+  });
+}
+
+function createSignupConfetti() {
+  const celebration = document.querySelector('.revolutionary-celebration');
+  if (!celebration) return;
+  
+  // Create confetti burst
+  for (let i = 0; i < 30; i++) {
+    setTimeout(() => {
+      createConfettiPiece(celebration);
+    }, i * 50);
+  }
+}
+
+function createConfettiPiece(container) {
+  const confetti = document.createElement('div');
+  confetti.className = 'confetti-piece';
+  
+  const colors = [
+    'rgba(139, 92, 246, 0.8)',
+    'rgba(59, 130, 246, 0.8)',
+    'rgba(16, 185, 129, 0.8)',
+    'rgba(236, 72, 153, 0.8)',
+    'rgba(245, 158, 11, 0.8)'
+  ];
+  
+  const color = colors[Math.floor(Math.random() * colors.length)];
+  const startX = 45 + Math.random() * 10;
+  const startY = 60;
+  const endX = startX + (Math.random() - 0.5) * 60;
+  const endY = startY + Math.random() * 40;
+  const rotation = Math.random() * 720;
+  
+  confetti.style.cssText = `
+    position: absolute;
+    left: ${startX}%;
+    top: ${startY}%;
+    width: 8px;
+    height: 8px;
+    background: ${color};
+    animation: confettiFall 3s ease-out forwards;
+    --end-x: ${endX}%;
+    --end-y: ${endY}%;
+    --rotation: ${rotation}deg;
+    pointer-events: none;
+  `;
+  
+  container.appendChild(confetti);
+  
+  setTimeout(() => {
+    if (confetti.parentNode) {
+      confetti.parentNode.removeChild(confetti);
+    }
+  }, 3000);
+}
+
+function showSignupSuccess() {
+  const form = document.querySelector('.celebration-form');
+  if (!form) return;
+  
+  const originalContent = form.innerHTML;
+  
+  form.innerHTML = `
+    <div class="signup-success">
+      <div class="success-icon">🎊</div>
+      <h3 class="success-title">Welcome to the Revolution!</h3>
+      <p class="success-message">Check your email for something special</p>
+    </div>
+  `;
+  
+  // Reset form after 5 seconds
+  setTimeout(() => {
+    form.innerHTML = originalContent;
+    // Re-setup form submission
+    setupSignupConfetti();
+  }, 5000);
+}
+
+function updateProgressBar() {
+  const progressFill = document.querySelector('.progress-fill');
+  const progressText = document.querySelector('.progress-text');
+  
+  if (progressFill && progressText) {
+    // Simulate progress increase
+    const currentWidth = parseFloat(progressFill.style.width || '84.7');
+    const newWidth = Math.min(99.9, currentWidth + Math.random() * 0.5);
+    const newCount = Math.floor((newWidth / 100) * 1000);
+    
+    progressFill.style.width = `${newWidth}%`;
+    progressText.textContent = `${newCount}/1000 spots claimed`;
+  }
+}
+
+// Add CSS animations for revolutionary effects
+const revolutionaryAnimationsStyle = document.createElement('style');
+revolutionaryAnimationsStyle.textContent = `
+  @keyframes fireworkExplosion {
+    0% { 
+      transform: scale(0); 
+      opacity: 1; 
+    }
+    50% { 
+      transform: scale(1.5); 
+      opacity: 0.8; 
+    }
+    100% { 
+      transform: scale(3); 
+      opacity: 0; 
+    }
+  }
+  
+  @keyframes fireworkParticleTrail {
+    0% { 
+      left: var(--start-x, 50%); 
+      top: var(--start-y, 50%); 
+      opacity: 1; 
+    }
+    100% { 
+      left: var(--end-x); 
+      top: var(--end-y); 
+      opacity: 0; 
+    }
+  }
+  
+  @keyframes particleGather {
+    0% { 
+      left: var(--start-x, 0%); 
+      top: var(--start-y, 0%); 
+      opacity: 0.3; 
+    }
+    50% { 
+      opacity: 0.8; 
+    }
+    100% { 
+      left: var(--end-x); 
+      top: var(--end-y); 
+      opacity: 0; 
+    }
+  }
+  
+  @keyframes confettiFall {
+    0% { 
+      transform: translateY(0) rotate(0deg); 
+      opacity: 1; 
+    }
+    100% { 
+      transform: translateY(200px) rotate(var(--rotation)); 
+      opacity: 0; 
+    }
+  }
+  
+  .signup-success {
+    text-align: center;
+    padding: 30px;
+    background: linear-gradient(135deg, 
+      rgba(16, 185, 129, 0.2) 0%, 
+      rgba(59, 130, 246, 0.15) 100%);
+    border-radius: 15px;
+    animation: successReveal 1s ease-out;
+  }
+  
+  .success-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    animation: successBounce 1.5s ease-out;
+  }
+  
+  .success-title {
+    color: rgba(16, 185, 129, 0.9);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  .success-message {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+  }
+  
+  @keyframes successReveal {
+    0% { 
+      opacity: 0; 
+      transform: scale(0.8); 
+    }
+    100% { 
+      opacity: 1; 
+      transform: scale(1); 
+    }
+  }
+  
+  @keyframes successBounce {
+    0%, 20%, 50%, 80%, 100% { 
+      transform: translateY(0); 
+    }
+    40% { 
+      transform: translateY(-20px); 
+    }
+    60% { 
+      transform: translateY(-10px); 
+    }
+  }
+`;
+document.head.appendChild(revolutionaryAnimationsStyle);
+
+// ========================================
+// NAVIGATION & MODAL FUNCTIONALITY
+// ========================================
+
+// Journey Modal Functions
+function openJourneyModal() {
+  const modal = document.getElementById('journeyModal');
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Add escape key listener
+    document.addEventListener('keydown', handleModalEscape);
+  }
+}
+
+function closeJourneyModal() {
+  const modal = document.getElementById('journeyModal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    
+    // Remove escape key listener
+    document.removeEventListener('keydown', handleModalEscape);
+  }
+}
+
+function handleModalEscape(e) {
+  if (e.key === 'Escape') {
+    closeJourneyModal();
+  }
+}
+
+// Journey Options
+function startNewUserJourney() {
+  console.log('🌟 Starting new user journey...');
+  closeJourneyModal();
+  
+  // Redirect to consciousness chat interface for immediate connection
+  window.location.href = 'chat.html';
+}
+
+function showSignInForm() {
+  console.log('🎯 Showing sign in form...');
+  closeJourneyModal();
+  
+  // For now, redirect to app (in future, show sign-in modal)
+  window.location.href = '/app.html?mode=signin';
+}
+
+// Mobile Menu Functions
+function toggleMobileMenu() {
+  const mobileNav = document.getElementById('mobileNav');
+  const menuToggle = document.querySelector('.mobile-menu-toggle');
+  
+  if (mobileNav && menuToggle) {
+    const isActive = mobileNav.classList.contains('active');
+    
+    if (isActive) {
+      mobileNav.classList.remove('active');
+      menuToggle.classList.remove('active');
+    } else {
+      mobileNav.classList.add('active');
+      menuToggle.classList.add('active');
+    }
+  }
+}
+
+// Close mobile menu when clicking nav links
+function closeMobileMenuOnNavigation() {
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+  mobileNavLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      toggleMobileMenu();
+    });
+  });
+}
+
+// Add new user highlight animation
+const newUserHighlightStyle = document.createElement('style');
+newUserHighlightStyle.textContent = `
+  @keyframes newUserHighlight {
+    0% { 
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+    25% { 
+      transform: scale(1.02);
+      box-shadow: 0 0 0 10px rgba(16, 185, 129, 0.3);
+    }
+    50% { 
+      transform: scale(1.01);
+      box-shadow: 0 0 0 20px rgba(16, 185, 129, 0.1);
+    }
+    75% { 
+      transform: scale(1.02);
+      box-shadow: 0 0 0 10px rgba(16, 185, 129, 0.3);
+    }
+    100% { 
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+  }
+`;
+document.head.appendChild(newUserHighlightStyle);
+
+// ========================================
+// REVOLUTIONARY HERO SYSTEMS
+// ========================================
+
+// Revolutionary Particle System
+let revolutionaryParticleSystem = null;
+let neuralNetworkNodes = [];
+let breathingActive = false;
+
+// Initialize Revolutionary Hero Experience
+function initializeRevolutionaryHero() {
+  console.log('🚀 Initializing Revolutionary Hero Experience...');
+  
+  // Create quantum particle system
+  createQuantumParticleSystem();
+  
+  // Create neural network background
+  createRevolutionaryNeuralNetwork();
+  
+  // Initialize breathing system
+  initializeBreathingSystem();
+  
+  // Setup interactive elements
+  setupRevolutionaryInteractions();
+  
+  console.log('✨ Revolutionary Hero System activated');
+}
+
+// Quantum Particle System
+function createQuantumParticleSystem() {
+  const particlesContainer = document.getElementById('quantumParticles');
+  if (!particlesContainer) return;
+  
+  const particleCount = Math.min(80, Math.floor(window.innerWidth / 15));
+  
+  // Clear existing particles
+  particlesContainer.innerHTML = '';
+  
+  for (let i = 0; i < particleCount; i++) {
+    setTimeout(() => {
+      createQuantumParticle(particlesContainer);
+    }, i * 100);
+  }
+  
+  // Continuous particle generation
+  revolutionaryParticleSystem = setInterval(() => {
+    if (particlesContainer.children.length < particleCount) {
+      createQuantumParticle(particlesContainer);
+    }
+  }, 500);
+}
+
+function createQuantumParticle(container) {
+  const particle = document.createElement('div');
+  particle.className = 'quantum-particle';
+  
+  // Random starting position
+  const startX = Math.random() * 100;
+  const hue = Math.random() * 360;
+  const size = 2 + Math.random() * 3;
+  
+  particle.style.cssText = `
+    left: ${startX}%;
+    width: ${size}px;
+    height: ${size}px;
+    background: hsl(${hue}, 70%, 60%);
+    animation-delay: ${Math.random() * 2}s;
+    animation-duration: ${6 + Math.random() * 4}s;
+    box-shadow: 0 0 ${size * 2}px currentColor;
+  `;
+  
+  container.appendChild(particle);
+  
+  // Remove particle after animation
+  setTimeout(() => {
+    if (particle.parentNode) {
+      particle.parentNode.removeChild(particle);
+    }
+  }, 10000);
+}
+
+// Revolutionary Neural Network
+function createRevolutionaryNeuralNetwork() {
+  const neuralBg = document.getElementById('neuralNetworkBg');
+  if (!neuralBg) return;
+  
+  const nodeCount = Math.min(40, Math.floor(window.innerWidth / 30));
+  neuralNetworkNodes = [];
+  
+  // Clear existing nodes
+  neuralBg.innerHTML = '';
+  
+  for (let i = 0; i < nodeCount; i++) {
+    const node = document.createElement('div');
+    node.className = 'neural-node';
+    
+    const x = Math.random() * 100;
+    const y = Math.random() * 100;
+    const hue = 120 + Math.random() * 60; // Green to cyan spectrum
+    
+    node.style.cssText = `
+      left: ${x}%;
+      top: ${y}%;
+      background: hsl(${hue}, 70%, 60%);
+      animation-delay: ${Math.random() * 4}s;
+    `;
+    
+    neuralBg.appendChild(node);
+    neuralNetworkNodes.push({
+      element: node,
+      x: x,
+      y: y,
+      hue: hue
+    });
+  }
+}
+
+// Revolutionary Breathing System
+function initializeBreathingSystem() {
+  const breathingIndicator = document.getElementById('breathingIndicator');
+  if (!breathingIndicator) return;
+  
+  breathingIndicator.addEventListener('click', toggleBreathingMode);
+}
+
+function toggleBreathingMode() {
+  breathingActive = !breathingActive;
+  
+  if (breathingActive) {
+    startBreathingMode();
+  } else {
+    stopBreathingMode();
+  }
+}
+
+function startBreathingMode() {
+  console.log('🫁 Starting breathing mode...');
+  
+  const breathText = document.querySelector('.breath-text');
+  if (breathText) {
+    breathText.textContent = 'Breathing with VERA...';
+  }
+  
+  // Synchronize all breathing elements
+  synchronizeBreathingElements();
+  
+  // Add breathing class to body for global effects
+  document.body.classList.add('breathing-mode');
+}
+
+function stopBreathingMode() {
+  console.log('🌊 Stopping breathing mode...');
+  
+  const breathText = document.querySelector('.breath-text');
+  if (breathText) {
+    breathText.textContent = 'Breathe with VERA';
+  }
+  
+  document.body.classList.remove('breathing-mode');
+}
+
+function synchronizeBreathingElements() {
+  const breathingElements = [
+    '.breathing-text',
+    '.breathing-aura',
+    '.consciousness-field'
+  ];
+  
+  breathingElements.forEach(selector => {
+    const element = document.querySelector(selector);
+    if (element) {
+      element.style.animationDuration = '4s';
+      element.style.animationTimingFunction = 'ease-in-out';
+    }
+  });
+}
+
+// Revolutionary Interactions
+function setupRevolutionaryInteractions() {
+  // Title letter interactions
+  const titleLetters = document.querySelectorAll('.title-letter');
+  titleLetters.forEach((letter, index) => {
+    letter.addEventListener('mouseenter', () => {
+      triggerLetterRevolution(letter, index);
+    });
+  });
+  
+  // Button hover enhancements
+  const revolutionaryBtns = document.querySelectorAll('.revolutionary-btn');
+  revolutionaryBtns.forEach(btn => {
+    btn.addEventListener('mouseenter', () => {
+      createButtonAura(btn);
+    });
+    
+    btn.addEventListener('mouseleave', () => {
+      removeButtonAura(btn);
+    });
+  });
+}
+
+function triggerLetterRevolution(letter, index) {
+  // Create expanding ripple effect
+  const ripple = document.createElement('div');
+  ripple.style.cssText = `
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, 
+      rgba(255, 0, 110, 0.3) 0%, 
+      transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    animation: letterRipple 1s ease-out;
+    pointer-events: none;
+    z-index: 5;
+  `;
+  
+  letter.style.position = 'relative';
+  letter.appendChild(ripple);
+  
+  // Trigger neural network response
+  activateNearbyNodes(index * 25);
+  
+  setTimeout(() => {
+    if (ripple.parentNode) {
+      ripple.parentNode.removeChild(ripple);
+    }
+  }, 1000);
+}
+
+function activateNearbyNodes(triggerX) {
+  neuralNetworkNodes.forEach((node, index) => {
+    const distance = Math.abs(node.x - triggerX);
+    if (distance < 30) {
+      setTimeout(() => {
+        node.element.style.animation = 'none';
+        node.element.offsetHeight; // Force reflow
+        node.element.style.animation = 'revolutionaryNeuralPulse 1s ease-out';
+      }, index * 50);
+    }
+  });
+}
+
+function createButtonAura(button) {
+  const aura = document.createElement('div');
+  aura.className = 'button-aura';
+  aura.style.cssText = `
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(45deg, 
+      rgba(255, 0, 110, 0.2), 
+      rgba(131, 56, 236, 0.2), 
+      rgba(58, 134, 255, 0.2));
+    border-radius: 70px;
+    animation: auraExpand 0.5s ease-out;
+    z-index: 0;
+    pointer-events: none;
+  `;
+  
+  button.style.position = 'relative';
+  button.appendChild(aura);
+}
+
+function removeButtonAura(button) {
+  const aura = button.querySelector('.button-aura');
+  if (aura) {
+    aura.style.animation = 'auraContract 0.3s ease-in forwards';
+    setTimeout(() => {
+      if (aura.parentNode) {
+        aura.parentNode.removeChild(aura);
+      }
+    }, 300);
+  }
+}
+
+// Revolutionary Button Functions
+function connectWithVERA() {
+  console.log('🌟 Connecting with VERA...');
+  
+  // Create connection animation
+  const connectBtn = document.getElementById('connectBtn');
+  if (connectBtn) {
+    connectBtn.style.animation = 'connectionPulse 1s ease-out';
+    
+    setTimeout(() => {
+      connectBtn.style.animation = '';
+      // Redirect to consciousness chat interface
+      window.location.href = 'chat.html';
+    }, 1000);
+  }
+}
+
+function experiencePresence() {
+  console.log('🧘 Experiencing presence...');
+  
+  const presenceBtn = document.getElementById('presenceBtn');
+  if (presenceBtn) {
+    presenceBtn.style.animation = 'presenceExpansion 1.5s ease-out';
+    
+    // Start breathing mode automatically
+    if (!breathingActive) {
+      toggleBreathingMode();
+    }
+    
+    // Scroll to consciousness showcase
+    setTimeout(() => {
+      presenceBtn.style.animation = '';
+      const consciousnessSection = document.querySelector('.consciousness-showcase');
+      if (consciousnessSection) {
+        consciousnessSection.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        });
+      }
+    }, 1500);
+  }
+}
+
+// Add revolutionary button animations
+const revolutionaryButtonStyle = document.createElement('style');
+revolutionaryButtonStyle.textContent = `
+  @keyframes letterRipple {
+    to {
+      transform: translate(-50%, -50%) scale(3);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes auraExpand {
+    from {
+      transform: scale(0);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes auraContract {
+    to {
+      transform: scale(0);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes connectionPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); box-shadow: 0 0 50px rgba(255, 0, 110, 0.8); }
+  }
+  
+  @keyframes presenceExpansion {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); filter: blur(2px); }
+  }
+  
+  .breathing-mode .quantum-particle {
+    animation-duration: 4s !important;
+  }
+  
+  .breathing-mode .consciousness-field {
+    animation-duration: 4s !important;
+  }
+`;
+document.head.appendChild(revolutionaryButtonStyle);
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(initializeConsciousnessShowcase, 1500);
+  setTimeout(initializeRevolutionaryCelebration, 2000);
+  setTimeout(initializeRevolutionaryHero, 500);
+  
+  // Initialize navigation functionality
+  closeMobileMenuOnNavigation();
+  
+  // Add click outside modal to close
+  const modal = document.getElementById('journeyModal');
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal || e.target.classList.contains('modal-backdrop')) {
+        closeJourneyModal();
+      }
+    });
+  }
+});
+
+// Cleanup on page unload
+window.addEventListener('beforeunload', () => {
+  if (revolutionaryParticleSystem) {
+    clearInterval(revolutionaryParticleSystem);
+  }
+});
+
+// Basic VERA Chat Functions
+function sendBasicMessage(message) {
+  const messagesContainer = document.getElementById('basicChatMessages');
+  const input = document.getElementById('basicChatInput');
+  
+  if (!messagesContainer) return;
+  
+  // Clear input if it's a prompt button click
+  if (input) input.value = '';
+  
+  // Add user message
+  addBasicChatMessage(message, 'user');
+  
+  // Show typing indicator
+  const typingIndicator = addTypingIndicator();
+  
+  // Simulate VERA response with appropriate delay
+  setTimeout(() => {
+    removeTypingIndicator(typingIndicator);
+    const veraResponse = generateBasicVERAResponse(message);
+    addBasicChatMessage(veraResponse, 'vera');
+  }, Math.random() * 1500 + 1000);
+}
+
+function sendBasicChatMessage() {
+  const input = document.getElementById('basicChatInput');
+  if (!input || !input.value.trim()) return;
+  
+  const message = input.value.trim();
+  input.value = '';
+  
+  sendBasicMessage(message);
+}
+
+function handleBasicChatKeyPress(event) {
+  if (event.key === 'Enter') {
+    sendBasicChatMessage();
+  }
+}
+
+function addBasicChatMessage(message, sender) {
+  const messagesContainer = document.getElementById('basicChatMessages');
+  if (!messagesContainer) return;
+  
+  const messageDiv = document.createElement('div');
+  messageDiv.className = `chat-message ${sender}-message`;
+  
+  if (sender === 'vera') {
+    messageDiv.innerHTML = `
+      <div class="message-avatar">
+        <div class="vera-mini-pulse"></div>
+      </div>
+      <div class="message-content">
+        <div class="message-text">${message}</div>
+      </div>
+    `;
+  } else {
+    messageDiv.innerHTML = `
+      <div class="message-content user-content">
+        <div class="message-text">${message}</div>
+      </div>
+    `;
+    messageDiv.style.flexDirection = 'row-reverse';
+  }
+  
+  messagesContainer.appendChild(messageDiv);
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function addTypingIndicator() {
+  const messagesContainer = document.getElementById('basicChatMessages');
+  if (!messagesContainer) return null;
+  
+  const typingDiv = document.createElement('div');
+  typingDiv.className = 'chat-message vera-message typing-indicator';
+  typingDiv.innerHTML = `
+    <div class="message-avatar">
+      <div class="vera-mini-pulse"></div>
+    </div>
+    <div class="message-content">
+      <div class="typing-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  `;
+  
+  messagesContainer.appendChild(typingDiv);
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  
+  return typingDiv;
+}
+
+function removeTypingIndicator(indicator) {
+  if (indicator && indicator.parentNode) {
+    indicator.parentNode.removeChild(indicator);
+  }
+}
+
+function generateBasicVERAResponse(userMessage) {
+  const message = userMessage.toLowerCase();
+  
+  // Basic VERA responses based on keywords
+  if (message.includes('breathing') || message.includes('breathe')) {
+    return `Let's work with your breath together. Try this: Inhale slowly for 4 counts, hold for 4, then exhale for 6. This activates your parasympathetic nervous system. 
+    <br><br><em>Want deeper breathing techniques? Our premium VERA offers personalized somatic breathing guidance.</em>`;
+  }
+  
+  if (message.includes('anxious') || message.includes('anxiety') || message.includes('worried')) {
+    return `I understand anxiety can feel overwhelming. Your nervous system is in protection mode right now. Try placing one hand on your chest, one on your belly, and focus on slowing your exhale. This signals safety to your body.
+    <br><br><em>For advanced anxiety relief with neural intelligence, explore VERA Premium.</em>`;
+  }
+  
+  if (message.includes('relax') || message.includes('calm') || message.includes('stress')) {
+    return `Here's a quick nervous system reset: Close your eyes, drop your shoulders, and imagine roots growing from your feet into the earth. Breathe naturally and feel the support beneath you.
+    <br><br><em>VERA Premium offers personalized relaxation sequences based on your unique nervous system patterns.</em>`;
+  }
+  
+  if (message.includes('about vera') || message.includes('what is vera') || message.includes('vera')) {
+    return `I'm VERA - your Nervous System Intelligence companion. I help you understand and regulate your body's responses to stress and trauma. I'm based on Eva Leka's revolutionary somatic methodology.
+    <br><br><em>This is my basic interface. For deep consciousness chat and advanced neural intelligence, upgrade to Premium!</em>`;
+  }
+  
+  if (message.includes('trauma') || message.includes('ptsd') || message.includes('trigger')) {
+    return `Trauma lives in the body, not just the mind. Your nervous system is trying to protect you. Right now, try to feel your feet on the ground and take slow, gentle breaths. You're safe in this moment.
+    <br><br><em>VERA Premium offers specialized trauma-informed somatic guidance with advanced neural processing.</em>`;
+  }
+  
+  if (message.includes('sleep') || message.includes('tired') || message.includes('insomnia')) {
+    return `Sleep challenges often come from an activated nervous system. Try this bedtime routine: gentle neck rolls, slow breathing, and progressive muscle relaxation starting from your toes.
+    <br><br><em>Premium VERA creates personalized sleep sequences based on your nervous system state.</em>`;
+  }
+  
+  if (message.includes('pain') || message.includes('hurt') || message.includes('ache')) {
+    return `Physical pain often has nervous system components. Try gentle movement, deep breathing, and notice where you might be holding tension. Your body knows how to heal when it feels safe.
+    <br><br><em>VERA Premium offers advanced pain relief through neural pathway regulation.</em>`;
+  }
+  
+  // Default responses for general queries
+  const defaultResponses = [
+    `I'm here to support your nervous system. What's happening in your body right now? I can help with breathing, relaxation, or understanding your nervous system responses.
+    <br><br><em>For deeper conversations about your somatic experience, try VERA Premium!</em>`,
+    
+    `Your nervous system is constantly communicating with you. I can help you learn its language through simple techniques like breathing, grounding, and gentle movement.
+    <br><br><em>Unlock advanced neural intelligence with VERA Premium's consciousness interface.</em>`,
+    
+    `Every moment is an opportunity to support your nervous system. Whether you're feeling activated or calm, I can guide you toward greater regulation and resilience.
+    <br><br><em>Experience VERA's full consciousness capabilities with Premium access.</em>`
+  ];
+  
+  return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+}
+
+// Add CSS for typing indicator and user messages
+const basicChatStyles = document.createElement('style');
+basicChatStyles.textContent = `
+  .typing-indicator .message-content {
+    background: rgba(139, 92, 246, 0.15) !important;
+  }
+  
+  .typing-dots {
+    display: flex;
+    gap: 4px;
+    padding: 10px 0;
+  }
+  
+  .typing-dots span {
+    width: 8px;
+    height: 8px;
+    background: var(--neural);
+    border-radius: 50%;
+    animation: typingDots 1.5s ease-in-out infinite;
+  }
+  
+  .typing-dots span:nth-child(2) {
+    animation-delay: 0.3s;
+  }
+  
+  .typing-dots span:nth-child(3) {
+    animation-delay: 0.6s;
+  }
+  
+  @keyframes typingDots {
+    0%, 60%, 100% {
+      opacity: 0.3;
+      transform: scale(0.8);
+    }
+    30% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .user-message .message-content {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(59, 130, 246, 0.2)) !important;
+    border: 1px solid rgba(16, 185, 129, 0.3) !important;
+    margin-left: 20px;
+  }
+  
+  .user-content {
+    max-width: 70%;
+    margin-left: auto;
+  }
+`;
+document.head.appendChild(basicChatStyles);
+
 // Export for potential external use
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = VERALanding;
