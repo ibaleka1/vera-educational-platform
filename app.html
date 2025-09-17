@@ -28,17 +28,21 @@
                 <div class="user-greeting" id="userGreeting">
                     Welcome back, Explorer!
                 </div>
+                <div class="user-tier-info">
+                    <div class="tier-indicator" id="tierIndicator">Explorer</div>
+                    <div class="chat-limit-display" id="chatLimitDisplay">0/10</div>
+                </div>
             </div>
 
             <nav class="panel-nav">
                 <div class="nav-section">
                     <h3>Regulation Library</h3>
                     <ul class="nav-list">
-                        <li><a href="#breathing" class="nav-item" data-section="breathing" onclick="createNeuralIcon('breathing', this); setNeuralCoherence()">
+                        <li><a href="#breathing" class="nav-item" data-section="breathing" data-tier-feature="breathing" onclick="createNeuralIcon('breathing', this); setNeuralCoherence()">
                             <div class="nav-neural" data-icon-type="breathing"></div>
                             <span>Breathing Exercises</span>
                         </a></li>
-                        <li><a href="#grounding" class="nav-item" data-section="grounding" onclick="createNeuralIcon('grounding', this); setNeuralRegulation()">
+                        <li><a href="#grounding" class="nav-item" data-section="grounding" data-tier-feature="grounding" onclick="createNeuralIcon('grounding', this); setNeuralRegulation()">
                             <div class="nav-neural" data-icon-type="grounding"></div>
                             <span>Grounding Techniques</span>
                         </a></li>

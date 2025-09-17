@@ -111,6 +111,10 @@ class VERAAuthSystem {
     }
 
     startFreeTrial(user) {
+        // Get selected plan from pricing page
+        const selectedPlan = localStorage.getItem('selectedPlan') || 'explorer';
+        const tierFeatures = this.getTierFeatures(selectedPlan);
+        
         const trialData = {
             userId: user.id,
             startDate: new Date().toISOString(),
@@ -118,19 +122,115 @@ class VERAAuthSystem {
             daysRemaining: 7,
             isActive: true,
             isSubscribed: false,
-            features: {
-                chatLimit: 10,
-                exercises: 'all',
-                journalPrompts: 'all',
-                veraVoice: true,
-                progressTracking: true
-            }
+            tier: selectedPlan,
+            selectedPlan: selectedPlan,
+            features: tierFeatures
         };
         
         localStorage.setItem('veraTrial', JSON.stringify(trialData));
         
+        // Store user tier information
+        const userData = {
+            ...user,
+            tier: selectedPlan,
+            subscription: 'trial',
+            planFeatures: tierFeatures,
+            trialPlan: selectedPlan
+        };
+        localStorage.setItem('veraUser', JSON.stringify(userData));
+        
         // Send welcome email (in production)
         this.sendWelcomeEmail(user);
+    }
+
+    getTierFeatures(tier) {
+        const tierDefinitions = {
+            explorer: {
+                chatLimit: 10,
+                exercises: 'basic',
+                neuralVisualization: 'simple',
+                breathingExercises: 5,
+                groundingTechniques: 6,
+                journalPrompts: 'daily',
+                veraVoice: true,
+                progressTracking: true,
+                features: ['breathing', 'grounding', 'chat', 'journal']
+            },
+            regulator: {
+                chatLimit: Infinity,
+                exercises: 'full',
+                neuralVisualization: 'enhanced',
+                breathingExercises: 'all',
+                groundingTechniques: 'all',
+                journalPrompts: '50+',
+                veraVoice: true,
+                progressTracking: true,
+                movementTools: true,
+                frequencyLibrary: true,
+                weeklyInsights: true,
+                features: ['breathing', 'grounding', 'chat', 'journal', 'movement', 'frequency', 'insights']
+            },
+            integrator: {
+                chatLimit: Infinity,
+                exercises: 'advanced',
+                neuralVisualization: 'complete',
+                personalizedPlans: true,
+                crisisSupport: true,
+                adaptiveCodeMapping: true,
+                integrationGuidance: true,
+                methodologyAccess: true,
+                prioritySupport: true,
+                features: ['breathing', 'grounding', 'chat', 'journal', 'movement', 'frequency', 'insights', 'personalized', 'crisis', 'adaptive', 'methodology']
+            },
+            enterprise: {
+                everything: true,
+                customization: true,
+                teamManagement: true,
+                professionalTools: true,
+                customIntegration: true,
+                training: true,
+                analytics: true,
+                compliance: true,
+                dedicatedSupport: true,
+                features: ['all']
+            }
+        };
+        
+        return tierDefinitions[tier] || tierDefinitions.explorer;
+    }
+
+    getUserTier() {
+        const trialData = localStorage.getItem('veraTrial');
+        const userData = localStorage.getItem('veraUser');
+        
+        if (trialData) {
+            const trial = JSON.parse(trialData);
+            return trial.tier || 'explorer';
+        }
+        
+        if (userData) {
+            const user = JSON.parse(userData);
+            return user.tier || 'explorer';
+        }
+        
+        return 'explorer';
+    }
+
+    hasFeatureAccess(featureName) {
+        const tier = this.getUserTier();
+        const features = this.getTierFeatures(tier);
+        
+        if (features.features && features.features.includes('all')) {
+            return true;
+        }
+        
+        return features.features && features.features.includes(featureName);
+    }
+
+    getChatLimit() {
+        const tier = this.getUserTier();
+        const features = this.getTierFeatures(tier);
+        return features.chatLimit === Infinity ? 999 : features.chatLimit;
     }
 
     handleAuthenticatedUser(user) {

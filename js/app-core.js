@@ -15,6 +15,7 @@ class VERAExplorerApp {
         this.setupEventListeners();
         this.updateUI();
         this.checkTrialStatus();
+        this.initTierManagement();
     }
 
     loadUserData() {
@@ -558,4 +559,267 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     `;
     document.head.appendChild(style);
-});
+
+    initTierManagement() {
+        this.updateTierDisplay();
+        this.checkFeatureAccess();
+        this.setupUpgradePrompts();
+    }
+
+    updateTierDisplay() {
+        const userTier = window.auth?.getUserTier() || 'explorer';
+        const tierFeatures = window.auth?.getTierFeatures(userTier) || {};
+        
+        // Update UI elements to show current tier
+        const tierIndicator = document.querySelector('.tier-indicator');
+        if (tierIndicator) {
+            tierIndicator.textContent = userTier.toUpperCase();
+            tierIndicator.className = `tier-indicator tier-${userTier}`;
+        }
+
+        // Update chat limit display
+        const chatLimit = window.auth?.getChatLimit() || 10;
+        const chatDisplay = document.querySelector('.chat-limit-display');
+        if (chatDisplay) {
+            chatDisplay.textContent = chatLimit === 999 ? 'Unlimited' : `${this.chatCount}/${chatLimit}`;
+        }
+
+        // Show/hide tier-specific features
+        this.updateFeatureVisibility(userTier, tierFeatures);
+    }
+
+    updateFeatureVisibility(tier, features) {
+        // Show/hide features based on tier
+        const featureElements = document.querySelectorAll('[data-tier-feature]');
+        
+        featureElements.forEach(element => {
+            const requiredFeature = element.getAttribute('data-tier-feature');
+            const hasAccess = window.auth?.hasFeatureAccess(requiredFeature) || false;
+            
+            if (hasAccess) {
+                element.classList.remove('tier-locked');
+            } else {
+                element.classList.add('tier-locked');
+                this.addUpgradePrompt(element, requiredFeature);
+            }
+        });
+    }
+
+    checkFeatureAccess() {
+        // Check specific feature access
+        const currentTier = window.auth?.getUserTier() || 'explorer';
+        const features = window.auth?.getTierFeatures(currentTier) || {};
+
+        // Update breathing exercises access
+        if (features.breathingExercises === 5 || features.breathingExercises === 'basic') {
+            this.limitBreathingExercises(5);
+        }
+
+        // Update grounding techniques access
+        if (features.groundingTechniques === 6) {
+            this.limitGroundingTechniques(6);
+        }
+
+        // Update chat limit enforcement
+        this.maxChats = features.chatLimit === Infinity ? 999 : features.chatLimit;
+    }
+
+    limitBreathingExercises(limit) {
+        const exercises = document.querySelectorAll('.breathing-exercise');
+        exercises.forEach((exercise, index) => {
+            if (index >= limit) {
+                exercise.classList.add('tier-locked');
+                this.addUpgradePrompt(exercise, 'breathing');
+            }
+        });
+    }
+
+    limitGroundingTechniques(limit) {
+        const techniques = document.querySelectorAll('.grounding-technique');
+        techniques.forEach((technique, index) => {
+            if (index >= limit) {
+                technique.classList.add('tier-locked');
+                this.addUpgradePrompt(technique, 'grounding');
+            }
+        });
+    }
+
+    addUpgradePrompt(element, featureType) {
+        // Add upgrade overlay to locked features
+        if (!element.querySelector('.upgrade-prompt')) {
+            const prompt = document.createElement('div');
+            prompt.className = 'upgrade-prompt';
+            prompt.innerHTML = `
+                <div class="upgrade-content">
+                    <div class="upgrade-icon">⭐</div>
+                    <p>Upgrade to unlock</p>
+                    <button class="upgrade-btn" onclick="window.app.showUpgradeModal('${featureType}')">
+                        View Plans
+                    </button>
+                </div>
+            `;
+            element.appendChild(prompt);
+        }
+    }
+
+    setupUpgradePrompts() {
+        // Add CSS for upgrade prompts
+        const style = document.createElement('style');
+        style.textContent = `
+            .tier-locked {
+                position: relative;
+                opacity: 0.6;
+                pointer-events: none;
+            }
+
+            .upgrade-prompt {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(15, 23, 42, 0.9);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: var(--radius);
+                backdrop-filter: blur(5px);
+            }
+
+            .upgrade-content {
+                text-align: center;
+                color: white;
+            }
+
+            .upgrade-icon {
+                font-size: var(--font-xl);
+                margin-bottom: var(--space-sm);
+            }
+
+            .upgrade-content p {
+                margin: var(--space-xs) 0;
+                font-size: var(--font-sm);
+            }
+
+            .upgrade-btn {
+                background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+                color: white;
+                border: none;
+                padding: var(--space-xs) var(--space-md);
+                border-radius: var(--radius);
+                font-size: var(--font-xs);
+                cursor: pointer;
+                transition: transform 0.2s;
+            }
+
+            .upgrade-btn:hover {
+                transform: scale(1.05);
+            }
+
+            .tier-indicator {
+                padding: var(--space-xs) var(--space-sm);
+                border-radius: var(--radius);
+                font-size: var(--font-xs);
+                font-weight: 600;
+                text-transform: uppercase;
+            }
+
+            .tier-explorer {
+                background: rgba(34, 197, 94, 0.2);
+                color: #22c55e;
+                border: 1px solid rgba(34, 197, 94, 0.3);
+            }
+
+            .tier-regulator {
+                background: rgba(59, 130, 246, 0.2);
+                color: #3b82f6;
+                border: 1px solid rgba(59, 130, 246, 0.3);
+            }
+
+            .tier-integrator {
+                background: rgba(139, 92, 246, 0.2);
+                color: #8b5cf6;
+                border: 1px solid rgba(139, 92, 246, 0.3);
+            }
+
+            .tier-enterprise {
+                background: rgba(245, 158, 11, 0.2);
+                color: #f59e0b;
+                border: 1px solid rgba(245, 158, 11, 0.3);
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    showUpgradeModal(featureType) {
+        const modal = document.createElement('div');
+        modal.className = 'upgrade-modal';
+        modal.innerHTML = `
+            <div class="upgrade-modal-content">
+                <div class="upgrade-modal-header">
+                    <h3>Unlock ${this.getFeatureName(featureType)}</h3>
+                    <button class="modal-close" onclick="this.parentElement.parentElement.parentElement.remove()">×</button>
+                </div>
+                <div class="upgrade-modal-body">
+                    <p>${this.getFeatureDescription(featureType)}</p>
+                    <div class="upgrade-options">
+                        <div class="upgrade-option" onclick="window.location.href='pricing.html?plan=regulator'">
+                            <h4>REGULATOR</h4>
+                            <p class="price">$39/month</p>
+                            <p class="description">Full access to all features</p>
+                        </div>
+                        <div class="upgrade-option" onclick="window.location.href='pricing.html?plan=integrator'">
+                            <h4>INTEGRATOR</h4>
+                            <p class="price">$79/month</p>
+                            <p class="description">Advanced personalization & methodology access</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            backdrop-filter: blur(10px);
+        `;
+
+        document.body.appendChild(modal);
+    }
+
+    getFeatureName(featureType) {
+        const names = {
+            breathing: 'Advanced Breathing Exercises',
+            grounding: 'Complete Grounding Library',
+            movement: 'Movement & Integration Tools',
+            frequency: 'Binaural Beat Library',
+            insights: 'Weekly Nervous System Insights',
+            personalized: 'Personalized Regulation Plans',
+            crisis: '24/7 Crisis Support',
+            methodology: 'Complete VERA Methodology'
+        };
+        return names[featureType] || 'Premium Features';
+    }
+
+    getFeatureDescription(featureType) {
+        const descriptions = {
+            breathing: 'Access all breathing exercises including advanced techniques like bilateral stimulation sequences.',
+            grounding: 'Unlock the complete library of grounding techniques with guided step-by-step instructions.',
+            movement: 'Bilateral stimulation sequences and movement-based integration tools.',
+            frequency: 'Therapeutic binaural beats and frequency combinations for nervous system regulation.',
+            insights: 'Weekly analysis of your nervous system patterns with personalized recommendations.',
+            personalized: 'Custom 30-day regulation protocols adapted to your unique nervous system profile.',
+            crisis: '24/7 access to acute dysregulation guidance and crisis intervention protocols.',
+            methodology: 'Complete access to Eva & Julija\'s original research and practitioner-level techniques.'
+        };
+        return descriptions[featureType] || 'Upgrade to unlock premium nervous system regulation features.';
+    }
+}
