@@ -36,13 +36,23 @@
 
             <nav class="panel-nav">
                 <div class="nav-section">
+                    <h3>Overview</h3>
+                    <ul class="nav-list">
+                        <li><a href="#dashboard" class="nav-item active" data-section="dashboard" onclick="VERACore.showSection('dashboard'); createNeuralIcon('dashboard', this)">
+                            <div class="nav-neural" data-icon-type="dashboard"></div>
+                            <span>Dashboard</span>
+                        </a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
                     <h3>Regulation Library</h3>
                     <ul class="nav-list">
-                        <li><a href="#breathing" class="nav-item" data-section="breathing" data-tier-feature="breathing" onclick="createNeuralIcon('breathing', this); setNeuralCoherence()">
+                        <li><a href="#breathing" class="nav-item" data-section="breathing" data-tier-feature="breathing" onclick="VERACore.showSection('breathing'); createNeuralIcon('breathing', this); setNeuralCoherence()">
                             <div class="nav-neural" data-icon-type="breathing"></div>
                             <span>Breathing Exercises</span>
                         </a></li>
-                        <li><a href="#grounding" class="nav-item" data-section="grounding" data-tier-feature="grounding" onclick="createNeuralIcon('grounding', this); setNeuralRegulation()">
+                        <li><a href="#grounding" class="nav-item" data-section="grounding" data-tier-feature="grounding" onclick="VERACore.showSection('grounding'); createNeuralIcon('grounding', this); setNeuralRegulation()">
                             <div class="nav-neural" data-icon-type="grounding"></div>
                             <span>Grounding Techniques</span>
                         </a></li>
@@ -52,11 +62,11 @@
                 <div class="nav-section">
                     <h3>Your Journey</h3>
                     <ul class="nav-list">
-                        <li><a href="#journal" class="nav-item" data-section="journal" onclick="createNeuralIcon('journal', this)">
+                        <li><a href="#journal" class="nav-item" data-section="journal" onclick="VERACore.showSection('journal'); createNeuralIcon('journal', this)">
                             <div class="nav-neural" data-icon-type="journal"></div>
                             <span>Nervous System Journal</span>
                         </a></li>
-                        <li><a href="#chat" class="nav-item" data-section="chat" onclick="createNeuralIcon('chat', this)">
+                        <li><a href="#chat" class="nav-item" data-section="chat" onclick="VERACore.showSection('chat'); createNeuralIcon('chat', this)">
                             <div class="nav-neural" data-icon-type="chat"></div>
                             <span>Chat with VERA</span>
                             <div class="chat-counter" id="chatCounter">7/10</div>
@@ -99,8 +109,8 @@
             </div>
 
             <div class="content-sections">
-                <!-- Welcome Section (Default) -->
-                <section id="welcome-section" class="content-section active">
+                <!-- Dashboard Section (Default) -->
+                <section id="dashboard-section" class="content-section active">
                     <div class="welcome-container">
                         <div class="welcome-message">
                             <h2>Welcome back, <span id="userName">Explorer</span>!</h2>
@@ -123,17 +133,21 @@
                         <div class="quick-regulation">
                             <h3>Quick Regulation</h3>
                             <div class="quick-options">
-                                <button class="quick-option" onclick="startQuickBreathing()">
+                                <button class="quick-option" onclick="VERACore.showSection('breathing')">
                                     <div class="option-neural pulse-neural"></div>
                                     <span>5-Minute Breathing</span>
                                 </button>
-                                <button class="quick-option" onclick="startQuickGrounding()">
+                                <button class="quick-option" onclick="VERACore.showSection('grounding')">
                                     <div class="option-neural wave-neural"></div>
                                     <span>Instant Grounding</span>
                                 </button>
-                                <button class="quick-option" onclick="openVERAChat()">
+                                <button class="quick-option" onclick="VERACore.showSection('chat')">
                                     <div class="option-neural glow-neural"></div>
                                     <span>Chat with VERA</span>
+                                </button>
+                                <button class="quick-option" onclick="VERACore.showSection('journal')">
+                                    <div class="option-neural neural-journal"></div>
+                                    <span>Neural Journal</span>
                                 </button>
                             </div>
                         </div>
@@ -141,35 +155,28 @@
                 </section>
 
                 <!-- Other sections will be loaded here -->
-                <section id="breathing-section" class="content-section">
+                <section id="breathing-section" class="content-section" style="display: none;">
                     <div class="section-loading">
                         <div class="loading-neural"></div>
                         <p>Loading breathing exercises...</p>
                     </div>
                 </section>
 
-                <section id="grounding-section" class="content-section">
+                <section id="grounding-section" class="content-section" style="display: none;">
                     <div class="section-loading">
                         <div class="loading-neural"></div>
                         <p>Loading grounding techniques...</p>
                     </div>
                 </section>
 
-                <section id="journal-section" class="content-section">
+                <section id="journal-section" class="content-section" style="display: none;">
                     <div class="section-loading">
                         <div class="loading-neural"></div>
                         <p>Loading your journal...</p>
                     </div>
                 </section>
 
-                <section id="dashboard-section" class="content-section">
-                    <div class="section-loading">
-                        <div class="loading-neural"></div>
-                        <p>Loading your dashboard...</p>
-                    </div>
-                </section>
-
-                <section id="chat-section" class="content-section">
+                <section id="chat-section" class="content-section" style="display: none;">
                     <div class="section-loading">
                         <div class="loading-neural"></div>
                         <p>Connecting to VERA...</p>
