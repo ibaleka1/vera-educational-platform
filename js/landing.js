@@ -742,6 +742,18 @@ function toggleVoiceChat() {
   }
 }
 
+// Quick Start Functions
+function selectQuickStart(message) {
+  const chatInput = document.getElementById('chatInput');
+  chatInput.value = message;
+  chatInput.focus();
+  
+  // Optionally auto-send the message
+  setTimeout(() => {
+    sendMessage();
+  }, 100);
+}
+
 async function sendMessage() {
   const chatInput = document.getElementById('chatInput');
   const chatMessages = document.getElementById('chatMessages');
@@ -788,9 +800,6 @@ function addHeroChatMessage(text, sender) {
   
   const avatar = document.createElement('div');
   avatar.className = 'message-avatar';
-  if (sender === 'vera') {
-    avatar.className += ' neural-pulse-small';
-  }
   
   const content = document.createElement('div');
   content.className = 'message-content';
@@ -809,56 +818,109 @@ async function generateVERAResponse(userMessage) {
     window.veraLanding.updateUserState(userMessage);
   }
   
-  // Therapeutic responses based on content
-  const responses = {
-    stress: [
-      "I can sense some activation in your system. Let's take a moment to breathe together and find your way back to safety.",
-      "It sounds like your nervous system is working hard right now. You're not alone in this - let me help you find some regulation.",
-      "I hear you. That feeling you're describing makes perfect sense. Let's gently guide your system back to calm."
-    ],
-    calm: [
-      "I love sensing this peaceful energy from you. How does it feel to be in this state of calm?",
-      "This is beautiful - your nervous system feels settled and coherent. Let's stay here together for a moment.",
-      "You're in such a lovely regulated state. What helped you find this sense of peace?"
-    ],
-    excited: [
-      "I can feel your energy! This is wonderful activation - let's channel it constructively.",
-      "Your enthusiasm is contagious! How can we use this beautiful energy you're experiencing?",
-      "I love this vitality I'm sensing from you. What's sparking this amazing energy?"
-    ],
-    confused: [
-      "It's completely normal to feel uncertain sometimes. Your nervous system is just processing - you're safe to explore this confusion.",
-      "I'm here to help you make sense of what you're experiencing. Let's break this down together, gently.",
-      "Confusion often means growth is happening. What part of this feels most unclear right now?"
-    ],
-    default: [
-      "Thank you for sharing that with me. I'm listening and here to support you however you need.",
-      "I hear you. How are you feeling in your body right now as you share this?",
-      "That's really insightful. What does your nervous system need from me in this moment?"
-    ]
-  };
-  
-  // Simple sentiment analysis
   const lowerMessage = userMessage.toLowerCase();
-  let category = 'default';
   
-  if (lowerMessage.match(/stress|anxious|overwhelmed|panic|worried|tense|tight/)) {
-    category = 'stress';
-  } else if (lowerMessage.match(/calm|peaceful|relaxed|centered|good|better|safe/)) {
-    category = 'calm';
-  } else if (lowerMessage.match(/excited|amazing|incredible|energy|fantastic|great/)) {
-    category = 'excited';
-  } else if (lowerMessage.match(/confused|don't know|unsure|unclear|lost|stuck/)) {
-    category = 'confused';
+  // Direct contextual responses that actually read what the user said
+  
+  // Greetings and introductions
+  if (lowerMessage.match(/hi|hello|hey|good morning|good afternoon|good evening/)) {
+    const greetings = [
+      "Hello there. I'm glad you're here. What's been on your mind today?",
+      "Hi. It's good to meet you. Tell me, what brought you here right now?",
+      "Hey. I can sense you're looking for something. What's going on for you?"
+    ];
+    return { text: greetings[Math.floor(Math.random() * greetings.length)], category: 'greeting' };
   }
   
-  const responseOptions = responses[category];
-  const selectedResponse = responseOptions[Math.floor(Math.random() * responseOptions.length)];
+  // Work-related stress
+  if (lowerMessage.match(/work|job|boss|meeting|deadline|project|career|office/)) {
+    const workResponses = [
+      `Work stress - I hear that. When you mention "${extractKeyPhrase(userMessage)}", what does that feel like in your body right now?`,
+      "Work can really activate our nervous system. Are you feeling that tension somewhere specific - maybe your shoulders or chest?",
+      "Sounds like work is weighing on you. Let's check in with your body for a moment. Take a breath - what are you noticing?"
+    ];
+    return { text: workResponses[Math.floor(Math.random() * workResponses.length)], category: 'work_stress' };
+  }
+  
+  // Relationship concerns
+  if (lowerMessage.match(/relationship|partner|family|friend|conflict|argument|love|dating/)) {
+    const relationshipResponses = [
+      `Relationships can stir up so much in us. When you think about what you just shared, where do you feel that in your body?`,
+      "People we care about can really affect our nervous system. Are you feeling activated or more shut down right now?",
+      "I hear the relationship piece. Sometimes our body holds these feelings before we even realize what's happening. What are you sensing?"
+    ];
+    return { text: relationshipResponses[Math.floor(Math.random() * relationshipResponses.length)], category: 'relationships' };
+  }
+  
+  // Physical sensations
+  if (lowerMessage.match(/pain|hurt|tight|tense|sore|headache|stomach|chest|shoulders|back|neck/)) {
+    const physicalResponses = [
+      `I notice you mentioned feeling something in your body. That tension or discomfort - it's your nervous system trying to tell you something. What's it asking for?`,
+      "Your body is speaking. When you feel that sensation you described, try breathing into that area gently. What happens?",
+      "Physical sensations are often our nervous system's way of processing. Can you describe what that feeling is like - heavy, tight, buzzing?"
+    ];
+    return { text: physicalResponses[Math.floor(Math.random() * physicalResponses.length)], category: 'physical' };
+  }
+  
+  // Emotions and feelings
+  if (lowerMessage.match(/feel|feeling|sad|angry|scared|anxious|worried|happy|excited|mad|frustrated|upset/)) {
+    const emotionWords = extractEmotionWords(userMessage);
+    const emotionalResponses = [
+      `${emotionWords} - that's a real feeling. Where do you sense that emotion living in your body right now?`,
+      "I hear the emotion in what you're sharing. Feelings have their own intelligence. What is this one trying to tell you?",
+      `When you feel ${emotionWords}, your nervous system is responding to something important. What do you think it's protecting you from?`
+    ];
+    return { text: emotionalResponses[Math.floor(Math.random() * emotionalResponses.length)], category: 'emotional' };
+  }
+  
+  // Sleep and energy
+  if (lowerMessage.match(/tired|exhausted|sleep|insomnia|energy|fatigue|sleepy|awake/)) {
+    const sleepResponses = [
+      "Sleep and energy are such direct windows into how our nervous system is doing. What's your sleep been like lately?",
+      "When you're tired like this, sometimes it's your body asking for a different kind of rest. What would feel most nourishing right now?",
+      "Fatigue can be our nervous system saying 'too much' or 'not safe to relax.' What does your body need to feel more settled?"
+    ];
+    return { text: sleepResponses[Math.floor(Math.random() * sleepResponses.length)], category: 'sleep' };
+  }
+  
+  // Specific questions or help-seeking
+  if (lowerMessage.match(/\?|how|what|why|help|don't know|confused|stuck|lost/)) {
+    const helpResponses = [
+      "I hear you're looking for some clarity. Let's slow down for a moment. What's the first thing you notice in your body right now?",
+      "Questions are good - they mean you're paying attention. Sometimes the answer isn't in your mind, but in what your body is telling you. What do you sense?",
+      "When we're confused, our nervous system is often trying to process something. Take a breath. What feels most true for you in this moment?"
+    ];
+    return { text: helpResponses[Math.floor(Math.random() * helpResponses.length)], category: 'seeking_help' };
+  }
+  
+  // Default conversational responses that acknowledge what they said
+  const defaultResponses = [
+    `I hear you sharing about ${extractKeyPhrase(userMessage)}. What's that bringing up for you right now?`,
+    "Thank you for trusting me with that. As you sit with what you just shared, what are you noticing in your body?",
+    "That sounds important. When you think about what you just told me, where do you feel it most in your body?",
+    "I'm with you in this. What would it feel like to breathe into whatever you're experiencing right now?"
+  ];
   
   return {
-    text: selectedResponse,
-    category: category
+    text: defaultResponses[Math.floor(Math.random() * defaultResponses.length)],
+    category: 'conversational'
   };
+}
+
+// Helper function to extract key phrases from user message
+function extractKeyPhrase(message) {
+  const words = message.toLowerCase().split(' ');
+  const keyWords = words.filter(word => 
+    word.length > 3 && 
+    !['that', 'this', 'with', 'have', 'been', 'feel', 'like', 'just', 'really', 'very', 'much'].includes(word)
+  );
+  return keyWords.slice(0, 2).join(' ') || 'what you shared';
+}
+
+// Helper function to extract emotion words
+function extractEmotionWords(message) {
+  const emotionWords = message.toLowerCase().match(/sad|angry|scared|anxious|worried|happy|excited|mad|frustrated|upset|nervous|calm|peaceful|stressed|overwhelmed/g);
+  return emotionWords ? emotionWords[0] : 'that feeling';
 }
 
 async function generateAndPlayVoice(text) {
@@ -875,18 +937,47 @@ async function generateAndPlayVoice(text) {
       energy_level: 0.5
     };
     
-    // Call the voice API endpoint
-    const response = await fetch('/api/vera-voice', {
+    // Select voice based on user state
+    let voiceId;
+    if (userState.activation_level > 0.7) {
+      voiceId = 'WAhoMTNdLdMoq1j3wf3I'; // Calming voice for high activation
+    } else if (userState.coherence_level < 0.3) {
+      voiceId = 'OYTbf65OHHFELVut7v2H'; // Gentle voice for low coherence
+    } else {
+      voiceId = 'uYXf8XasLslADfZ2MB4u'; // Primary therapeutic voice
+    }
+    
+    // Check for ElevenLabs API key
+    let API_KEY = localStorage.getItem('elevenlabs_api_key');
+    
+    if (!API_KEY) {
+      showApiKeySetup();
+      throw new Error('API key required - please set up your ElevenLabs API key');
+    }
+    
+    // Call ElevenLabs API directly
+    const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 
-        text: text, 
-        userState: userState
+      headers: {
+        'Accept': 'audio/mpeg',
+        'Content-Type': 'application/json',
+        'xi-api-key': API_KEY
+      },
+      body: JSON.stringify({
+        text: text,
+        model_id: 'eleven_monolingual_v1',
+        voice_settings: {
+          stability: userState.coherence_level * 0.5 + 0.4, // 0.4-0.9 range
+          similarity_boost: 0.75,
+          style: userState.activation_level > 0.6 ? 0.3 : 0.1,
+          use_speaker_boost: true
+        }
       })
     });
     
     if (!response.ok) {
-      throw new Error(`Voice API error: ${response.status}`);
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(`ElevenLabs API error: ${response.status} - ${errorData.detail || 'Unknown error'}`);
     }
     
     const audioData = await response.arrayBuffer();
@@ -916,7 +1007,7 @@ async function generateAndPlayVoice(text) {
     console.log('📝 Falling back to text-only response');
     hideHeroChatVoiceIndicator();
     
-    // Show fallback message to user
+    // Show informative fallback message
     const chatMessages = document.getElementById('chatMessages');
     if (chatMessages) {
       const fallbackDiv = document.createElement('div');
@@ -924,7 +1015,7 @@ async function generateAndPlayVoice(text) {
       fallbackDiv.innerHTML = `
         <div class="message-avatar neural-pulse-small"></div>
         <div class="message-content" style="font-style: italic; opacity: 0.8;">
-          <p>🔇 Voice temporarily unavailable - API key needed for voice generation</p>
+          <p>🔇 Voice generation failed: ${error.message.includes('API key') ? 'Please add your ElevenLabs API key' : 'Connection issue - text response only'}</p>
         </div>
       `;
       chatMessages.appendChild(fallbackDiv);
@@ -979,12 +1070,353 @@ function toggleBenefit(header) {
   }
 }
 
+// About Section Expansion Function
+function toggleAboutSection(header) {
+  const section = header.closest('.about-section');
+  const isExpanded = section.classList.contains('expanded');
+  
+  // Close all other about sections first
+  document.querySelectorAll('.about-section').forEach(s => {
+    if (s !== section) {
+      s.classList.remove('expanded');
+    }
+  });
+  
+  // Toggle current section
+  if (isExpanded) {
+    section.classList.remove('expanded');
+  } else {
+    section.classList.add('expanded');
+    
+    // Track expansion for analytics
+    const title = header.querySelector('h4').textContent;
+    console.log('VERA About Section Expanded:', title);
+    
+    // Auto-scroll to keep content in view
+    setTimeout(() => {
+      section.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'nearest' 
+      });
+    }, 250);
+  }
+}
+
 // Make VERA instance globally accessible for voice controls
 window.veraLanding = null;
 
 // Initialize VERA Landing Experience
 document.addEventListener('DOMContentLoaded', () => {
   window.veraLanding = new VERALanding();
+});
+
+// API Key Management Functions
+function showApiKeySetup() {
+  const apiKeySetup = document.getElementById('apiKeySetup');
+  if (apiKeySetup) {
+    apiKeySetup.style.display = 'block';
+  }
+}
+
+function hideApiKeySetup() {
+  const apiKeySetup = document.getElementById('apiKeySetup');
+  if (apiKeySetup) {
+    apiKeySetup.style.display = 'none';
+  }
+}
+
+function saveApiKey() {
+  const apiKeyInput = document.getElementById('apiKeyInput');
+  const apiKey = apiKeyInput.value.trim();
+  
+  if (!apiKey) {
+    alert('Please enter a valid API key');
+    return false;
+  }
+  
+  // Basic validation for ElevenLabs API key format
+  if (!apiKey.match(/^[a-f0-9]{32}$/i) && !apiKey.startsWith('sk-')) {
+    const proceed = confirm('This doesn\'t look like a typical ElevenLabs API key format. Save anyway?');
+    if (!proceed) return false;
+  }
+  
+  // Save to localStorage
+  localStorage.setItem('elevenlabs_api_key', apiKey);
+  
+  // Clear input and hide setup
+  apiKeyInput.value = '';
+  hideApiKeySetup();
+  
+  // Show success message
+  const chatMessages = document.getElementById('chatMessages');
+  if (chatMessages) {
+    const successDiv = document.createElement('div');
+    successDiv.className = 'message vera-message';
+    successDiv.innerHTML = `
+      <div class="message-avatar neural-pulse-small"></div>
+      <div class="message-content">
+        <p>✅ API key saved! VERA's voice is now ready. Try sending me a message!</p>
+      </div>
+    `;
+    chatMessages.appendChild(successDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+  
+  return false; // Prevent form submission
+}
+
+function clearApiKey() {
+  localStorage.removeItem('elevenlabs_api_key');
+  showApiKeySetup();
+  
+  const chatMessages = document.getElementById('chatMessages');
+  if (chatMessages) {
+    const infoDiv = document.createElement('div');
+    infoDiv.className = 'message vera-message';
+    infoDiv.innerHTML = `
+      <div class="message-avatar neural-pulse-small"></div>
+      <div class="message-content">
+        <p>🔑 API key cleared. Please enter your ElevenLabs API key to enable voice chat.</p>
+      </div>
+    `;
+    chatMessages.appendChild(infoDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+}
+
+// Check API key on page load
+document.addEventListener('DOMContentLoaded', () => {
+  const hasApiKey = localStorage.getItem('elevenlabs_api_key');
+  if (!hasApiKey) {
+    setTimeout(() => {
+      showApiKeySetup();
+    }, 2000); // Show setup after 2 seconds if no API key
+  }
+  
+  // Setup Enter key for API key input
+  const apiKeyInput = document.getElementById('apiKeyInput');
+  if (apiKeyInput) {
+    apiKeyInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        saveApiKey();
+      }
+    });
+  }
+});
+
+// Authentication Modal Functions
+function showAuthModal(type = 'signup') {
+  const modal = document.getElementById('authModal');
+  const signupForm = document.getElementById('signupForm');
+  const loginForm = document.getElementById('loginForm');
+  
+  if (type === 'signup') {
+    signupForm.style.display = 'block';
+    loginForm.style.display = 'none';
+  } else {
+    signupForm.style.display = 'none';
+    loginForm.style.display = 'block';
+  }
+  
+  modal.style.display = 'block';
+  
+  // Focus first input
+  setTimeout(() => {
+    const firstInput = modal.querySelector('input[type="text"], input[type="email"]');
+    if (firstInput) firstInput.focus();
+  }, 100);
+}
+
+function closeAuthModal() {
+  const modal = document.getElementById('authModal');
+  modal.style.display = 'none';
+}
+
+function switchToLogin() {
+  document.getElementById('signupForm').style.display = 'none';
+  document.getElementById('loginForm').style.display = 'block';
+}
+
+function switchToSignup() {
+  document.getElementById('signupForm').style.display = 'block';
+  document.getElementById('loginForm').style.display = 'none';
+}
+
+async function handleSignup(event) {
+  event.preventDefault();
+  
+  const formData = new FormData(event.target);
+  const userData = {
+    name: formData.get('name'),
+    email: formData.get('email'),
+    password: formData.get('password')
+  };
+  
+  // Show loading state
+  const submitBtn = event.target.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.textContent = 'Creating Account...';
+  submitBtn.disabled = true;
+  
+  try {
+    if (window.veraAuth) {
+      const result = await window.veraAuth.signup(userData);
+      
+      if (result.success) {
+        // Close modal and redirect to app
+        closeAuthModal();
+        
+        // Show success message
+        showSuccessMessage('Welcome to VERA! Redirecting to your dashboard...');
+        
+        // Redirect to app after a moment
+        setTimeout(() => {
+          window.location.href = '/app.html';
+        }, 2000);
+      } else {
+        showErrorMessage(result.error || 'Signup failed. Please try again.');
+      }
+    } else {
+      // Fallback for when auth system isn't loaded
+      localStorage.setItem('veraSignupData', JSON.stringify(userData));
+      showSuccessMessage('Account created! Redirecting to VERA...');
+      
+      setTimeout(() => {
+        window.location.href = '/app.html';
+      }, 2000);
+    }
+  } catch (error) {
+    console.error('Signup error:', error);
+    showErrorMessage('Something went wrong. Please try again.');
+  } finally {
+    // Reset button
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
+  }
+}
+
+async function handleLogin(event) {
+  event.preventDefault();
+  
+  const formData = new FormData(event.target);
+  const credentials = {
+    email: formData.get('email'),
+    password: formData.get('password')
+  };
+  
+  // Show loading state
+  const submitBtn = event.target.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.textContent = 'Signing In...';
+  submitBtn.disabled = true;
+  
+  try {
+    if (window.veraAuth) {
+      const result = await window.veraAuth.login(credentials);
+      
+      if (result.success) {
+        closeAuthModal();
+        showSuccessMessage('Welcome back! Redirecting to VERA...');
+        
+        setTimeout(() => {
+          window.location.href = '/app.html';
+        }, 2000);
+      } else {
+        showErrorMessage(result.error || 'Login failed. Please check your credentials.');
+      }
+    } else {
+      // Fallback
+      showSuccessMessage('Signing you in...');
+      setTimeout(() => {
+        window.location.href = '/app.html';
+      }, 2000);
+    }
+  } catch (error) {
+    console.error('Login error:', error);
+    showErrorMessage('Something went wrong. Please try again.');
+  } finally {
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
+  }
+}
+
+function startFreeTrial() {
+  showAuthModal('signup');
+}
+
+function showSuccessMessage(message) {
+  const notification = document.createElement('div');
+  notification.className = 'auth-notification success';
+  notification.textContent = message;
+  notification.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    z-index: 10000;
+    animation: slideIn 0.3s ease;
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+  `;
+  
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.remove();
+  }, 4000);
+}
+
+function showErrorMessage(message) {
+  const notification = document.createElement('div');
+  notification.className = 'auth-notification error';
+  notification.textContent = message;
+  notification.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    z-index: 10000;
+    animation: slideIn 0.3s ease;
+    box-shadow: 0 10px 30px rgba(239, 68, 68, 0.3);
+  `;
+  
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.remove();
+  }, 4000);
+}
+
+// Add CSS animation for notifications
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+`;
+document.head.appendChild(style);
+
+// Close modal on outside click
+window.addEventListener('click', function(event) {
+  const modal = document.getElementById('authModal');
+  if (event.target === modal) {
+    closeAuthModal();
+  }
+});
+
+// Handle URL hash for direct signup/login links
+window.addEventListener('load', function() {
+  if (window.location.hash === '#signup') {
+    showAuthModal('signup');
+  } else if (window.location.hash === '#login') {
+    showAuthModal('login');
+  }
 });
 
 // Export for potential external use

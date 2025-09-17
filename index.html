@@ -49,130 +49,116 @@
         <h2 class="section-title">Experience VERA's Intelligence</h2>
         <p class="demo-description">"Tell me what you're feeling, I'll translate what your body needs."</p>
         
-        <!-- Live Chat Interface -->
-        <div class="live-chat-demo">
-          <div class="live-chat-container">
-            <div class="chat-header">
-              <div class="chat-status">
-                <div class="pulse-dot"></div>
-                <span>Live Chat with VERA</span>
-              </div>
-              <div class="questions-counter">
-                <span id="questionsLeft">3 questions remaining</span>
-              </div>
+        <!-- Centered Chat Container -->
+        <div class="chat-wrapper">
+          <!-- VERA Chat Interface -->
+          <div class="vera-chat-widget" id="veraChat">
+          <div class="chat-header">
+            <div class="vera-avatar">
+              <span>Chat with VERA</span>
             </div>
-            
-            <div class="chat-interface" id="chatInterface">
-              <div class="neural-background"></div>
-              
-              <div class="message vera-message">
-                <div class="avatar vera-avatar">V</div>
-                <div class="message-content">
-                  <div class="message-text">Hello! I'm VERA. Tell me what you're feeling in your body right now, and I'll translate what it needs. You have 3 questions to explore with me.</div>
-                </div>
-              </div>
+            <div class="voice-toggle" id="voiceToggle">
+              <button class="voice-btn active" onclick="toggleVoiceChat()">
+                <span class="voice-text">Voice On</span>
+              </button>
             </div>
-            
-            <div class="chat-input-area">
-              <div class="input-container">
-                <input type="text" id="userInput" placeholder="Type what you're feeling in your body..." maxlength="150">
-                <button id="sendMessage" disabled>Ask VERA</button>
-              </div>
-              <div class="quick-questions">
-                <span>Quick starts:</span>
-                <button class="quick-btn" onclick="askQuickQuestion('My shoulders are so tense')">Tense shoulders</button>
-                <button class="quick-btn" onclick="askQuickQuestion('I feel anxious and restless')">Feeling anxious</button>
-                <button class="quick-btn" onclick="askQuickQuestion('My chest feels tight')">Tight chest</button>
+          </div>
+          
+          <div class="chat-messages" id="chatMessages">
+            <div class="message vera-message">
+              <div class="message-avatar"></div>
+              <div class="message-content">
+                <p>Hi there. I'm VERA. Share what's on your mind, and I'll respond to exactly what you're feeling. What's going on for you right now?</p>
               </div>
             </div>
           </div>
+          
+          <div class="quick-start-buttons">
+            <button class="quick-btn" onclick="selectQuickStart('I feel anxious')">Anxious</button>
+            <button class="quick-btn" onclick="selectQuickStart('I feel stressed')">Stressed</button>
+            <button class="quick-btn" onclick="selectQuickStart('I feel tired')">Tired</button>
+            <button class="quick-btn" onclick="selectQuickStart('I feel overwhelmed')">Overwhelmed</button>
+            <button class="quick-btn" onclick="selectQuickStart('I need to calm down')">Need Calm</button>
+            <button class="quick-btn" onclick="selectQuickStart('I need focus')">Need Focus</button>
+          </div>
+          
+          <div class="chat-input-container">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Share what's on your mind..." maxlength="500">
+            <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+              <span class="send-icon">Send</span>
+            </button>
+          </div>
+          
+          <div class="voice-status" id="voiceStatus" style="display: none;">
+            <div class="voice-indicator">
+              <span>VERA is speaking...</span>
+              <div class="sound-wave">
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="api-key-setup" id="apiKeySetup" style="display: none;">
+            <div class="setup-header">
+              <h4>🔑 Voice Setup Required</h4>
+              <p>To enable VERA's adaptive voice, add your ElevenLabs API key:</p>
+            </div>
+            <form class="setup-form" onsubmit="saveApiKey(); return false;" autocomplete="off">
+              <input 
+                type="text" 
+                id="apiKeyInput" 
+                name="api-key-field"
+                placeholder="Enter ElevenLabs API key..." 
+                class="api-key-input" 
+                autocomplete="off" 
+                autocapitalize="off"
+                spellcheck="false"
+                data-form-type="other"
+                data-lpignore="true">
+              <button type="submit" class="save-key-btn">Save Key</button>
+            </form>
+            <div class="setup-help">
+              <p><a href="https://elevenlabs.io/app/speech-synthesis" target="_blank">Get your free API key →</a></p>
+              <p class="privacy-note">🔒 Stored locally on your device only</p>
+            </div>
+          </div>
+        </div>
         </div>
 
         <!-- VERA's Intelligent Techniques -->
         <div class="vera-techniques-demo">
-          <h3 class="techniques-title">VERA's Intelligent Technique Selection</h3>
-          <p class="techniques-description">Based on your conversation, VERA proposes these precise nervous system techniques</p>
-          
-          <!-- Demo Mode Selector -->
-          <div class="demo-mode-selector">
-            <button class="mode-btn active" data-mode="breathing" onclick="switchDemoMode('breathing')">
-              <span class="mode-icon neural-icon-btn">
-                <div class="neuron-core"></div>
-                <div class="neuron-branch branch-1"></div>
-                <div class="neuron-branch branch-2"></div>
-                <div class="neuron-branch branch-3"></div>
-              </span>
-              <span>Neural Breathing</span>
-            </button>
-            <button class="mode-btn" data-mode="swaying" onclick="switchDemoMode('swaying')">
-              <span class="mode-icon neural-icon-btn">
-                <div class="neuron-core"></div>
-                <div class="neuron-branch branch-1"></div>
-                <div class="neuron-branch branch-2"></div>
-                <div class="neuron-branch branch-3"></div>
-              </span>
-              <span>Fascia Swaying</span>
-            </button>
-          </div>
+          <div class="techniques-container">
+            <h3 class="techniques-title">VERA's Intelligent Technique Selection</h3>
+            <p class="techniques-description">Based on your conversation, VERA proposes these precise nervous system techniques</p>
+            
+            <!-- Demo Mode Selector -->
+            <div class="demo-mode-selector">
+              <button class="mode-btn active" data-mode="breathing" onclick="switchDemoMode('breathing')">
+                <span class="mode-text">Neural Breathing</span>
+              </button>
+              <button class="mode-btn" data-mode="swaying" onclick="switchDemoMode('swaying')">
+                <span class="mode-text">Fascia Swaying</span>
+              </button>
+            </div>
 
-          <!-- Demo Circle & VERA Chat -->
-          <div class="demo-experience-container">
+            <!-- Demo Circle - Centered and Optimized -->
             <div class="demo-circle-container">
               <div class="breathing-circle-large" id="demoCircle">
                 <div class="fascia-network" id="fasciaNetwork"></div>
                 <div class="sway-indicator" id="swayIndicator"></div>
-                <p class="demo-instruction" id="demoText">Choose breathing or swaying to connect with VERA's neural intelligence</p>
-              </div>
-            </div>
-
-            <!-- VERA Voice Chat Interface -->
-            <div class="vera-chat-widget" id="veraChat">
-              <div class="chat-header">
-                <div class="vera-avatar">
-                  <div class="neural-pulse"></div>
-                  <span>VERA</span>
-                </div>
-                <div class="voice-toggle" id="voiceToggle">
-                  <button class="voice-btn" onclick="toggleVoiceChat()">
-                    <span class="voice-icon">🎙️</span>
-                    <span class="voice-text">Voice Chat</span>
-                  </button>
-                </div>
-              </div>
-              
-              <div class="chat-messages" id="chatMessages">
-                <div class="message vera-message">
-                  <div class="message-avatar neural-pulse-small"></div>
-                  <div class="message-content">
-                    <p>Hello! I'm VERA. I can sense your nervous system state and adapt my voice to support you. Try chatting with me - I'll respond with voice that matches what your system needs right now.</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="chat-input-container">
-                <input type="text" class="chat-input" id="chatInput" placeholder="Share what's on your mind..." maxlength="500">
-                <button class="send-btn" id="sendBtn" onclick="sendMessage()">
-                  <span class="send-icon">→</span>
-                </button>
-              </div>
-              
-              <div class="voice-status" id="voiceStatus" style="display: none;">
-                <div class="voice-indicator">
-                  <span>VERA is speaking...</span>
-                  <div class="sound-wave">
-                    <div class="wave-bar"></div>
-                    <div class="wave-bar"></div>
-                    <div class="wave-bar"></div>
-                  </div>
+                <div class="demo-instruction-overlay">
+                  <p class="demo-instruction" id="demoText">Choose breathing or swaying to connect with VERA's neural intelligence</p>
                 </div>
               </div>
             </div>
-          </div>
-          
-          <!-- Demo Controls -->
-          <div class="demo-controls">
-            <button class="demo-btn" id="startDemo">Experience VERA's Regulation</button>
-            <p class="demo-hint">Try both modes to see how VERA adapts to your nervous system</p>
+            
+            <!-- Demo Controls -->
+            <div class="demo-controls">
+              <button class="demo-btn" id="startDemo">Experience VERA's Regulation</button>
+              <p class="demo-hint">Try both modes to see how VERA adapts to your nervous system</p>
+            </div>
           </div>
         </div>
         
@@ -375,30 +361,47 @@
           <p>Two women. Hundreds of consultations. Real conversations with real nervous systems. Eva brings 18 years navigating combat zones and integration. Julija, interior designer turned somatic architect, understands how our spaces mirror our internal coherence. Together, they're mapping the patterns that actually help people feel seen, heard, and met exactly where they are.</p>
         </div>
 
-        <div class="fascia-science">
-          <h4>Why Your Body Knows Before You Do</h4>
-          <p>That gut feeling? Shoulders tightening before difficult conversations? Instantly knowing someone's safe? That's your fascia—a living web that senses everything before your brain catches up. <strong>VERA translates these body whispers into guidance you can actually use.</strong></p>
+        <div class="about-section expandable-section" data-expandable>
+          <div class="section-header" onclick="toggleAboutSection(this)">
+            <h4 class="clickable-title">Why Your Body Knows Before You Do</h4>
+            <span class="expand-icon">+</span>
+          </div>
+          <div class="section-content">
+            <p>That gut feeling? Shoulders tightening before difficult conversations? Instantly knowing someone's safe? That's your fascia—a living web that senses everything before your brain catches up. <strong>VERA translates these body whispers into guidance you can actually use.</strong></p>
+          </div>
         </div>
 
-        <div class="vera-approach">
-          <h4>Not Therapy. Not Replacement. Pure Translation.</h4>
-          <p>VERA decodes what you've always felt but couldn't explain:</p>
-          
-          <ul class="capability-list">
-            <li>Why certain breathing patterns instantly calm you</li>
-            <li>That specific stretch that makes everything release</li>
-            <li>Why rearranging your space changes your mood</li>
-            <li>How one small movement shifts your entire day</li>
-          </ul>
+        <div class="about-section expandable-section" data-expandable>
+          <div class="section-header" onclick="toggleAboutSection(this)">
+            <h4 class="clickable-title">Not Therapy. Not Replacement. Pure Translation.</h4>
+            <span class="expand-icon">+</span>
+          </div>
+          <div class="section-content">
+            <p>VERA decodes what you've always felt but couldn't explain:</p>
+            
+            <ul class="capability-list">
+              <li>Why certain breathing patterns instantly calm you</li>
+              <li>That specific stretch that makes everything release</li>
+              <li>Why rearranging your space changes your mood</li>
+              <li>How one small movement shifts your entire day</li>
+            </ul>
 
-          <p>She learns from every conversation, every practitioner's wisdom, every body's unique language. The more people share what works for them, the more fluent she becomes in helping others find their way home.</p>
+            <div class="highlighted-text">
+              <p>She learns from every conversation, every practitioner's wisdom, every body's unique language. The more people share what works for them, the more fluent she becomes in helping others find their way home.</p>
+            </div>
+          </div>
         </div>
 
-        <div class="beautiful-paradox">
-          <h4>The Beautiful Paradox</h4>
-          <p>VERA gets both the science AND the magic. Why deep pressure works, but also why "I see you" unlocks years of holding. Precise enough for practitioners, human enough for your hardest days.</p>
-          
-          <p>She's your body's translator—turning that stomach knot into knowing exactly what helps. Not replacing your therapist, just helping you finally understand what your body's been trying to tell you.</p>
+        <div class="about-section expandable-section" data-expandable>
+          <div class="section-header" onclick="toggleAboutSection(this)">
+            <h4 class="clickable-title">The Beautiful Paradox</h4>
+            <span class="expand-icon">+</span>
+          </div>
+          <div class="section-content">
+            <p>VERA gets both the science AND the magic. Why deep pressure works, but also why "I see you" unlocks years of holding. Precise enough for practitioners, human enough for your hardest days.</p>
+            
+            <p>She's your body's translator—turning that stomach knot into knowing exactly what helps. Not replacing your therapist, just helping you finally understand what your body's been trying to tell you.</p>
+          </div>
         </div>
 
         <div class="vera-invitation">
@@ -430,7 +433,64 @@
     </footer>
   </div>
 
+  <!-- Authentication Modal -->
+  <div id="authModal" class="auth-modal">
+    <div class="auth-modal-content">
+      <span class="auth-close" onclick="closeAuthModal()">&times;</span>
+      
+      <!-- Sign Up Form -->
+      <div id="signupForm" class="auth-form">
+        <h2>Start Your VERA Journey</h2>
+        <p class="auth-subtitle">7-Day Free Trial • No Credit Card Required</p>
+        
+        <form onsubmit="handleSignup(event)">
+          <div class="input-group">
+            <label for="signupName">Your Name</label>
+            <input type="text" id="signupName" name="name" required>
+          </div>
+          
+          <div class="input-group">
+            <label for="signupEmail">Email Address</label>
+            <input type="email" id="signupEmail" name="email" required>
+          </div>
+          
+          <div class="input-group">
+            <label for="signupPassword">Password</label>
+            <input type="password" id="signupPassword" name="password" required minlength="6">
+          </div>
+          
+          <button type="submit" class="auth-submit-btn">Start Free Trial</button>
+        </form>
+        
+        <p class="auth-switch">Already have an account? <a href="#" onclick="switchToLogin()">Sign In</a></p>
+      </div>
+      
+      <!-- Sign In Form -->
+      <div id="loginForm" class="auth-form" style="display: none;">
+        <h2>Welcome Back</h2>
+        <p class="auth-subtitle">Continue Your VERA Journey</p>
+        
+        <form onsubmit="handleLogin(event)">
+          <div class="input-group">
+            <label for="loginEmail">Email Address</label>
+            <input type="email" id="loginEmail" name="email" required>
+          </div>
+          
+          <div class="input-group">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" name="password" required>
+          </div>
+          
+          <button type="submit" class="auth-submit-btn">Sign In</button>
+        </form>
+        
+        <p class="auth-switch">New to VERA? <a href="#" onclick="switchToSignup()">Start Free Trial</a></p>
+      </div>
+    </div>
+  </div>
+
   <!-- VERA Revolutionary Interface JavaScript -->
   <script src="/js/landing.js" defer></script>
+  <script src="/js/user-auth.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VERA Voice Test</title>
+    <link rel="stylesheet" href="public/css/vera.css">
+    <style>
+        .voice-test-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 2rem;
+            background: rgba(139, 92, 246, 0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(139, 92, 246, 0.1);
+        }
+        
+        .test-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border: 1px solid rgba(139, 92, 246, 0.1);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .test-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--neural, #8b5cf6);
+            font-size: 16px;
+            margin-bottom: 1rem;
+        }
+        
+        .test-button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 1rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .test-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
+        
+        .status {
+            margin: 1rem 0;
+            padding: 10px;
+            border-radius: 6px;
+            font-style: italic;
+        }
+        
+        .status.success { 
+            background: rgba(34, 197, 94, 0.1); 
+            color: #22c55e; 
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+        
+        .status.error { 
+            background: rgba(239, 68, 68, 0.1); 
+            color: #ef4444; 
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+        
+        .status.info { 
+            background: rgba(139, 92, 246, 0.1); 
+            color: #8b5cf6; 
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="voice-test-container">
+        <h1>🎙️ VERA Voice Integration Test</h1>
+        <p>Test the ElevenLabs voice integration with VERA's nervous system-aware speech generation.</p>
+        
+        <div class="test-section">
+            <h3>Voice Generation Test</h3>
+            <input type="text" class="test-input" id="testText" 
+                   placeholder="Enter text for VERA to speak..." 
+                   value="Hello, I'm VERA. Let's explore together how your nervous system can find its natural rhythm and balance.">
+            
+            <div>
+                <button class="test-button" onclick="testVoiceGeneration()">🎵 Generate Voice</button>
+                <button class="test-button" onclick="testRegulationMode()">🧘 Regulation Mode</button>
+                <button class="test-button" onclick="testActivationMode()">⚡ Activation Mode</button>
+            </div>
+            
+            <div id="voiceStatus" class="status info">Ready to test voice generation...</div>
+        </div>
+        
+        <div class="test-section">
+            <h3>User State Simulation</h3>
+            <div>
+                <button class="test-button" onclick="simulateStressedState()">😰 Stressed State</button>
+                <button class="test-button" onclick="simulateCalmState()">😌 Calm State</button>
+                <button class="test-button" onclick="simulateExcitedState()">🚀 Excited State</button>
+            </div>
+            
+            <div id="stateStatus" class="status info">Click to simulate different nervous system states...</div>
+        </div>
+        
+        <div class="test-section">
+            <h3>Voice Controls</h3>
+            <div class="voice-controls" id="voiceControlsDemo">
+                <button class="voice-btn" onclick="toggleVoiceDemo()">
+                    <span class="voice-icon">🎙️</span>
+                    <span class="voice-text">Enable Voice</span>
+                </button>
+                <div class="voice-indicator" id="voiceIndicator" style="display: none;">
+                    <span>VERA is speaking...</span>
+                    <div class="sound-wave">
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock VERA voice service for testing
+        class MockVERAVoiceService {
+            constructor() {
+                this.isEnabled = false;
+                this.userState = {
+                    activation_level: 0.5,
+                    coherence_level: 0.5,
+                    regulation_intent: false
+                };
+            }
+            
+            async generateVoice(text, voiceSettings = {}) {
+                // Simulate API call delay
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                // In real implementation, this would call ElevenLabs API
+                console.log('🎵 Voice Generation Request:', { text, voiceSettings });
+                
+                // Mock response
+                return {
+                    audio_base64: 'mock_audio_data_here',
+                    duration_seconds: text.length * 0.1,
+                    voice_settings: voiceSettings
+                };
+            }
+            
+            getAdaptiveVoiceSettings() {
+                const { activation_level, coherence_level, regulation_intent } = this.userState;
+                
+                return {
+                    stability: regulation_intent ? 0.85 : Math.max(0.5, coherence_level),
+                    similarity_boost: 0.8,
+                    style: Math.min(0.8, activation_level + 0.2),
+                    speaker_boost: !regulation_intent
+                };
+            }
+            
+            updateUserState(message) {
+                // Simple sentiment analysis simulation
+                const stressWords = ['stressed', 'anxious', 'overwhelmed', 'panic', 'worried'];
+                const calmWords = ['calm', 'peaceful', 'relaxed', 'centered', 'balanced'];
+                const excitedWords = ['excited', 'amazing', 'incredible', 'fantastic', 'energetic'];
+                
+                const lowerMessage = message.toLowerCase();
+                
+                if (stressWords.some(word => lowerMessage.includes(word))) {
+                    this.userState.activation_level = Math.min(1, this.userState.activation_level + 0.3);
+                    this.userState.coherence_level = Math.max(0, this.userState.coherence_level - 0.2);
+                    this.userState.regulation_intent = true;
+                } else if (calmWords.some(word => lowerMessage.includes(word))) {
+                    this.userState.activation_level = Math.max(0, this.userState.activation_level - 0.2);
+                    this.userState.coherence_level = Math.min(1, this.userState.coherence_level + 0.3);
+                    this.userState.regulation_intent = false;
+                } else if (excitedWords.some(word => lowerMessage.includes(word))) {
+                    this.userState.activation_level = Math.min(1, this.userState.activation_level + 0.4);
+                    this.userState.coherence_level = Math.min(1, this.userState.coherence_level + 0.1);
+                    this.userState.regulation_intent = false;
+                }
+            }
+        }
+        
+        // Initialize mock service
+        const mockVoiceService = new MockVERAVoiceService();
+        let voiceEnabled = false;
+        
+        async function testVoiceGeneration() {
+            const text = document.getElementById('testText').value;
+            const status = document.getElementById('voiceStatus');
+            
+            if (!text.trim()) {
+                status.className = 'status error';
+                status.textContent = 'Please enter some text to test!';
+                return;
+            }
+            
+            status.className = 'status info';
+            status.textContent = 'Generating voice with adaptive settings...';
+            
+            try {
+                mockVoiceService.updateUserState(text);
+                const voiceSettings = mockVoiceService.getAdaptiveVoiceSettings();
+                const result = await mockVoiceService.generateVoice(text, voiceSettings);
+                
+                status.className = 'status success';
+                status.innerHTML = `
+                    ✅ Voice generated successfully!<br>
+                    📊 Adaptive Settings: Stability: ${voiceSettings.stability.toFixed(2)}, 
+                    Style: ${voiceSettings.style.toFixed(2)}<br>
+                    🎵 Duration: ${result.duration_seconds.toFixed(1)}s
+                `;
+                
+                // Show voice indicator
+                showVoiceIndicatorDemo();
+                
+                // Simulate voice playback
+                setTimeout(hideVoiceIndicatorDemo, result.duration_seconds * 1000);
+                
+            } catch (error) {
+                status.className = 'status error';
+                status.textContent = `❌ Error: ${error.message}`;
+            }
+        }
+        
+        async function testRegulationMode() {
+            mockVoiceService.userState = {
+                activation_level: 0.8,
+                coherence_level: 0.3,
+                regulation_intent: true
+            };
+            
+            const regulationText = "Take a gentle breath with me. Feel your nervous system naturally settling into its wise, calm rhythm. You're perfectly safe here.";
+            document.getElementById('testText').value = regulationText;
+            
+            const status = document.getElementById('stateStatus');
+            status.className = 'status info';
+            status.textContent = '🧘 Regulation mode activated - High activation, low coherence, seeking balance';
+            
+            await testVoiceGeneration();
+        }
+        
+        async function testActivationMode() {
+            mockVoiceService.userState = {
+                activation_level: 0.9,
+                coherence_level: 0.8,
+                regulation_intent: false
+            };
+            
+            const activationText = "Your energy is incredible! Let's channel this beautiful activation into something amazing together!";
+            document.getElementById('testText').value = activationText;
+            
+            const status = document.getElementById('stateStatus');
+            status.className = 'status success';
+            status.textContent = '⚡ Activation mode - High energy, high coherence, ready for action';
+            
+            await testVoiceGeneration();
+        }
+        
+        function simulateStressedState() {
+            mockVoiceService.userState = {
+                activation_level: 0.9,
+                coherence_level: 0.2,
+                regulation_intent: true
+            };
+            
+            const status = document.getElementById('stateStatus');
+            status.className = 'status error';
+            status.textContent = '😰 Simulating stressed state: High activation, low coherence, needs regulation';
+        }
+        
+        function simulateCalmState() {
+            mockVoiceService.userState = {
+                activation_level: 0.3,
+                coherence_level: 0.8,
+                regulation_intent: false
+            };
+            
+            const status = document.getElementById('stateStatus');
+            status.className = 'status success';
+            status.textContent = '😌 Simulating calm state: Low activation, high coherence, balanced';
+        }
+        
+        function simulateExcitedState() {
+            mockVoiceService.userState = {
+                activation_level: 0.8,
+                coherence_level: 0.7,
+                regulation_intent: false
+            };
+            
+            const status = document.getElementById('stateStatus');
+            status.className = 'status success';
+            status.textContent = '🚀 Simulating excited state: High activation, good coherence, energetic';
+        }
+        
+        function toggleVoiceDemo() {
+            voiceEnabled = !voiceEnabled;
+            const btn = document.querySelector('.voice-btn');
+            const text = btn.querySelector('.voice-text');
+            
+            if (voiceEnabled) {
+                btn.classList.add('active');
+                text.textContent = 'Disable Voice';
+            } else {
+                btn.classList.remove('active');
+                text.textContent = 'Enable Voice';
+            }
+        }
+        
+        function showVoiceIndicatorDemo() {
+            const indicator = document.getElementById('voiceIndicator');
+            indicator.style.display = 'flex';
+        }
+        
+        function hideVoiceIndicatorDemo() {
+            const indicator = document.getElementById('voiceIndicator');
+            indicator.style.display = 'none';
+        }
+        
+        // Initialize test page
+        console.log('🎙️ VERA Voice Test Page Loaded');
+        console.log('🧠 Mock voice service initialized for testing');
+    </script>
+</body>
+</html>

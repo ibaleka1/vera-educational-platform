@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VERA Explorer - Nervous System Regulation</title>
+    <link rel="stylesheet" href="css/vera.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="app-body">
+    <!-- Neural Particle Background -->
+    <div class="neural-background">
+        <canvas id="neuralCanvas"></canvas>
+    </div>
+
+    <!-- Main App Container -->
+    <div class="app-container">
+        <!-- Side Navigation Panel -->
+        <aside class="side-panel" id="sidePanel">
+            <div class="panel-header">
+                <div class="vera-logo">
+                    <div class="logo-pulse"></div>
+                    <span>VERA Explorer</span>
+                </div>
+                <div class="user-greeting" id="userGreeting">
+                    Welcome back, Explorer!
+                </div>
+            </div>
+
+            <nav class="panel-nav">
+                <div class="nav-section">
+                    <h3>Regulation Library</h3>
+                    <ul class="nav-list">
+                        <li><a href="#breathing" class="nav-item" data-section="breathing" onclick="createNeuralIcon('breathing', this); setNeuralCoherence()">
+                            <div class="nav-neural" data-icon-type="breathing"></div>
+                            <span>Breathing Exercises</span>
+                        </a></li>
+                        <li><a href="#grounding" class="nav-item" data-section="grounding" onclick="createNeuralIcon('grounding', this); setNeuralRegulation()">
+                            <div class="nav-neural" data-icon-type="grounding"></div>
+                            <span>Grounding Techniques</span>
+                        </a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3>Your Journey</h3>
+                    <ul class="nav-list">
+                        <li><a href="#journal" class="nav-item" data-section="journal" onclick="createNeuralIcon('journal', this)">
+                            <div class="nav-neural" data-icon-type="journal"></div>
+                            <span>Nervous System Journal</span>
+                        </a></li>
+                        <li><a href="#chat" class="nav-item" data-section="chat" onclick="createNeuralIcon('chat', this)">
+                            <div class="nav-neural" data-icon-type="chat"></div>
+                            <span>Chat with VERA</span>
+                            <div class="chat-counter" id="chatCounter">7/10</div>
+                        </a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3>Your Account</h3>
+                    <ul class="nav-list">
+                        <li><a href="#progress" class="nav-item" data-section="progress">
+                            <div class="nav-neural"></div>
+                            <span>Progress Tracking</span>
+                        </a></li>
+                        <li><a href="#settings" class="nav-item" data-section="settings">
+                            <div class="nav-neural"></div>
+                            <span>Settings</span>
+                        </a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Trial Status -->
+            <div class="trial-status" id="trialStatus">
+                <div class="trial-info">
+                    <span class="trial-text">Free Trial</span>
+                    <span class="trial-days" id="trialDays">5 days left</span>
+                </div>
+                <button class="upgrade-btn" onclick="showUpgradeModal()">Upgrade to Explorer</button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <div class="content-header">
+                <button class="menu-toggle" id="menuToggle">
+                    <div class="nav-neural menu-neural"></div>
+                </button>
+                <h1 class="content-title" id="contentTitle">How are you feeling in your body today?</h1>
+            </div>
+
+            <div class="content-sections">
+                <!-- Welcome Section (Default) -->
+                <section id="welcome-section" class="content-section active">
+                    <div class="welcome-container">
+                        <div class="welcome-message">
+                            <h2>Welcome back, <span id="userName">Explorer</span>!</h2>
+                            <p>"How are you feeling in your body today?"</p>
+                        </div>
+                        
+                        <div class="body-check-input">
+                            <div class="input-neural-bg"></div>
+                            <textarea 
+                                id="bodyCheckInput" 
+                                placeholder="Share what's happening in your body right now..."
+                                maxlength="500"
+                            ></textarea>
+                            <button class="neural-submit-btn" onclick="submitBodyCheck()">
+                                <div class="submit-neural"></div>
+                                <span>Share</span>
+                            </button>
+                        </div>
+
+                        <div class="quick-regulation">
+                            <h3>Quick Regulation</h3>
+                            <div class="quick-options">
+                                <button class="quick-option" onclick="startQuickBreathing()">
+                                    <div class="option-neural pulse-neural"></div>
+                                    <span>5-Minute Breathing</span>
+                                </button>
+                                <button class="quick-option" onclick="startQuickGrounding()">
+                                    <div class="option-neural wave-neural"></div>
+                                    <span>Instant Grounding</span>
+                                </button>
+                                <button class="quick-option" onclick="openVERAChat()">
+                                    <div class="option-neural glow-neural"></div>
+                                    <span>Chat with VERA</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Other sections will be loaded here -->
+                <section id="breathing-section" class="content-section">
+                    <div class="section-loading">
+                        <div class="loading-neural"></div>
+                        <p>Loading breathing exercises...</p>
+                    </div>
+                </section>
+
+                <section id="grounding-section" class="content-section">
+                    <div class="section-loading">
+                        <div class="loading-neural"></div>
+                        <p>Loading grounding techniques...</p>
+                    </div>
+                </section>
+
+                <section id="journal-section" class="content-section">
+                    <div class="section-loading">
+                        <div class="loading-neural"></div>
+                        <p>Loading your journal...</p>
+                    </div>
+                </section>
+
+                <section id="chat-section" class="content-section">
+                    <div class="section-loading">
+                        <div class="loading-neural"></div>
+                        <p>Connecting to VERA...</p>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Upgrade Modal -->
+    <div class="modal-overlay" id="upgradeModal" style="display: none;">
+        <div class="upgrade-modal">
+            <div class="modal-header">
+                <h2>Continue Your Neural Journey</h2>
+                <button class="modal-close" onclick="closeUpgradeModal()">
+                    <div class="close-neural"></div>
+                </button>
+            </div>
+            <div class="modal-content">
+                <div class="upgrade-benefits">
+                    <h3>VERA Explorer - $19/month</h3>
+                    <ul class="benefits-list">
+                        <li><div class="benefit-neural"></div> Unlimited VERA conversations</li>
+                        <li><div class="benefit-neural"></div> Full regulation library access</li>
+                        <li><div class="benefit-neural"></div> Advanced progress tracking</li>
+                        <li><div class="benefit-neural"></div> Personalized nervous system insights</li>
+                    </ul>
+                </div>
+                <button class="upgrade-confirm-btn" onclick="processUpgrade()">
+                    <span>Start Explorer Plan</span>
+                    <div class="confirm-neural"></div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app-core.js"></script>
+    <script src="js/neural-particles.js"></script>
+    <script src="js/user-auth.js"></script>
+    <script src="js/breathing-exercises.js"></script>
+    <script src="js/trial-management.js"></script>
+</body>
+</html>
