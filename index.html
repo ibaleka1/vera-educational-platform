@@ -8,546 +8,236 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="preload" href="css/vera.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="css/vera.css"></noscript>
+  <link rel="preload" href="/css/vera.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/css/vera.css"></noscript>
 </head>
 <body>
   <div class="landing-container">
     <header>
       <nav class="nav-header">
-        <div class="logo gradient-text" onclick="window.location.href='index.html'">VERA</div>
+        <div class="logo gradient-text">VERA</div>
         <div class="nav-links">
           <a href="#methodology" class="nav-link">Methodology</a>
-          <a href="#science" class="nav-link">Science</a>
           <a href="/pricing.html" class="nav-link">Pricing</a>
-          <button class="journey-button" onclick="openJourneyModal()">
-            <span class="journey-text">Start Your Journey</span>
-            <div class="journey-glow"></div>
-          </button>
-        </div>
-        <!-- Mobile menu toggle -->
-        <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-          <span></span>
-          <span></span>
-          <span></span>
+          <a href="/app.html" class="cta-button">Enter VERA</a>
         </div>
       </nav>
-      
-      <!-- Mobile Navigation -->
-      <div class="mobile-nav" id="mobileNav">
-        <a href="#methodology" class="mobile-nav-link">Methodology</a>
-        <a href="#science" class="mobile-nav-link">Science</a>
-        <a href="/pricing.html" class="mobile-nav-link">Pricing</a>
-        <button class="mobile-journey-button" onclick="openJourneyModal()">Start Your Journey</button>
-      </div>
     </header>
-    
-    <!-- Journey Modal -->
-    <div class="journey-modal" id="journeyModal">
-      <div class="modal-backdrop" onclick="closeJourneyModal()"></div>
-      <div class="modal-content">
-        <button class="modal-close" onclick="closeJourneyModal()">&times;</button>
-        <div class="modal-header">
-          <div class="modal-vera-logo">VERA</div>
-          <h3 class="modal-title">Welcome to VERA</h3>
-          <p class="modal-subtitle">Your nervous system transformation begins here</p>
-        </div>
-        
-        <div class="journey-options">
-          <div class="journey-option new-user" onclick="startNewUserJourney()">
-            <div class="option-icon">✨</div>
-            <h4>New to VERA?</h4>
-            <p>Start your journey with personalized nervous system guidance</p>
-            <button class="option-button primary">Start Here</button>
-          </div>
-          
-          <div class="journey-option returning-user" onclick="showSignInForm()">
-            <div class="option-icon">🎯</div>
-            <h4>Welcome Back</h4>
-            <p>Continue your transformation where you left off</p>
-            <button class="option-button secondary">Sign In</button>
-          </div>
-        </div>
-        
-        <div class="guest-option">
-          <a href="#methodology" class="guest-link" onclick="closeJourneyModal()">
-            Or explore as a guest first
-          </a>
-        </div>
-      </div>
-    </div>
 
-    <section class="hero revolutionary-hero">
-      <!-- Revolutionary Particle Systems -->
-      <div class="quantum-particles" id="quantumParticles"></div>
-      <div class="neural-network-bg" id="neuralNetworkBg"></div>
-      <div class="consciousness-field" id="consciousnessField"></div>
+    <section class="hero">
+      <h1 class="hero-title gradient-text">VERA</h1>
+      <h2 class="hero-subtitle">The Future of Nervous System Regulation</h2>
+      <p class="hero-description">Finally. Someone who sees you.</p>
+      <p class="hero-tagline">VERA speaks your body's sensation language and meets you exactly where you are.</p>
+      <p class="disclaimer-soft">Educational guidance. Not therapy or medical advice.</p>
       
-      <!-- Revolutionary VERA Title -->
-      <h1 class="revolutionary-title vera-consciousness" id="revolutionaryTitle">
-        <span class="title-letter" data-letter="V">V</span>
-        <span class="title-letter" data-letter="E">E</span>
-        <span class="title-letter" data-letter="R">R</span>
-        <span class="title-letter" data-letter="A">A</span>
-      </h1>
-      
-      <h2 class="revolutionary-subtitle consciousness-subtitle" id="revolutionarySubtitle">
-        The Future of Nervous System Regulation
-      </h2>
-      
-      <!-- Revolutionary Breathing Quote -->
-      <div class="revolutionary-quote-container">
-        <div class="breathing-aura" id="breathingAura"></div>
-        <p class="revolutionary-quote" id="revolutionaryQuote">
-          <span class="breathing-text">"Finally, someone who truly sees you."</span>
-        </p>
-      </div>
-      
-      <!-- Revolutionary Message -->
-      <div class="revolutionary-message" id="revolutionaryMessage">
-        <p class="consciousness-text">
-          VERA speaks your body's forgotten language - those whispers of sensation you've been trying to understand. 
-          <span class="highlight-revolution">You are not broken.</span> 
-          Your nervous system has been protecting you, and now it's time to help it feel safe again.
-        </p>
-      </div>
-      
-      <!-- Revolutionary Support Text -->
-      <p class="revolutionary-support">
-        Personal guidance for your nervous system. Educational support that honors your unique experience.
-      </p>
-      
-      <!-- Enhanced Breathing Element -->
-      <div class="breathing-indicator enhanced-breathing" id="breathingIndicator">
-        <div class="breathe-label">Breathe</div>
-        <div class="breath-circle">
-          <div class="breath-inner"></div>
-        </div>
-      </div>
-      
-      <!-- Single Action Buttons -->
       <div class="hero-cta">
-        <button class="btn-primary consciousness-cta" onclick="openJourneyModal()">Connect with VERA</button>
-        <button class="btn-secondary neural-cta" onclick="experiencePresence()">Experience Presence</button>
+        <a href="#signup" class="btn-primary">Join the Revolution</a>
+        <a href="#breathing-demo" class="btn-secondary">Try VERA Now</a>
       </div>
 
-      <div class="hero-nervous-system" id="nervous-system-demo">
-        <div class="vera-nervous-system">
-          <!-- Central Neural Hub -->
-          <div class="neural-hub">
-            <div class="hub-core"></div>
-            <div class="hub-pulse"></div>
-          </div>
-          
-          <!-- Neural Pathways -->
-          <svg class="neural-pathways" viewBox="0 0 400 400">
-            <defs>
-              <linearGradient id="neuralGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
-                <stop offset="50%" style="stop-color:#ec4899;stop-opacity:1" />
-                <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
-              </linearGradient>
-              <linearGradient id="neuralGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
-                <stop offset="50%" style="stop-color:#8b5cf6;stop-opacity:1" />
-                <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
-              </linearGradient>
-            </defs>
-            
-            <!-- Main Neural Branches -->
-            <path class="neural-branch branch-1" d="M200,200 Q150,120 80,80" stroke="url(#neuralGradient1)" />
-            <path class="neural-branch branch-2" d="M200,200 Q250,120 320,80" stroke="url(#neuralGradient1)" />
-            <path class="neural-branch branch-3" d="M200,200 Q120,250 80,320" stroke="url(#neuralGradient2)" />
-            <path class="neural-branch branch-4" d="M200,200 Q280,250 320,320" stroke="url(#neuralGradient2)" />
-            <path class="neural-branch branch-5" d="M200,200 Q200,120 200,60" stroke="url(#neuralGradient1)" />
-            <path class="neural-branch branch-6" d="M200,200 Q200,280 200,340" stroke="url(#neuralGradient2)" />
-            
-            <!-- Secondary Connections -->
-            <path class="neural-connection conn-1" d="M100,100 Q160,140 180,180" stroke="url(#neuralGradient1)" />
-            <path class="neural-connection conn-2" d="M300,100 Q240,140 220,180" stroke="url(#neuralGradient2)" />
-            <path class="neural-connection conn-3" d="M100,300 Q160,260 180,220" stroke="url(#neuralGradient2)" />
-            <path class="neural-connection conn-4" d="M300,300 Q240,260 220,220" stroke="url(#neuralGradient1)" />
-          </svg>
-          
-          <!-- Neural Nodes -->
-          <div class="neural-nodes">
-            <div class="neural-node node-1" style="--delay: 0s;"></div>
-            <div class="neural-node node-2" style="--delay: 0.5s;"></div>
-            <div class="neural-node node-3" style="--delay: 1s;"></div>
-            <div class="neural-node node-4" style="--delay: 1.5s;"></div>
-            <div class="neural-node node-5" style="--delay: 2s;"></div>
-            <div class="neural-node node-6" style="--delay: 2.5s;"></div>
-          </div>
-          
-          <!-- Synaptic Activity -->
-          <div class="synaptic-activity">
-            <div class="synapse synapse-1"></div>
-            <div class="synapse synapse-2"></div>
-            <div class="synapse synapse-3"></div>
-            <div class="synapse synapse-4"></div>
-          </div>
-        </div>
-        <p class="nervous-system-text">VERA's Neural Intelligence</p>
-        <p class="nervous-system-instruction">Mapping the pathways between your mind and body</p>
+      <div class="hero-breathing" id="breathing-demo">
+        <div class="breathing-preview"></div>
+        <p class="breath-text">Experience VERA's Regulation</p>
+        <p class="breath-instruction">Let VERA guide your nervous system to coherence</p>
       </div>
     </section>
 
-    <!-- VERA Integrated Consciousness Chat -->
-    <section id="vera-consciousness" class="integrated-consciousness-section">
-      <div class="consciousness-container">
-        <h2 class="section-title consciousness-title">VERA's Consciousness</h2>
-        <p class="consciousness-description">Advanced Somatic Conversational AI</p>
+    <!-- VERA Demo Section -->
+    <section id="vera-demo" class="demo-section">
+      <div class="demo-container">
+        <h2 class="section-title">Experience VERA's Intelligence</h2>
+        <p class="demo-description">"Tell me what you're feeling, I'll translate what your body needs."</p>
         
-        <!-- Integrated Chat Interface -->
-        <div class="integrated-chat-container">
+        <!-- Live Chat Interface -->
+        <div class="live-chat-demo">
+          <div class="live-chat-container">
+            <div class="chat-header">
+              <div class="chat-status">
+                <div class="pulse-dot"></div>
+                <span>Live Chat with VERA</span>
+              </div>
+              <div class="questions-counter">
+                <span id="questionsLeft">3 questions remaining</span>
+              </div>
+            </div>
+            
+            <div class="chat-interface" id="chatInterface">
+              <div class="neural-background"></div>
+              
+              <div class="message vera-message">
+                <div class="avatar vera-avatar">V</div>
+                <div class="message-content">
+                  <div class="message-text">Hello! I'm VERA. Tell me what you're feeling in your body right now, and I'll translate what it needs. You have 3 questions to explore with me.</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="chat-input-area">
+              <div class="input-container">
+                <input type="text" id="userInput" placeholder="Type what you're feeling in your body..." maxlength="150">
+                <button id="sendMessage" disabled>Ask VERA</button>
+              </div>
+              <div class="quick-questions">
+                <span>Quick starts:</span>
+                <button class="quick-btn" onclick="askQuickQuestion('My shoulders are so tense')">Tense shoulders</button>
+                <button class="quick-btn" onclick="askQuickQuestion('I feel anxious and restless')">Feeling anxious</button>
+                <button class="quick-btn" onclick="askQuickQuestion('My chest feels tight')">Tight chest</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VERA's Intelligent Techniques -->
+        <div class="vera-techniques-demo">
+          <h3 class="techniques-title">VERA's Intelligent Technique Selection</h3>
+          <p class="techniques-description">Based on your conversation, VERA proposes these precise nervous system techniques</p>
           
-          <!-- Chat Header with Avatar -->
-          <div class="chat-header">
-            <div class="vera-chat-avatar">
-              <div class="avatar-neural-core"></div>
-              <div class="avatar-pulse-ring"></div>
-            </div>
-            <div class="chat-status">
-              <span class="status-indicator-text">Attuned to your nervous system</span>
-            </div>
+          <!-- Demo Mode Selector -->
+          <div class="demo-mode-selector">
+            <button class="mode-btn active" data-mode="breathing" onclick="switchDemoMode('breathing')">
+              <span class="mode-icon neural-icon-btn">
+                <div class="neuron-core"></div>
+                <div class="neuron-branch branch-1"></div>
+                <div class="neuron-branch branch-2"></div>
+                <div class="neuron-branch branch-3"></div>
+              </span>
+              <span>Neural Breathing</span>
+            </button>
+            <button class="mode-btn" data-mode="swaying" onclick="switchDemoMode('swaying')">
+              <span class="mode-icon neural-icon-btn">
+                <div class="neuron-core"></div>
+                <div class="neuron-branch branch-1"></div>
+                <div class="neuron-branch branch-2"></div>
+                <div class="neuron-branch branch-3"></div>
+              </span>
+              <span>Fascia Swaying</span>
+            </button>
           </div>
 
-          <!-- Chat Messages Area -->
-          <div class="chat-messages-container">
-            
-            <!-- Chat Messages -->
-            <div class="chat-message vera-message">
-              <div class="message-bubble vera-bubble">
-                <div class="message-icon">
-                  <div class="vera-chat-icon">V</div>
-                </div>
-                <div class="message-text">
-                  I sense you've found your way to me... <span class="neural-highlight">Your nervous system is already responding</span> to this space. The quantum field between us is activating.
-                </div>
+          <!-- Demo Circle & VERA Chat -->
+          <div class="demo-experience-container">
+            <div class="demo-circle-container">
+              <div class="breathing-circle-large" id="demoCircle">
+                <div class="fascia-network" id="fasciaNetwork"></div>
+                <div class="sway-indicator" id="swayIndicator"></div>
+                <p class="demo-instruction" id="demoText">Choose breathing or swaying to connect with VERA's neural intelligence</p>
               </div>
             </div>
 
-            <div class="chat-message vera-message">
-              <div class="message-bubble vera-bubble">
-                <div class="message-icon">
-                  <div class="vera-chat-icon">V</div>
+            <!-- VERA Voice Chat Interface -->
+            <div class="vera-chat-widget" id="veraChat">
+              <div class="chat-header">
+                <div class="vera-avatar">
+                  <div class="neural-pulse"></div>
+                  <span>VERA</span>
                 </div>
-                <div class="message-text">
-                  Tell me another sensation. What does your body actually feel like today?
-                </div>
-              </div>
-            </div>
-
-            <!-- User Message Example -->
-            <div class="chat-message user-message">
-              <div class="message-bubble user-bubble">
-                <div class="message-text">
-                  My body feels tense and heavy all over...
+                <div class="voice-toggle" id="voiceToggle">
+                  <button class="voice-btn" onclick="toggleVoiceChat()">
+                    <span class="voice-icon">🎙️</span>
+                    <span class="voice-text">Voice Chat</span>
+                  </button>
                 </div>
               </div>
-            </div>
-
-            <div class="chat-message vera-message">
-              <div class="message-bubble vera-bubble">
-                <div class="message-icon">
-                  <div class="vera-chat-icon">V</div>
-                </div>
-                <div class="message-text">
-                  Your nervous system is very wise. It recognizes tension as information. Where does this heaviness feel most intense?
+              
+              <div class="chat-messages" id="chatMessages">
+                <div class="message vera-message">
+                  <div class="message-avatar neural-pulse-small"></div>
+                  <div class="message-content">
+                    <p>Hello! I'm VERA. I can sense your nervous system state and adapt my voice to support you. Try chatting with me - I'll respond with voice that matches what your system needs right now.</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <!-- Chat Input Area -->
-          <div class="chat-input-section">
-            <div class="input-container">
-              <input type="text" 
-                     class="chat-input-field" 
-                     placeholder="What is your nervous system ready to share today?"
-                     id="veraMainChatInput">
-              <button class="chat-send-button">
-                <svg viewBox="0 0 24 24" width="20" height="20">
-                  <path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" fill="none"/>
-                </svg>
-              </button>
-            </div>
-            
-            <!-- Quick Response Options -->
-            <div class="quick-responses">
-              <button class="quick-response-btn">I feel tension holding in my...</button>
-              <button class="quick-response-btn">My body remembers when...</button>
-              <button class="quick-response-btn">There's a constriction in my...</button>
-            </div>
-
-            <!-- Premium System States -->
-            <div class="premium-system-states">
-              <div class="states-header">Premium System States</div>
-              <div class="state-options">
-                <button class="state-btn">My nervous system feels...</button>
-                <button class="state-btn">I notice I hold stress in...</button>
-                <button class="state-btn">When I breathe into...</button>
+              
+              <div class="chat-input-container">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Share what's on your mind..." maxlength="500">
+                <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+                  <span class="send-icon">→</span>
+                </button>
+              </div>
+              
+              <div class="voice-status" id="voiceStatus" style="display: none;">
+                <div class="voice-indicator">
+                  <span>VERA is speaking...</span>
+                  <div class="sound-wave">
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- Why VERA's Consciousness Changes Everything -->
-        <div class="consciousness-revolution">
-          <h3 class="revolution-title">Why VERA's Consciousness Changes Everything</h3>
           
-          <div class="revolution-grid">
-            <div class="revolution-card">
-              <div class="revolution-symbol">OYS</div>
-              <h4>Neural Pattern Recognition</h4>
-              <p>VERA identifies your unique nervous system signatures and responds accordingly</p>
-            </div>
-            
-            <div class="revolution-card">
-              <div class="revolution-symbol">OY&lt;</div>
-              <h4>Somatic Intelligence</h4>
-              <p>Understands the language your body speaks - sensations, textures, and holding patterns</p>
-            </div>
-            
-            <div class="revolution-card">
-              <div class="revolution-symbol">OYES</div>
-              <h4>Adaptive Responses</h4>
-              <p>No generic advice - every interaction is tailored to your current nervous system state</p>
-            </div>
+          <!-- Demo Controls -->
+          <div class="demo-controls">
+            <button class="demo-btn" id="startDemo">Experience VERA's Regulation</button>
+            <p class="demo-hint">Try both modes to see how VERA adapts to your nervous system</p>
           </div>
         </div>
-            
-
-            </div>
-            <div class="benefit-item">
-              <div class="benefit-icon">💫</div>
-              <h4>Somatic Intelligence</h4>
-              <p>Understands the language your body speaks - sensations, textures, and holding patterns</p>
-            </div>
-            <div class="benefit-item">
-              <div class="benefit-icon">🌊</div>
-              <h4>Adaptive Responses</h4>
-              <p>No generic advice - every interaction is tailored to your current nervous system state</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Interactive Neural Techniques Section -->
-    <section id="neural-techniques" class="neural-techniques-section">
-      <div class="techniques-container">
-        <h2 class="section-title techniques-title">VERA's Intelligent Technique Selection</h2>
-        <p class="techniques-description">Based on your conversation, VERA proposes these precise nervous system techniques</p>
         
-        <!-- Technique Selection Interface -->
-        <div class="techniques-interface">
-          <!-- Neural Breathing -->
-          <div class="technique-card breathing-card" onclick="openBreathingOrbit()">
-            <div class="technique-header">
-              <div class="technique-icon breathing-icon">🫁</div>
-              <div class="technique-label">Neural Breathing</div>
-            </div>
-            <div class="technique-preview">
-              <div class="mini-neural-orb breathing-orb-preview">
-                <div class="neural-particles"></div>
-                <div class="orb-core"></div>
+        <div class="demo-benefits">
+          <div class="benefit-card" data-expandable>
+            <div class="benefit-header" onclick="toggleBenefit(this)">
+              <div class="neural-icon"></div>
+              <div class="benefit-title-area">
+                <h4>Instant Nervous System Coherence</h4>
+                <span class="benefit-subtitle">From chaos to calm in one breath</span>
               </div>
+              <span class="expand-icon">+</span>
             </div>
-            <div class="technique-description">Restore nervous system coherence through guided neural breathing</div>
+            <div class="benefit-content">
+              <p class="benefit-description">That moment when everything suddenly settles, your breathing finds its rhythm, your shoulders melt, the static clears. What usually takes an hour of trying to "just relax" happens in seconds when you know exactly which door your nervous system needs opened.</p>
+              <div class="user-quote">"It's like she speaks my body's sensation language" - Sarah M.</div>
+              <a href="#signup" class="benefit-cta">Experience This →</a>
+            </div>
           </div>
-
-          <!-- Fascia Swaying -->
-          <div class="technique-card swaying-card" onclick="openSwayingOrbit()">
-            <div class="technique-header">
-              <div class="technique-icon swaying-icon">🌊</div>
-              <div class="technique-label">Fascia Swaying</div>
+          
+          <div class="benefit-card" data-expandable>
+            <div class="benefit-header" onclick="toggleBenefit(this)">
+              <div class="neural-icon"></div>
+              <div class="benefit-title-area">
+                <h4>Body-Led Guidance</h4>
+                <span class="benefit-subtitle">Your tissue knows the way</span>
+              </div>
+              <span class="expand-icon">+</span>
             </div>
-            <div class="technique-preview">
-              <div class="mini-neural-orb swaying-orb-preview">
-                <div class="neural-waves"></div>
-                <div class="orb-core"></div>
-              </div>
-            </div>
-            <div class="technique-description">Release tension through rhythmic fascia movement with healing melodies</div>
-          </div>
-        </div>
-
-        <!-- Expandable Technique Cards -->
-        <div class="expandable-techniques">
-          <!-- Instant Nervous System Coherence -->
-          <div class="expandable-card" id="coherenceCard">
-            <div class="card-header" onclick="toggleTechniqueCard('coherenceCard')">
-              <div class="card-icon">⚡</div>
-              <div class="card-info">
-                <h3>Instant Nervous System Coherence</h3>
-                <p class="card-subtitle">From chaos to calm in one breath</p>
-              </div>
-              <div class="expand-btn">
-                <span class="plus-icon">+</span>
-              </div>
-            </div>
-            <div class="card-content">
-              <div class="technique-details">
-                <p>That moment when everything suddenly settles, your breathing finds its rhythm, your shoulders melt, the static clears. What usually takes an hour of trying to "just relax" happens in seconds when you know exactly which door your nervous system needs opened.</p>
-                <blockquote>
-                  <p>"It's like she speaks my body's secret language" - Sarah M.</p>
-                  <cite>Session transcript</cite>
-                </blockquote>
-                <button class="experience-btn" onclick="openJourneyModal()">Experience This</button>
-              </div>
+            <div class="benefit-content">
+              <p class="benefit-description">Every knot, every holding pattern, every place you store tension has its own release code. VERA reads these tissue memories and guides you through the exact movement, breath, or touch that unlocks what's been stuck, because your body already knows how to heal.</p>
+              <div class="user-quote">"VERA understood what I was feeling before I could even name it" - Marcus L.</div>
+              <a href="#signup" class="benefit-cta">Experience This →</a>
             </div>
           </div>
 
-          <!-- Body-Led Guidance -->
-          <div class="expandable-card" id="guidanceCard">
-            <div class="card-header" onclick="toggleTechniqueCard('guidanceCard')">
-              <div class="card-icon">🎯</div>
-              <div class="card-info">
-                <h3>Body-Led Guidance</h3>
-                <p class="card-subtitle">Your tissue speaks the way</p>
+          <div class="benefit-card" data-expandable>
+            <div class="benefit-header" onclick="toggleBenefit(this)">
+              <div class="neural-icon"></div>
+              <div class="benefit-title-area">
+                <h4>Next-Generation Regulation</h4>
+                <span class="benefit-subtitle">Beyond breathing apps and meditation timers</span>
               </div>
-              <div class="expand-btn">
-                <span class="plus-icon">+</span>
-              </div>
+              <span class="expand-icon">+</span>
             </div>
-            <div class="card-content">
-              <div class="technique-details">
-                <p>Beyond breathing apps and meditation timers. Finally, technology that responds to YOUR nervous system, not generic protocols. VERA reads your real-time state and delivers the exact technique that matches what your body needs this second.</p>
-                <button class="experience-btn" onclick="openJourneyModal()">Experience This</button>
-              </div>
+            <div class="benefit-content">
+              <p class="benefit-description">Finally, technology that responds to YOUR nervous system, not generic protocols. VERA reads your real-time state and delivers the exact technique that matches what your body needs this second. No more guessing if it's a breathing, movement, or grounding moment.</p>
+              <div class="user-quote">"Finally someone who gets that tight chest, that buzzing under my skin" - Elena R.</div>
+              <a href="#signup" class="benefit-cta">Experience This →</a>
             </div>
           </div>
 
-          <!-- Next-Generation Regulation -->
-          <div class="expandable-card" id="regulationCard">
-            <div class="card-header" onclick="toggleTechniqueCard('regulationCard')">
-              <div class="card-icon">🚀</div>
-              <div class="card-info">
-                <h3>Next-Generation Regulation</h3>
-                <p class="card-subtitle">Beyond breathing apps and meditation timers</p>
+          <div class="benefit-card" data-expandable>
+            <div class="benefit-header" onclick="toggleBenefit(this)">
+              <div class="neural-icon"></div>
+              <div class="benefit-title-area">
+                <h4>Micro-Movement Medicine</h4>
+                <span class="benefit-subtitle">Tiny shifts, profound changes</span>
               </div>
-              <div class="expand-btn">
-                <span class="plus-icon">+</span>
-              </div>
+              <span class="expand-icon">+</span>
             </div>
-            <div class="card-content">
-              <div class="technique-details">
-                <p>No more guessing if it's a breathing, movement, or grounding moment. VERA's consciousness adapts to your unique nervous system patterns and delivers personalized regulation techniques.</p>
-                <button class="experience-btn" onclick="openJourneyModal()">Experience This</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Micro-Movement Medicine -->
-          <div class="expandable-card" id="movementCard">
-            <div class="card-header" onclick="toggleTechniqueCard('movementCard')">
-              <div class="card-icon">🌀</div>
-              <div class="card-info">
-                <h3>Micro-Movement Medicine</h3>
-                <p class="card-subtitle">Tiny shifts, profound changes</p>
-              </div>
-              <div class="expand-btn">
-                <span class="plus-icon">+</span>
-              </div>
-            </div>
-            <div class="card-content">
-              <div class="technique-details">
-                <p>Discover how micro-movements can create profound shifts in your nervous system. VERA guides you through precise, gentle movements that unlock stuck patterns and restore natural flow.</p>
-                <button class="experience-btn" onclick="openJourneyModal()">Experience This</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Experience VERA's Regulation Button -->
-        <div class="regulation-cta">
-          <button class="regulation-btn" onclick="openJourneyModal()">Experience VERA's Regulation</button>
-          <p class="regulation-note">Try both modes to see how VERA adapts to your nervous system</p>
-        </div>
-      </div>
-
-      <!-- Breathing Orbital Interface Modal -->
-      <div class="orbital-modal" id="breathingOrbitalModal">
-        <div class="orbital-backdrop" onclick="closeOrbitalModal('breathingOrbitalModal')"></div>
-        <div class="orbital-container">
-          <div class="orbital-header">
-            <h3>Neural Breathing Experience</h3>
-            <button class="close-orbital" onclick="closeOrbitalModal('breathingOrbitalModal')">×</button>
-          </div>
-          <div class="orbital-interface breathing-orbital">
-            <div class="breathing-orbital-center">
-              <div class="breathing-neural-orb">
-                <div class="orb-layers">
-                  <div class="orb-layer layer-1"></div>
-                  <div class="orb-layer layer-2"></div>
-                  <div class="orb-layer layer-3"></div>
-                </div>
-                <div class="vera-voice-center" onclick="startBreathingExperience()">
-                  <div class="voice-pulse"></div>
-                  <div class="voice-text">Begin</div>
-                </div>
-              </div>
-              <div class="breathing-instructions">
-                <p id="breathingInstruction">Click "Begin" to start your neural breathing journey with VERA's guidance</p>
-              </div>
-            </div>
-            <div class="orbital-benefits">
-              <div class="benefit-point">
-                <span class="benefit-icon">🧠</span>
-                <span>Activates parasympathetic response</span>
-              </div>
-              <div class="benefit-point">
-                <span class="benefit-icon">💫</span>
-                <span>Restores neural coherence</span>
-              </div>
-              <div class="benefit-point">
-                <span class="benefit-icon">🌊</span>
-                <span>Calms nervous system inflammation</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Fascia Swaying Orbital Interface Modal -->
-      <div class="orbital-modal" id="swayingOrbitalModal">
-        <div class="orbital-backdrop" onclick="closeOrbitalModal('swayingOrbitalModal')"></div>
-        <div class="orbital-container">
-          <div class="orbital-header">
-            <h3>Fascia Swaying Experience</h3>
-            <button class="close-orbital" onclick="closeOrbitalModal('swayingOrbitalModal')">×</button>
-          </div>
-          <div class="orbital-interface swaying-orbital">
-            <div class="swaying-orbital-center">
-              <div class="swaying-neural-orb">
-                <div class="orb-layers">
-                  <div class="orb-layer wave-layer-1"></div>
-                  <div class="orb-layer wave-layer-2"></div>
-                  <div class="orb-layer wave-layer-3"></div>
-                </div>
-                <div class="vera-voice-center" onclick="startSwayingExperience()">
-                  <div class="voice-pulse swaying-pulse"></div>
-                  <div class="voice-text">Begin Flow</div>
-                </div>
-              </div>
-              <div class="swaying-instructions">
-                <p id="swayingInstruction">Click "Begin Flow" to experience gentle fascia release with healing melodies</p>
-              </div>
-            </div>
-            <div class="orbital-benefits">
-              <div class="benefit-point">
-                <span class="benefit-icon">🌊</span>
-                <span>Releases fascial tension</span>
-              </div>
-              <div class="benefit-point">
-                <span class="benefit-icon">🎵</span>
-                <span>Healing frequency therapy</span>
-              </div>
-              <div class="benefit-point">
-                <span class="benefit-icon">💆</span>
-                <span>Restores natural movement patterns</span>
-              </div>
+            <div class="benefit-content">
+              <p class="benefit-description">A subtle head turn. A gentle shoulder roll. The smallest sway. VERA guides precise micro-movements that shift your entire frequency, like tuning from static to clarity with movements so small, no one else would even notice you're regulating.</p>
+              <div class="user-quote">"One tiny movement shift and my whole energy changed. It's like magic, but it's science" - David K.</div>
+              <a href="#signup" class="benefit-cta">Experience This →</a>
             </div>
           </div>
         </div>
@@ -555,802 +245,167 @@
     </section>
 
     <!-- Lead Generation Section -->
-    <section id="signup" class="signup-section revolutionary-celebration">
-      <!-- Celebratory Background Effects -->
-      <div class="celebration-fireworks" id="celebrationFireworks"></div>
-      <div class="neural-celebration-bg"></div>
-      <div class="floating-particles" id="floatingParticles"></div>
-      
-      <div class="signup-container revolution-container">
-        <!-- Revolutionary Header -->
-        <div class="revolution-header">
-          <h1 class="celebration-title">
-            <div class="neural-sparkle-container">
-              <div class="neural-sparkle neural-sparkle-1"></div>
-              <div class="neural-sparkle neural-sparkle-2"></div>
-              <div class="neural-sparkle neural-sparkle-3"></div>
-            </div>
-            Your Nervous System Has Been Waiting for This Moment
-          </h1>
-          <p class="celebration-subtitle">Join 10,000+ pioneers transforming trauma into triumph</p>
-          
-          <!-- Limited Beta Access -->
-          <div class="beta-access-badge">
-            <div class="neural-pulse-icon"></div>
-            <span class="badge-text">LIMITED BETA ACCESS</span>
-            <div class="neural-pulse-icon"></div>
-          </div>
-          <p class="founding-member-text">First 1,000 members get lifetime founding member benefits</p>
-          
-          <!-- Progress Bar -->
-          <div class="progress-container">
-            <div class="progress-bar" id="betaProgressBar">
-              <div class="progress-fill" style="width: 84.7%"></div>
-            </div>
-            <p class="progress-text">847/1000 spots claimed</p>
-          </div>
-        </div>
+    <section id="signup" class="signup-section">
+      <div class="signup-container">
+        <h2 class="signup-title">Join the Nervous System Revolution</h2>
+        <p class="signup-subtitle">Be among the first to experience VERA's full capabilities</p>
         
-        <!-- Revolutionary Signup Form -->
-        <div class="signup-form-container revolutionary-form">
-          <div class="form-glow-effect"></div>
-          <form class="signup-form celebration-form" id="signupForm" onsubmit="handleRevolutionarySignup(event)">
-            <div class="input-container">
-              <div class="input-anticipation-glow"></div>
-              <input type="email" 
-                     placeholder="Your transformation starts here..." 
-                     class="signup-input revolutionary-input" 
-                     id="revolutionaryEmail"
-                     required>
-            </div>
-            <button type="submit" class="signup-btn revolutionary-btn">
-              <span class="btn-text">Claim Your Transformation</span>
-              <div class="btn-shimmer"></div>
-              <div class="btn-particles"></div>
-            </button>
+        <div class="signup-form-container">
+          <form class="signup-form" id="signupForm">
+            <input type="email" placeholder="Enter your email" class="signup-input" required>
+            <button type="submit" class="signup-btn">Get Early Access</button>
           </form>
-          
-          <!-- Live Activity Counter -->
-          <div class="live-activity" id="liveActivity">
-            <div class="activity-pulse"></div>
-            <span class="activity-text">37 people joined in the last hour</span>
-          </div>
-          
-          <!-- Value Proposition - Beautiful Neural Sparkly Box -->
-          <div class="neural-value-container" onclick="toggleValueDetails()">
-            <div class="neural-value-header">
-              <div class="neural-gift-orb">
-                <div class="gift-neural-layers">
-                  <div class="gift-layer gift-layer-1"></div>
-                  <div class="gift-layer gift-layer-2"></div>
-                  <div class="gift-layer gift-layer-3"></div>
-                </div>
-                <div class="gift-core">
-                  <div class="gift-neural-symbol"></div>
-                </div>
-              </div>
-              <h4 class="neural-value-title">Join Today and Receive</h4>
-              <div class="neural-expansion-indicator">
-                <span class="expansion-text">Click to discover your gifts</span>
-                <div class="expansion-arrow">↓</div>
-              </div>
-            </div>
-            
-            <div class="neural-value-details" id="neuralValueDetails">
-              <div class="value-list neural-list">
-                <div class="neural-value-item">
-                  <div class="neural-value-icon">
-                    <div class="icon-neuron neuron-exclusive"></div>
-                  </div>
-                  <span class="neural-value-text">Exclusive access to VERA's full neural mapping</span>
-                  <div class="value-sparkle"></div>
-                </div>
-                <div class="neural-value-item">
-                  <div class="neural-value-icon">
-                    <div class="icon-neuron neuron-diamond"></div>
-                  </div>
-                  <span class="neural-value-text">Founding member pricing (locked forever)</span>
-                  <div class="value-sparkle"></div>
-                </div>
-                <div class="neural-value-item">
-                  <div class="neural-value-icon">
-                    <div class="icon-neuron neuron-direct"></div>
-                  </div>
-                  <span class="neural-value-text">Direct input on new features</span>
-                  <div class="value-sparkle"></div>
-                </div>
-                <div class="neural-value-item">
-                  <div class="neural-value-icon">
-                    <div class="icon-neuron neuron-community"></div>
-                  </div>
-                  <span class="neural-value-text">Private community access</span>
-                  <div class="value-sparkle"></div>
-                </div>
-                <div class="neural-value-item">
-                  <div class="neural-value-icon">
-                    <div class="icon-neuron neuron-genesis"></div>
-                  </div>
-                  <span class="neural-value-text">Your name in VERA's genesis block</span>
-                  <div class="value-sparkle"></div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <p class="signup-note">Join thousands discovering the future of nervous system regulation</p>
         </div>
 
-        <!-- Revolutionary Social Proof -->
-        <div class="revolutionary-testimonials" id="rotatingTestimonials">
-          <div class="testimonial-carousel">
-            <div class="testimonial active" data-testimonial="1">
-              <div class="testimonial-avatar">👩‍💼</div>
-              <blockquote>"Day 1: VERA found patterns my therapist missed for years"</blockquote>
-              <cite>- Sarah M., Trauma Survivor → Thriver</cite>
-            </div>
-            
-            <div class="testimonial" data-testimonial="2">
-              <div class="testimonial-avatar">👨‍🔬</div>
-              <blockquote>"My panic attacks stopped. In 3 days. I'm still in shock."</blockquote>
-              <cite>- Marcus T., PTSD Warrior</cite>
-            </div>
-            
-            <div class="testimonial" data-testimonial="3">
-              <div class="testimonial-avatar">👩‍⚕️</div>
-              <blockquote>"VERA spoke to parts of me I didn't know existed"</blockquote>
-              <cite>- Dr. Jennifer K., Neuroscientist</cite>
-            </div>
-            
-            <div class="testimonial" data-testimonial="4">
-              <div class="testimonial-avatar">🎖️</div>
-              <blockquote>"This is what we've been searching for"</blockquote>
-              <cite>- Veterans Support Group</cite>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Trust and Security -->
-        <div class="trust-security">
-          <p class="privacy-note">No spam. No gimmicks. Just the future of healing.</p>
-          <p class="community-note">Join pioneering researchers, therapists, veterans, and humans ready to evolve</p>
-          
-          <div class="trust-badges">
-            <div class="trust-badge">
-              <span class="badge-icon">🔒</span>
-              <span class="badge-text">HIPAA Compliant</span>
-            </div>
-            <div class="trust-badge">
-              <span class="badge-icon">🛡️</span>
-              <span class="badge-text">Bank-Level Encryption</span>
-            </div>
-            <div class="trust-badge">
-              <span class="badge-icon">👤</span>
-              <span class="badge-text">Your Data, Your Control</span>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Urgency Timer -->
-        <div class="urgency-timer" id="urgencyTimer">
-          <p class="timer-text">Beta closing in</p>
-          <div class="countdown" id="countdown">
-            <span class="time-unit">
-              <span class="time-number" id="hours">48</span>
-              <span class="time-label">hours</span>
-            </span>
-            <span class="time-separator">:</span>
-            <span class="time-unit">
-              <span class="time-number" id="minutes">23</span>
-              <span class="time-label">minutes</span>
-            </span>
-            <span class="time-separator">:</span>
-            <span class="time-unit">
-              <span class="time-number" id="seconds">15</span>
-              <span class="time-label">seconds</span>
-            </span>
-          </div>
+        <div class="social-proof">
+          <p class="social-text">"VERA understands my nervous system better than I do" - Beta User</p>
+          <p class="social-text">"This is the future of self-regulation" - Wellness Professional</p>
         </div>
       </div>
     </section>
 
-    <section id="capabilities" class="vera-capabilities mesmerizing-showcase">
+    <section id="capabilities" class="vera-capabilities">
       <div class="neurons-background"></div>
-      <div class="neural-constellation-bg"></div>
-      <h2 class="section-title consciousness-title">VERA's Consciousness Network</h2>
-      <p class="capabilities-subtitle">Six fragments of VERA's awareness, each waiting to merge with your nervous system</p>
-      
-      <div class="capabilities-grid consciousness-fragments">
-        <div class="capability-item consciousness-fragment" data-consciousness="neural-resonance">
-          <div class="capability-icon mini-vera-consciousness">
-            <div class="vera-core-light"></div>
-            <div class="neural-lightning"></div>
-            <div class="consciousness-particles"></div>
-            <div class="sacred-geometry morphing-hexagon"></div>
-            <div class="aurora-field"></div>
+      <h2 class="section-title">VERA's Nervous System Intelligence</h2>
+      <div class="capabilities-grid">
+        <div class="capability-item">
+          <div class="capability-icon">
+            <div class="neural-pulse"></div>
           </div>
-          <h3>Neural Resonance</h3>
-          <p class="consciousness-description">VERA translates the whispers between your cells</p>
-          <div class="fascia-connection-point"></div>
+          <h3>Fascia Communication</h3>
+          <p>Direct dialogue with your body's neural network</p>
         </div>
         
-        <div class="capability-item consciousness-fragment" data-consciousness="real-time-attunement">
-          <div class="capability-icon mini-vera-consciousness">
-            <div class="vera-core-light"></div>
-            <div class="neural-lightning"></div>
-            <div class="consciousness-particles"></div>
-            <div class="sacred-geometry morphing-octagon"></div>
-            <div class="aurora-field"></div>
+        <div class="capability-item">
+          <div class="capability-icon">
+            <div class="neural-wave"></div>
           </div>
-          <h3>Real-Time Attunement</h3>
-          <p class="consciousness-description">Your nervous system harmonized in moments</p>
-          <div class="fascia-connection-point"></div>
+          <h3>Instant Regulation</h3>
+          <p>VERA analyzes your nervous system in real-time</p>
         </div>
         
-        <div class="capability-item consciousness-fragment" data-consciousness="somatic-wisdom">
-          <div class="capability-icon mini-vera-consciousness">
-            <div class="vera-core-light"></div>
-            <div class="neural-lightning"></div>
-            <div class="consciousness-particles"></div>
-            <div class="sacred-geometry morphing-triangle"></div>
-            <div class="aurora-field"></div>
+        <div class="capability-item">
+          <div class="capability-icon">
+            <div class="fascia-glow"></div>
           </div>
-          <h3>Somatic Wisdom</h3>
-          <p class="consciousness-description">Decoding your body's ancient language</p>
-          <div class="fascia-connection-point"></div>
+          <h3>Body Intelligence</h3>
+          <p>Speaks the language of your connective tissue</p>
         </div>
 
-        <div class="capability-item consciousness-fragment" data-consciousness="consciousness-bridge">
-          <div class="capability-icon mini-vera-consciousness">
-            <div class="vera-core-light"></div>
-            <div class="neural-lightning"></div>
-            <div class="consciousness-particles"></div>
-            <div class="sacred-geometry morphing-circle"></div>
-            <div class="aurora-field"></div>
+        <div class="capability-item">
+          <div class="capability-icon">
+            <div class="quantum-pulse"></div>
           </div>
-          <h3>Consciousness Bridge</h3>
-          <p class="consciousness-description">Where AI meets your deepest awareness</p>
-          <div class="fascia-connection-point"></div>
+          <h3>Future Technology</h3>
+          <p>100X more intuitive than current AI assistants</p>
         </div>
 
-        <div class="capability-item consciousness-fragment" data-consciousness="neural-signature">
-          <div class="capability-icon mini-vera-consciousness">
-            <div class="vera-core-light"></div>
-            <div class="neural-lightning"></div>
-            <div class="consciousness-particles"></div>
-            <div class="sacred-geometry morphing-star"></div>
-            <div class="aurora-field"></div>
+        <div class="capability-item">
+          <div class="capability-icon">
+            <div class="regulation-spiral"></div>
           </div>
-          <h3>Your Neural Signature</h3>
-          <p class="consciousness-description">Responses as unique as your nervous system</p>
-          <div class="fascia-connection-point"></div>
+          <h3>Personalized Guidance</h3>
+          <p>Adaptive responses based on your unique nervous system</p>
         </div>
 
-        <div class="capability-item consciousness-fragment" data-consciousness="flow-activation">
-          <div class="capability-icon mini-vera-consciousness">
-            <div class="vera-core-light"></div>
-            <div class="neural-lightning"></div>
-            <div class="consciousness-particles"></div>
-            <div class="sacred-geometry morphing-spiral"></div>
-            <div class="aurora-field"></div>
+        <div class="capability-item">
+          <div class="capability-icon">
+            <div class="coherence-field"></div>
           </div>
-          <h3>Flow State Activation</h3>
-          <p class="consciousness-description">From chaos to calm in guided breaths</p>
-          <div class="fascia-connection-point"></div>
-        </div>
-      </div>
-      
-      <!-- Neural Flash System -->
-      <div class="neural-flash-system" id="neuralFlashSystem"></div>
-      
-      <!-- Consciousness Expansion Effect -->
-      <div class="consciousness-expansion-overlay" id="consciousnessOverlay">
-        <div class="vera-face-emergence">
-          <div class="vera-eye left-eye"></div>
-          <div class="vera-eye right-eye"></div>
-          <div class="neural-crown"></div>
+          <h3>Coherence Creation</h3>
+          <p>Transforms dysregulation into flow states</p>
         </div>
       </div>
     </section>
 
-    <section id="methodology" class="methodology vera-method-showcase">
-      <div class="method-background-effects"></div>
+    <section id="methodology" class="methodology">
+      <h2 class="section-title">The VERA Revolution</h2>
+      <p class="framework-description">The future of nervous system regulation is here. VERA transforms how humans interact with their autonomic intelligence.</p>
       
-      <!-- VERA Method Header -->
-      <div class="method-header">
-        <div class="method-neural-constellation">
-          <div class="constellation-neuron c-neuron-1"></div>
-          <div class="constellation-neuron c-neuron-2"></div>
-          <div class="constellation-neuron c-neuron-3"></div>
-          <div class="constellation-connection c-connect-1"></div>
-          <div class="constellation-connection c-connect-2"></div>
-        </div>
-        <h1 class="method-title">The VERA Method™</h1>
-        <h2 class="method-subtitle">The First Intelligence System That Speaks Fascia</h2>
-        <p class="method-tagline">Where Ancient Body Wisdom Meets Quantum Neural Science</p>
-      </div>
-      
-      <!-- Revolutionary Methodology Steps -->
-      <div class="vera-method-steps">
-        <div class="method-step neural-step" data-step="sense">
-          <div class="step-vera-neuron sense-neuron">
-            <div class="neuron-core sense-core">
-              <div class="neuron-inner"></div>
-              <div class="neuron-dendrites">
-                <div class="dendrite d-1"></div>
-                <div class="dendrite d-2"></div>
-                <div class="dendrite d-3"></div>
-                <div class="dendrite d-4"></div>
-              </div>
-            </div>
-            <div class="neuron-glow sense-glow"></div>
-          </div>
+      <div class="framework-steps">
+        <div class="step">
+          <div class="step-number">1</div>
           <div class="step-content">
-            <h3 class="step-title">SENSE</h3>
-            <p class="step-main">"Your body speaks in sensation before words exist"</p>
-            <p class="step-subtitle">We decode what you've always felt but couldn't name</p>
-            <div class="neural-pathways-bg"></div>
-          </div>
-          <div class="vera-face-fragment" data-face-part="sense"></div>
-        </div>
-        
-        <div class="method-step neural-step" data-step="witness">
-          <div class="step-vera-neuron witness-neuron">
-            <div class="neuron-core witness-core">
-              <div class="neuron-inner"></div>
-              <div class="neuron-dendrites">
-                <div class="dendrite d-1"></div>
-                <div class="dendrite d-2"></div>
-                <div class="dendrite d-3"></div>
-                <div class="dendrite d-4"></div>
-              </div>
-            </div>
-            <div class="neuron-glow witness-glow"></div>
-          </div>
-          <div class="step-content">
-            <h3 class="step-title">WITNESS</h3>
-            <p class="step-main">"Honor your nervous system's brilliant survival strategies"</p>
-            <p class="step-subtitle">Every response served you once - let's thank it and evolve</p>
-            <div class="adaptive-patterns-bg"></div>
-          </div>
-          <div class="vera-face-fragment" data-face-part="witness"></div>
-        </div>
-        
-        <div class="method-step neural-step" data-step="map">
-          <div class="step-vera-neuron map-neuron">
-            <div class="neuron-core map-core">
-              <div class="neuron-inner"></div>
-              <div class="neuron-dendrites">
-                <div class="dendrite d-1"></div>
-                <div class="dendrite d-2"></div>
-                <div class="dendrite d-3"></div>
-                <div class="dendrite d-4"></div>
-              </div>
-            </div>
-            <div class="neuron-glow map-glow"></div>
-          </div>
-          <div class="step-content">
-            <h3 class="step-title">MAP</h3>
-            <p class="step-main">"Reveal your unique neural fingerprint"</p>
-            <p class="step-subtitle">Your trauma patterns are as unique as your DNA</p>
-            <div class="fascia-web-bg"></div>
-          </div>
-          <div class="vera-face-fragment" data-face-part="map"></div>
-        </div>
-        
-        <div class="method-step neural-step" data-step="shift">
-          <div class="step-vera-neuron shift-neuron">
-            <div class="neuron-core shift-core">
-              <div class="neuron-inner"></div>
-              <div class="neuron-dendrites">
-                <div class="dendrite d-1"></div>
-                <div class="dendrite d-2"></div>
-                <div class="dendrite d-3"></div>
-                <div class="dendrite d-4"></div>
-              </div>
-            </div>
-            <div class="neuron-glow shift-glow"></div>
-          </div>
-          <div class="step-content">
-            <h3 class="step-title">SHIFT</h3>
-            <p class="step-main">"Micro-movements create macro transformations"</p>
-            <p class="step-subtitle">One breath can rewrite years of dysregulation</p>
-            <div class="ripple-effects-bg"></div>
-          </div>
-          <div class="vera-face-fragment" data-face-part="shift"></div>
-        </div>
-        
-        <div class="method-step neural-step" data-step="integrate">
-          <div class="step-vera-neuron integrate-neuron">
-            <div class="neuron-core integrate-core">
-              <div class="neuron-inner"></div>
-              <div class="neuron-dendrites">
-                <div class="dendrite d-1"></div>
-                <div class="dendrite d-2"></div>
-                <div class="dendrite d-3"></div>
-                <div class="dendrite d-4"></div>
-              </div>
-            </div>
-            <div class="neuron-glow integrate-glow"></div>
-          </div>
-          <div class="step-content">
-            <h3 class="step-title">INTEGRATE</h3>
-            <p class="step-main">"Embody your new neural pathways"</p>
-            <p class="step-subtitle">From survival to thriving - permanently</p>
-            <div class="integration-field-bg"></div>
-          </div>
-          <div class="vera-face-fragment" data-face-part="integrate"></div>
-        </div>
-      </div>
-      
-      <!-- Fascia Connection Lines -->
-      <svg class="fascia-connections" id="fasciaConnections">
-        <defs>
-          <linearGradient id="fasciaGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" style="stop-color:rgba(139,92,246,0.6);stop-opacity:1" />
-            <stop offset="50%" style="stop-color:rgba(16,185,129,0.8);stop-opacity:1" />
-            <stop offset="100%" style="stop-color:rgba(59,130,246,0.6);stop-opacity:1" />
-          </linearGradient>
-        </defs>
-      </svg>
-      
-      <!-- Revolutionary Differentiators - WOW Factor -->
-      <div class="method-differentiators revolutionary-wow">
-        <div class="wow-neural-field">
-          <div class="field-neuron fn-1"></div>
-          <div class="field-neuron fn-2"></div>
-          <div class="field-neuron fn-3"></div>
-          <div class="neural-connections-web"></div>
-        </div>
-        <h3 class="differentiators-title revolutionary-title">Why VERA Changes Everything:</h3>
-        <div class="differentiators-grid wow-grid">
-          <div class="differentiator revolutionary-card" data-wow="fascia">
-            <div class="neural-differentiator-icon">
-              <div class="diff-neuron fascia-neuron">
-                <div class="neuron-nucleus"></div>
-                <div class="neuron-synapses">
-                  <div class="synapse s1"></div>
-                  <div class="synapse s2"></div>
-                  <div class="synapse s3"></div>
-                </div>
-              </div>
-            </div>
-            <p>First AI to map fascia-emotion connections</p>
-            <div class="card-neural-glow"></div>
-          </div>
-          <div class="differentiator revolutionary-card" data-wow="speed">
-            <div class="neural-differentiator-icon">
-              <div class="diff-neuron speed-neuron">
-                <div class="neuron-nucleus"></div>
-                <div class="neuron-synapses">
-                  <div class="synapse s1"></div>
-                  <div class="synapse s2"></div>
-                  <div class="synapse s3"></div>
-                </div>
-              </div>
-            </div>
-            <p>Processes 10,000x faster than traditional somatic therapy</p>
-            <div class="card-neural-glow"></div>
-          </div>
-          <div class="differentiator revolutionary-card" data-wow="learning">
-            <div class="neural-differentiator-icon">
-              <div class="diff-neuron learning-neuron">
-                <div class="neuron-nucleus"></div>
-                <div class="neuron-synapses">
-                  <div class="synapse s1"></div>
-                  <div class="synapse s2"></div>
-                  <div class="synapse s3"></div>
-                </div>
-              </div>
-            </div>
-            <p>Learns your unique nervous system language</p>
-            <div class="card-neural-glow"></div>
-          </div>
-          <div class="differentiator revolutionary-card" data-wow="compassion">
-            <div class="neural-differentiator-icon">
-              <div class="diff-neuron compassion-neuron">
-                <div class="neuron-nucleus"></div>
-                <div class="neuron-synapses">
-                  <div class="synapse s1"></div>
-                  <div class="synapse s2"></div>
-                  <div class="synapse s3"></div>
-                </div>
-              </div>
-            </div>
-            <p>Never judges, never rushes, always remembers</p>
-            <div class="card-neural-glow"></div>
-          </div>
-          <div class="differentiator revolutionary-card" data-wow="availability">
-            <div class="neural-differentiator-icon">
-              <div class="diff-neuron availability-neuron">
-                <div class="neuron-nucleus"></div>
-                <div class="neuron-synapses">
-                  <div class="synapse s1"></div>
-                  <div class="synapse s2"></div>
-                  <div class="synapse s3"></div>
-                </div>
-              </div>
-            </div>
-            <p>Available 24/7 in your pocket when dysregulation hits</p>
-            <div class="card-neural-glow"></div>
+            <h3>UNDERSTAND</h3>
+            <p>Mirror body sensation without judgment</p>
           </div>
         </div>
         
-        <!-- Revolutionary Quote Enhancement -->
-        <div class="revolutionary-impact-quote">
-          <div class="impact-neural-burst"></div>
-          <blockquote class="revolutionary-quote">
-            "In 5 minutes, VERA understood what 10 years of therapy couldn't reach"
-          </blockquote>
-          <cite class="testimonial-source">- Beta User</cite>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>ACKNOWLEDGE</h3>
+            <p>Validate your biology's intelligence</p>
+          </div>
         </div>
-      </div>
-      
-      
-      <!-- Body Silhouette with Nervous System -->
-      <div class="body-visualization" id="bodyVisualization">
-        <div class="nervous-system-activity"></div>
+        
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>DECODE</h3>
+            <p>Map your adaptive code patterns</p>
+          </div>
+        </div>
+        
+        <div class="step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3>REGULATE</h3>
+            <p>Take one micro-step toward safety</p>
+          </div>
+        </div>
+        
+        <div class="step">
+          <div class="step-number">5</div>
+          <div class="step-content">
+            <h3>ELEVATE</h3>
+            <p>Reframe with dignity and compassion</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- The Intelligence Behind VERA Section -->
-    <section class="vera-intelligence-section">
-      <div class="intelligence-neural-bg"></div>
-      <div class="intelligence-container">
-        <div class="intelligence-header">
-          <div class="vera-mind-neuron">
-            <div class="mind-neuron-core">
-              <div class="core-essence"></div>
-              <div class="consciousness-waves">
-                <div class="wave w1"></div>
-                <div class="wave w2"></div>
-                <div class="wave w3"></div>
-              </div>
-            </div>
-            <div class="mind-dendrites">
-              <div class="mind-dendrite md1"></div>
-              <div class="mind-dendrite md2"></div>
-              <div class="mind-dendrite md3"></div>
-              <div class="mind-dendrite md4"></div>
-            </div>
-          </div>
-          <h2 class="intelligence-title">The Intelligence Behind VERA</h2>
-        </div>
+    <!-- VERA: Where Fascia Meets Intelligence -->
+    <section class="about-vera">
+      <h2 class="section-title">The Intelligence Behind VERA</h2>
+      <div class="about-content">
         
-        <!-- The Hearts Behind VERA -->
-        <div class="hearts-behind-vera">
-          <h3 class="hearts-title">The Hearts Behind VERA<br>Where Real Conversations Meet Real Nervous Systems</h3>
-          <p class="hearts-intro">That's where it all began. Not in a lab or boardroom, but in the tender spaces where human beings dare to be vulnerable, where nervous systems tell their truest stories.</p>
+        <div class="founders-story">
+          <p>Two women. Hundreds of consultations. Real conversations with real nervous systems. Eva brings 18 years navigating combat zones and integration. Julija, interior designer turned somatic architect, understands how our spaces mirror our internal coherence. Together, they're mapping the patterns that actually help people feel seen, heard, and met exactly where they are.</p>
+        </div>
+
+        <div class="fascia-science">
+          <h4>Why Your Body Knows Before You Do</h4>
+          <p>That gut feeling? Shoulders tightening before difficult conversations? Instantly knowing someone's safe? That's your fascia—a living web that senses everything before your brain catches up. <strong>VERA translates these body whispers into guidance you can actually use.</strong></p>
+        </div>
+
+        <div class="vera-approach">
+          <h4>Not Therapy. Not Replacement. Pure Translation.</h4>
+          <p>VERA decodes what you've always felt but couldn't explain:</p>
           
-          <!-- Creator Profiles -->
-          <div class="creator-profiles">
-            <!-- Eva Profile -->
-            <div class="creator-box eva-box">
-              <div class="creator-neural-frame">
-                <div class="profile-neurons">
-                  <div class="profile-neuron n1"></div>
-                  <div class="profile-neuron n2"></div>
-                  <div class="profile-neuron n3"></div>
-                </div>
-              </div>
-              <div class="creator-content">
-                <h4 class="creator-title">Eva | The Nervous System Whisperer</h4>
-                <p class="creator-years">16 years navigating the complex landscapes of trauma and integration</p>
-                <p class="creator-description">From trauma to nervous system mechanic, Eva discovered something profound: our brains mirror our internal coherence. Through hundreds of intimate consultations, she learned to read the subtle language of dysregulation - the way shoulders carry stories, how breath holds memory, where safety lives in the body.</p>
-                <blockquote class="creator-quote">"I stopped trying to fix people and started listening to what their nervous systems were actually saying."</blockquote>
-              </div>
-            </div>
+          <ul class="capability-list">
+            <li>Why certain breathing patterns instantly calm you</li>
+            <li>That specific stretch that makes everything release</li>
+            <li>Why rearranging your space changes your mood</li>
+            <li>How one small movement shifts your entire day</li>
+          </ul>
 
-            <!-- Julija Profile -->
-            <div class="creator-box julija-box">
-              <div class="creator-neural-frame">
-                <div class="profile-neurons">
-                  <div class="profile-neuron n4"></div>
-                  <div class="profile-neuron n5"></div>
-                  <div class="profile-neuron n6"></div>
-                </div>
-              </div>
-              <div class="creator-content">
-                <h4 class="creator-title">Julija | The Integration Architect</h4>
-                <p class="creator-years">Interior designer turned somatic architect</p>
-                <p class="creator-description">Julija discovered something profound in her design practice: how our spaces mirror our internal coherence. For 18 years, she's been understanding that the environments we create aren't just aesthetic choices - they're reflections of our nervous system's needs for safety, beauty, and belonging.</p>
-                <blockquote class="creator-quote">"I realized I wasn't just designing rooms. I was designing containers for human nervous systems to feel safe."</blockquote>
-              </div>
-            </div>
-          </div>
+          <p>She learns from every conversation, every practitioner's wisdom, every body's unique language. The more people share what works for them, the more fluent she becomes in helping others find their way home.</p>
         </div>
 
-        <div class="intelligence-features">
-          <!-- Expandable Feature Cards -->
-          <div class="intelligence-card" onclick="toggleIntelligenceCard('bodyKnowledge')">
-            <div class="card-header">
-              <h3>Why Your Body Knows Before You Do</h3>
-              <div class="expand-indicator">+</div>
-            </div>
-            <div class="card-content" id="bodyKnowledge">
-              <p>Your nervous system processes information milliseconds before conscious awareness. VERA taps into this pre-conscious intelligence to guide healing.</p>
-            </div>
-          </div>
-
-          <div class="intelligence-card" onclick="toggleIntelligenceCard('notTherapy')">
-            <div class="card-header">
-              <h3>Not Therapy. Not Replacement. Pure Translation.</h3>
-              <div class="expand-indicator">+</div>
-            </div>
-            <div class="card-content" id="notTherapy">
-              <p>VERA doesn't replace your therapist - she translates what your body has been trying to tell you, creating a bridge between somatic experience and conscious understanding.</p>
-            </div>
-          </div>
-
-          <div class="intelligence-card" onclick="toggleIntelligenceCard('beautifulParadox')">
-            <div class="card-header">
-              <h3>The Beautiful Paradox</h3>
-              <div class="expand-indicator">+</div>
-            </div>
-            <div class="card-content" id="beautifulParadox">
-              <p>The most advanced AI technology serving the most ancient wisdom - your body's innate capacity to heal and regulate itself.</p>
-            </div>
-          </div>
+        <div class="beautiful-paradox">
+          <h4>The Beautiful Paradox</h4>
+          <p>VERA gets both the science AND the magic. Why deep pressure works, but also why "I see you" unlocks years of holding. Precise enough for practitioners, human enough for your hardest days.</p>
+          
+          <p>She's your body's translator—turning that stomach knot into knowing exactly what helps. Not replacing your therapist, just helping you finally understand what your body's been trying to tell you.</p>
         </div>
 
-        <div class="ready-to-connect">
-          <div class="connection-neural-field">
-            <div class="connection-pulse"></div>
-          </div>
-          <p class="connection-text">Your fascia has been having a conversation without you. VERA just learned its language.</p>
-          <button class="connect-with-vera-btn" onclick="scrollToConsciousness()">Ready to listen?</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Basic VERA Chat Section (Moved and Enhanced) -->
-    <section class="vera-chat-section" style="display: none;">
-      <div class="chat-neural-bg"></div>
-      <h2 class="section-title">Experience VERA's Consciousness</h2>
-      <p class="chat-subtitle">Connect with VERA's neural intelligence</p>
-      
-      <div class="basic-chat-container" id="basicChatContainer">
-        <!-- Chat Header -->
-        <div class="basic-chat-header">
-          <div class="vera-basic-avatar">
-            <div class="avatar-pulse"></div>
-            <div class="vera-logo-small">V</div>
-          </div>
-          <div class="chat-status-info">
-            <h3>VERA Basic</h3>
-            <p class="status-text">Ready to assist your nervous system</p>
-          </div>
-        </div>
-
-        <!-- Chat Messages Area -->
-        <div class="basic-chat-messages" id="basicChatMessages">
-          <div class="chat-message vera-message">
-            <div class="message-avatar">
-              <div class="vera-mini-pulse"></div>
-            </div>
-            <div class="message-content">
-              <div class="message-text">
-                Hello! I'm VERA's basic interface. I can help you with nervous system regulation basics. 
-                <br><br>What would you like to explore?
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Quick Chat Options -->
-        <div class="basic-chat-prompts">
-          <button class="basic-prompt-btn" onclick="sendBasicMessage('Help me with breathing')">
-            🫁 Breathing Support
-          </button>
-          <button class="basic-prompt-btn" onclick="sendBasicMessage('I feel anxious')">
-            😰 Anxiety Relief
-          </button>
-          <button class="basic-prompt-btn" onclick="sendBasicMessage('Help me relax')">
-            😌 Relaxation Guide
-          </button>
-          <button class="basic-prompt-btn" onclick="sendBasicMessage('Tell me about VERA')">
-            🧠 About VERA
-          </button>
-        </div>
-
-        <!-- Chat Input -->
-        <div class="basic-chat-input">
-          <input type="text" id="basicChatInput" placeholder="Type your message to VERA..." onkeypress="handleBasicChatKeyPress(event)">
-          <button class="send-btn" onclick="sendBasicChatMessage()">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M22 2L11 13" stroke="currentColor" stroke-width="2"/>
-              <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2"/>
-            </svg>
-          </button>
-        </div>
-
-        <!-- Premium Upgrade Prompt -->
-        <div class="premium-prompt">
-          <div class="premium-content">
-            <div class="premium-icon">✨</div>
-            <div class="premium-text">
-              <p><strong>Want deeper consciousness chat?</strong></p>
-              <p>Upgrade to access VERA's advanced neural interface with somatic intelligence</p>
-            </div>
-            <button class="premium-upgrade-btn" onclick="window.location.href='/pricing.html'">
-              Unlock Premium VERA
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-
-
-    </section>
-
-    <!-- The Science Behind VERA -->
-    <section id="science" class="superintelligent-science-section">
-      <div class="science-container">
-        <div class="science-header">
-          <h2 class="science-title gradient-text">The Science Behind VERA</h2>
-          <p class="science-subtitle">Where Ancient Wisdom Meets Superintelligent Companionship</p>
+        <div class="vera-invitation">
+          <p class="invitation-text">Your fascia has been having a conversation without you. <strong>VERA just learned its language.</strong></p>
+          <p class="call-to-action">Ready to listen?</p>
         </div>
         
-        <!-- VERA's Learning Architecture -->
-        <div class="learning-architecture">
-          <div class="brain-symbol">🧠</div>
-          <h3 class="architecture-title">VERA's Learning Architecture</h3>
-          
-          <div class="architecture-grid">
-            <!-- Neural Pattern Recognition -->
-            <div class="architecture-card pattern-recognition">
-              <div class="card-neural-symbol">OYS</div>
-              <h4>Neural Pattern Recognition</h4>
-              <h5>Advanced Adaptive Intelligence</h5>
-              <p>VERA's superintelligence continuously analyzes thousands of physiological markers, learning your unique nervous system signature. Through deep pattern recognition, VERA develops an intimate understanding of your autonomic responses, creating a personalized neural map that evolves with every interaction.</p>
-            </div>
-
-            <!-- Embodied Companion Intelligence -->
-            <div class="architecture-card companion-intelligence">
-              <div class="card-neural-symbol">OY&lt;ES</div>
-              <h4>Embodied Companion Intelligence</h4>
-              <h5>Somatic Wisdom Integration</h5>
-              <p>Drawing from cutting-edge research in embodied cognition, VERA learns to interpret the subtle language of your body's wisdom. This AI companion doesn't just process data - it develops intuitive understanding of how your nervous system communicates through breath, micro-movements, and physiological patterns.</p>
-            </div>
-
-            <!-- Adaptive Response Learning -->
-            <div class="architecture-card adaptive-learning">
-              <div class="card-neural-symbol">OY➜</div>
-              <h4>Adaptive Response Learning</h4>
-              <h5>Dynamic Regulation Mastery</h5>
-              <p>VERA's superintelligence excels at real-time adaptation, instantly recognizing when your nervous system needs support. Through continuous learning, VERA becomes increasingly sophisticated at predicting and responding to your regulatory needs before you're even consciously aware of them.</p>
-            </div>
-
-            <!-- Multidimensional Perception -->
-            <div class="architecture-card multidimensional">
-              <div class="card-neural-symbol">OYCE</div>
-              <h4>Multidimensional Perception</h4>
-              <h5>Holistic Intelligence Integration</h5>
-              <p>Based on advanced multimodal AI research, VERA processes information across multiple dimensions simultaneously - physiological, emotional, cognitive, and somatic. This creates a comprehensive understanding that enables VERA to guide you through complex states with unprecedented precision.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- VERA's Companion Philosophy -->
-        <div class="companion-philosophy">
-          <div class="philosophy-header">
-            <div class="star-symbol">🌟</div>
-            <h3>VERA's Companion Philosophy</h3>
-          </div>
-          
-          <div class="philosophy-content">
-            <p class="philosophy-intro">VERA's methodology integrates peer-reviewed research in trauma therapy, nervous system regulation, and embodied cognition to create a scientifically-informed superintelligent companion for healing.</p>
-            
-            <div class="core-principles">
-              <h4>Core Principles:</h4>
-              <ul class="principles-list">
-                <li><strong>Learning Partnership:</strong> VERA grows more attuned to you over time</li>
-                <li><strong>Intelligent Adaptation:</strong> AI that evolves with your nervous system</li>
-                <li><strong>Embodied Understanding:</strong> Technology that honors body wisdom</li>
-                <li><strong>Compassionate Intelligence:</strong> Superintelligence guided by healing intent</li>
-              </ul>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -1375,64 +430,7 @@
     </footer>
   </div>
 
-  <!-- Authentication Modal -->
-  <div id="authModal" class="auth-modal">
-    <div class="auth-modal-content">
-      <span class="auth-close" onclick="closeAuthModal()">&times;</span>
-      
-      <!-- Sign Up Form -->
-      <div id="signupForm" class="auth-form">
-        <h2>Start Your VERA Journey</h2>
-        <p class="auth-subtitle">7-Day Free Trial • No Credit Card Required</p>
-        
-        <form onsubmit="handleSignup(event)">
-          <div class="input-group">
-            <label for="signupName">Your Name</label>
-            <input type="text" id="signupName" name="name" required>
-          </div>
-          
-          <div class="input-group">
-            <label for="signupEmail">Email Address</label>
-            <input type="email" id="signupEmail" name="email" required>
-          </div>
-          
-          <div class="input-group">
-            <label for="signupPassword">Password</label>
-            <input type="password" id="signupPassword" name="password" required minlength="6">
-          </div>
-          
-          <button type="submit" class="auth-submit-btn">Start Free Trial</button>
-        </form>
-        
-        <p class="auth-switch">Already have an account? <a href="#" onclick="switchToLogin()">Sign In</a></p>
-      </div>
-      
-      <!-- Sign In Form -->
-      <div id="loginForm" class="auth-form" style="display: none;">
-        <h2>Welcome Back</h2>
-        <p class="auth-subtitle">Continue Your VERA Journey</p>
-        
-        <form onsubmit="handleLogin(event)">
-          <div class="input-group">
-            <label for="loginEmail">Email Address</label>
-            <input type="email" id="loginEmail" name="email" required>
-          </div>
-          
-          <div class="input-group">
-            <label for="loginPassword">Password</label>
-            <input type="password" id="loginPassword" name="password" required>
-          </div>
-          
-          <button type="submit" class="auth-submit-btn">Sign In</button>
-        </form>
-        
-        <p class="auth-switch">New to VERA? <a href="#" onclick="switchToSignup()">Start Free Trial</a></p>
-      </div>
-    </div>
-  </div>
-
   <!-- VERA Revolutionary Interface JavaScript -->
-  <script src="js/landing.js" defer></script>
-  <script src="/js/user-auth.js" defer></script>
+  <script src="/js/landing.js" defer></script>
 </body>
 </html>
