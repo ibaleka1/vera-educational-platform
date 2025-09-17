@@ -401,19 +401,24 @@ class VERAExplorerApp {
     }
 
     loadChatSection(contentArea) {
-        if (contentArea.children.length === 0 || contentArea.querySelector('.section-loading')) {
+        // Initialize enhanced chat system
+        if (window.VERAEnhancedChat) {
+            window.VERAEnhancedChat.initialize();
+        } else {
+            // Fallback loading message
             contentArea.innerHTML = `
-                <div class="vera-chat-interface">
-                    <div class="chat-header">
-                        <h2>Chat with VERA</h2>
-                        <p class="chat-subtitle">Your nervous system regulation companion</p>
-                    </div>
-                    <div class="section-loading">
-                        <div class="loading-neural"></div>
-                        <p>Coming soon: Enhanced VERA chat interface</p>
-                    </div>
+                <div class="section-loading">
+                    <div class="loading-neural"></div>
+                    <p>Loading enhanced chat system...</p>
                 </div>
             `;
+            
+            // Retry initialization after a delay
+            setTimeout(() => {
+                if (window.VERAEnhancedChat) {
+                    window.VERAEnhancedChat.initialize();
+                }
+            }, 1000);
         }
     }
 
