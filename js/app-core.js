@@ -312,20 +312,76 @@ class VERAExplorerApp {
     }
 
     loadGroundingSection(contentArea) {
-        if (contentArea.children.length === 0 || contentArea.querySelector('.section-loading')) {
+        // Initialize grounding library if not already loaded
+        if (!window.groundingLibrary) {
             contentArea.innerHTML = `
-                <div class="grounding-techniques">
-                    <div class="techniques-header">
-                        <h2>Grounding Techniques</h2>
-                        <p class="techniques-subtitle">Ground yourself in the present moment</p>
-                    </div>
-                    <div class="section-loading">
-                        <div class="loading-neural"></div>
-                        <p>Coming soon: Interactive grounding techniques</p>
-                    </div>
+                <div class="section-loading">
+                    <div class="loading-neural"></div>
+                    <p>Loading grounding techniques...</p>
                 </div>
             `;
+            return;
         }
+
+        const techniques = window.groundingLibrary.getTechniquesList();
+        contentArea.innerHTML = `
+            <div class="grounding-techniques">
+                <div class="section-header">
+                    <div class="neural-icon" data-icon-type="grounding"></div>
+                    <h2>Grounding Techniques</h2>
+                    <p>Evidence-based practices for nervous system regulation and present-moment awareness</p>
+                </div>
+                
+                <div class="techniques-grid">
+                    ${techniques.map(technique => {
+                        const hasAccess = window.groundingLibrary.hasAccess(technique.id);
+                        const isCompleted = window.groundingLibrary.completedTechniques.includes(technique.id);
+                        
+                        return `
+                            <div class="technique-card grounding-technique ${!hasAccess ? 'tier-locked' : ''} ${isCompleted ? 'completed' : ''}" 
+                                 data-tier-feature="grounding" 
+                                 onclick="${hasAccess ? `window.groundingLibrary.startTechnique('${technique.id}')` : ''}">
+                                ${isCompleted ? '<div class="completion-badge">✓</div>' : ''}
+                                ${!hasAccess ? '<div class="tier-lock">⭐</div>' : ''}
+                                
+                                <div class="technique-header">
+                                    <h3>${technique.name}</h3>
+                                    <div class="neural-state-indicator ${technique.neuralState}"></div>
+                                </div>
+                                
+                                <p class="technique-description">${technique.description}</p>
+                                
+                                <div class="technique-meta">
+                                    <span class="duration">${technique.duration}</span>
+                                    <span class="difficulty ${technique.difficulty.toLowerCase()}">${technique.difficulty}</span>
+                                    <span class="tier-required">${technique.tierRequired.toUpperCase()}</span>
+                                </div>
+                                
+                                <div class="technique-benefits">
+                                    ${technique.benefits.slice(0, 2).map(benefit => `<span class="benefit-tag">${benefit}</span>`).join('')}
+                                </div>
+                                
+                                ${!hasAccess ? `
+                                    <div class="upgrade-overlay">
+                                        <p>Upgrade to ${technique.tierRequired.toUpperCase()} to unlock</p>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+                
+                <div class="grounding-progress">
+                    <h3>Your Progress</h3>
+                    <div class="progress-summary">
+                        <span>Completed: ${window.groundingLibrary.completedTechniques.length} of ${techniques.length}</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${(window.groundingLibrary.completedTechniques.length / techniques.length) * 100}%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
     }
 
     loadJournalSection(contentArea) {
