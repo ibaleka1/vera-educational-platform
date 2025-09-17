@@ -908,3 +908,488 @@ document.addEventListener('DOMContentLoaded', function() {
         return descriptions[featureType] || 'Upgrade to unlock premium nervous system regulation features.';
     }
 }
+
+// VERACore Navigation System
+class VERACore {
+    constructor() {
+        this.currentSection = 'dashboard';
+        this.sections = new Map();
+        this.initialized = false;
+    }
+
+    init() {
+        if (this.initialized) return;
+        
+        console.log('🚀 VERACore Navigation System Initialized');
+        
+        // Register all sections
+        this.registerSection('dashboard', () => this.loadDashboard());
+        this.registerSection('breathing', () => this.loadBreathing());
+        this.registerSection('grounding', () => this.loadGrounding());
+        this.registerSection('journal', () => this.loadJournal());
+        this.registerSection('chat', () => this.loadChat());
+        this.registerSection('progress', () => this.loadProgress());
+        this.registerSection('settings', () => this.loadSettings());
+        
+        // Initialize with dashboard
+        this.showSection('dashboard');
+        this.initialized = true;
+    }
+
+    registerSection(name, loadFunction) {
+        this.sections.set(name, loadFunction);
+        console.log(`📋 Registered section: ${name}`);
+    }
+
+    showSection(sectionName) {
+        console.log(`🔄 Switching to section: ${sectionName}`);
+        
+        // Hide all sections
+        this.hideAllSections();
+        
+        // Update navigation
+        this.updateNavigation(sectionName);
+        
+        // Load and show the requested section
+        if (this.sections.has(sectionName)) {
+            this.currentSection = sectionName;
+            this.sections.get(sectionName)();
+        } else {
+            console.warn(`⚠️ Section not found: ${sectionName}`);
+            this.loadDashboard(); // Fallback to dashboard
+        }
+    }
+
+    hideAllSections() {
+        // Hide all content sections
+        const sections = [
+            'dashboard-section',
+            'breathing-section', 
+            'grounding-section',
+            'journal-section',
+            'chat-section',
+            'progress-section',
+            'settings-section'
+        ];
+        
+        sections.forEach(sectionId => {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.style.display = 'none';
+            }
+        });
+
+        // Also hide any existing content containers
+        const mainContent = document.querySelector('.main-content');
+        if (mainContent) {
+            // Clear dynamic content while preserving structure
+            const dynamicContainers = mainContent.querySelectorAll('.section-content');
+            dynamicContainers.forEach(container => {
+                container.style.display = 'none';
+            });
+        }
+    }
+
+    updateNavigation(activeSectionName) {
+        // Update sidebar navigation
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            item.classList.remove('active');
+            const section = item.getAttribute('data-section');
+            if (section === activeSectionName) {
+                item.classList.add('active');
+            }
+        });
+    }
+
+    loadDashboard() {
+        console.log('📊 Loading Dashboard');
+        this.showSectionContainer('dashboard-section');
+        
+        // Initialize dashboard if it exists
+        if (window.personalizedDashboard) {
+            window.personalizedDashboard.init();
+        }
+    }
+
+    loadBreathing() {
+        console.log('🫁 Loading Breathing Exercises');
+        const section = this.showSectionContainer('breathing-section');
+        
+        // Initialize breathing exercises if it exists
+        if (window.breathingExercises) {
+            window.breathingExercises.init();
+        } else if (window.BreathingExercises) {
+            // Try the class version
+            new window.BreathingExercises();
+        } else {
+            // Create basic breathing interface
+            section.innerHTML = `
+                <div class="breathing-container">
+                    <div class="content-header">
+                        <h2>🫁 Breathing Exercises</h2>
+                        <p>Regulate your nervous system with guided breathing techniques</p>
+                    </div>
+                    
+                    <div class="technique-grid">
+                        <div class="technique-card" data-technique="box">
+                            <div class="technique-icon">📦</div>
+                            <h3>Box Breathing</h3>
+                            <p>4-4-4-4 pattern for balance</p>
+                            <button class="start-technique-btn" onclick="startBreathingTechnique('box')">Start</button>
+                        </div>
+                        
+                        <div class="technique-card" data-technique="physiological">
+                            <div class="technique-icon">💨</div>
+                            <h3>Physiological Sigh</h3>
+                            <p>Double inhale + long exhale for calm</p>
+                            <button class="start-technique-btn" onclick="startBreathingTechnique('physiological')">Start</button>
+                        </div>
+                        
+                        <div class="technique-card" data-technique="coherent">
+                            <div class="technique-icon">🌊</div>
+                            <h3>Coherent Breathing</h3>
+                            <p>5-5 pattern for coherence</p>
+                            <button class="start-technique-btn" onclick="startBreathingTechnique('coherent')">Start</button>
+                        </div>
+                        
+                        <div class="technique-card" data-technique="voo">
+                            <div class="technique-icon">🗣️</div>
+                            <h3>Voo Breathing</h3>
+                            <p>Vagal tone activation</p>
+                            <button class="start-technique-btn" onclick="startBreathingTechnique('voo')">Start</button>
+                        </div>
+                        
+                        <div class="technique-card" data-technique="478">
+                            <div class="technique-icon">😴</div>
+                            <h3>4-7-8 Breathing</h3>
+                            <p>For deep relaxation</p>
+                            <button class="start-technique-btn" onclick="startBreathingTechnique('478')">Start</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
+    loadGrounding() {
+        console.log('🌱 Loading Grounding Techniques');
+        const section = this.showSectionContainer('grounding-section');
+        
+        // Initialize grounding techniques if it exists
+        if (window.groundingTechniques) {
+            window.groundingTechniques.init();
+        } else if (window.GroundingTechniques) {
+            new window.GroundingTechniques();
+        } else {
+            // Create basic grounding interface
+            section.innerHTML = `
+                <div class="grounding-container">
+                    <div class="content-header">
+                        <h2>🌱 Grounding Techniques</h2>
+                        <p>Ground yourself in the present moment</p>
+                    </div>
+                    
+                    <div class="grounding-grid">
+                        <div class="grounding-card" data-technique="5-4-3-2-1">
+                            <div class="grounding-icon">👁️</div>
+                            <h3>5-4-3-2-1 Sensory</h3>
+                            <p>5 things you see, 4 you hear, 3 you touch, 2 you smell, 1 you taste</p>
+                            <button class="start-grounding-btn" onclick="startGroundingTechnique('sensory')">Start</button>
+                        </div>
+                        
+                        <div class="grounding-card" data-technique="progressive">
+                            <div class="grounding-icon">💪</div>
+                            <h3>Progressive Muscle</h3>
+                            <p>Tense and release muscle groups</p>
+                            <button class="start-grounding-btn" onclick="startGroundingTechnique('progressive')">Start</button>
+                        </div>
+                        
+                        <div class="grounding-card" data-technique="bilateral" data-tier="regulator">
+                            <div class="grounding-icon">🤲</div>
+                            <h3>Bilateral Stimulation</h3>
+                            <p>Cross-lateral movements for integration</p>
+                            <button class="start-grounding-btn" onclick="startGroundingTechnique('bilateral')">Upgrade Required</button>
+                        </div>
+                        
+                        <div class="grounding-card" data-technique="coherent-movement" data-tier="regulator">
+                            <div class="grounding-icon">🌊</div>
+                            <h3>Coherent Movement</h3>
+                            <p>Rhythmic movements for coherence</p>
+                            <button class="start-grounding-btn" onclick="startGroundingTechnique('movement')">Upgrade Required</button>
+                        </div>
+                        
+                        <div class="grounding-card" data-technique="cold" data-tier="integrator">
+                            <div class="grounding-icon">❄️</div>
+                            <h3>Cold Exposure</h3>
+                            <p>Controlled stress for resilience</p>
+                            <button class="start-grounding-btn" onclick="startGroundingTechnique('cold')">Integrator Plan</button>
+                        </div>
+                        
+                        <div class="grounding-card" data-technique="breathwork" data-tier="integrator">
+                            <div class="grounding-icon">🌬️</div>
+                            <h3>Breathwork Integration</h3>
+                            <p>Advanced breathing + movement</p>
+                            <button class="start-grounding-btn" onclick="startGroundingTechnique('breathwork')">Integrator Plan</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
+    loadJournal() {
+        console.log('📝 Loading Nervous System Journal');
+        const section = this.showSectionContainer('journal-section');
+        
+        // Initialize journal if it exists
+        if (window.nervousSystemJournal) {
+            window.nervousSystemJournal.init();
+        } else if (window.NervousSystemJournal) {
+            new window.NervousSystemJournal();
+        } else {
+            // Create basic journal interface
+            section.innerHTML = `
+                <div class="journal-container">
+                    <div class="content-header">
+                        <h2>📝 Nervous System Journal</h2>
+                        <p>Track your regulation patterns and insights</p>
+                    </div>
+                    
+                    <div class="journal-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon">📈</div>
+                            <div class="stat-info">
+                                <div class="stat-number">7</div>
+                                <div class="stat-label">Day Streak</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">🎯</div>
+                            <div class="stat-info">
+                                <div class="stat-number">4.2/5</div>
+                                <div class="stat-label">Avg Mood</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">⚡</div>
+                            <div class="stat-info">
+                                <div class="stat-number">12</div>
+                                <div class="stat-label">Total Entries</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="journal-entry">
+                        <h3>How is your nervous system today?</h3>
+                        <textarea class="journal-textarea" placeholder="Describe what you're feeling in your body..."></textarea>
+                        
+                        <div class="mood-scale">
+                            <div class="mood-option" data-mood="1">😰</div>
+                            <div class="mood-option" data-mood="2">😟</div>
+                            <div class="mood-option" data-mood="3">😐</div>
+                            <div class="mood-option" data-mood="4">😌</div>
+                            <div class="mood-option" data-mood="5">😊</div>
+                        </div>
+                        
+                        <button class="save-entry-btn">Save Entry</button>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
+    loadChat() {
+        console.log('💬 Loading Enhanced Chat');
+        const section = this.showSectionContainer('chat-section');
+        
+        // Initialize chat if it exists
+        if (window.enhancedChat) {
+            window.enhancedChat.init();
+        } else if (window.EnhancedChat) {
+            new window.EnhancedChat();
+        } else {
+            // Create basic chat interface
+            section.innerHTML = `
+                <div class="chat-container">
+                    <div class="content-header">
+                        <h2>💬 Chat with VERA</h2>
+                        <p>Your AI nervous system companion</p>
+                        <div class="chat-limits">7/10 chats this month</div>
+                    </div>
+                    
+                    <div class="messages-container">
+                        <div class="message vera-message">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <p>Hello! I'm VERA, your nervous system companion. How can I help you regulate today?</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-input-container">
+                        <textarea class="chat-input" placeholder="Share what you're feeling..."></textarea>
+                        <button class="send-btn">Send</button>
+                        <button class="voice-btn">🎤</button>
+                    </div>
+                    
+                    <div class="feature-buttons">
+                        <button class="feature-btn" onclick="addChatMessage('I need help with anxiety')">Help with Anxiety</button>
+                        <button class="feature-btn" onclick="addChatMessage('I feel overwhelmed')">Feeling Overwhelmed</button>
+                        <button class="feature-btn" onclick="addChatMessage('Breathing guidance')">Breathing Guidance</button>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
+    loadProgress() {
+        console.log('📈 Loading Progress Tracking');
+        this.showSectionContainer('progress-section');
+        
+        // Same as dashboard for now
+        this.loadDashboard();
+    }
+
+    loadSettings() {
+        console.log('⚙️ Loading Settings');
+        this.showSectionContainer('settings-section');
+        
+        // Create basic settings interface
+        this.createSettingsInterface();
+    }
+
+    showSectionContainer(sectionId) {
+        // First try to find existing section
+        let section = document.getElementById(sectionId);
+        
+        if (!section) {
+            // Create section if it doesn't exist
+            section = document.createElement('div');
+            section.id = sectionId;
+            section.className = 'section-content active-section';
+            
+            const mainContent = document.querySelector('.main-content');
+            if (mainContent) {
+                mainContent.appendChild(section);
+            }
+        }
+        
+        // Show the section
+        section.style.display = 'block';
+        section.classList.add('active-section');
+        
+        return section;
+    }
+
+    createSettingsInterface() {
+        const settingsSection = this.showSectionContainer('settings-section');
+        settingsSection.innerHTML = `
+            <div class="settings-container">
+                <h2>Settings</h2>
+                <div class="settings-grid">
+                    <div class="setting-item">
+                        <h3>Account</h3>
+                        <p>Manage your VERA account settings</p>
+                        <button class="btn-secondary">Edit Profile</button>
+                    </div>
+                    <div class="setting-item">
+                        <h3>Notifications</h3>
+                        <p>Customize your regulation reminders</p>
+                        <button class="btn-secondary">Configure</button>
+                    </div>
+                    <div class="setting-item">
+                        <h3>Privacy</h3>
+                        <p>Control your data and privacy settings</p>
+                        <button class="btn-secondary">Manage</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    showUpgradeModal() {
+        console.log('💳 Showing upgrade modal');
+        // Redirect to pricing page for now
+        window.location.href = '/pricing.html';
+    }
+
+    loadSectionContent(sectionName) {
+        // Alias for showSection for compatibility
+        this.showSection(sectionName);
+    }
+}
+
+// Initialize VERACore
+window.VERACore = new VERACore();
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🎯 DOM Loaded - Initializing VERA Systems');
+    
+    // Initialize VERACore first
+    if (window.VERACore) {
+        window.VERACore.init();
+    }
+    
+    // Initialize main app
+    if (!window.veraApp) {
+        window.veraApp = new VERAExplorerApp();
+    }
+});
+
+// Utility functions for basic interactions
+function startBreathingTechnique(technique) {
+    console.log(`🫁 Starting ${technique} breathing technique`);
+    alert(`Starting ${technique} breathing technique! In a full version, this would launch the guided breathing interface.`);
+}
+
+function startGroundingTechnique(technique) {
+    console.log(`🌱 Starting ${technique} grounding technique`);
+    alert(`Starting ${technique} grounding technique! In a full version, this would launch the guided grounding interface.`);
+}
+
+function addChatMessage(message) {
+    console.log(`💬 Adding chat message: ${message}`);
+    const messagesContainer = document.querySelector('.messages-container');
+    if (messagesContainer) {
+        const userMessage = document.createElement('div');
+        userMessage.className = 'message user-message';
+        userMessage.innerHTML = `
+            <div class="message-content">
+                <p>${message}</p>
+            </div>
+        `;
+        messagesContainer.appendChild(userMessage);
+        
+        // Add VERA response
+        setTimeout(() => {
+            const veraResponse = document.createElement('div');
+            veraResponse.className = 'message vera-message';
+            veraResponse.innerHTML = `
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">
+                    <p>I understand you're experiencing ${message.toLowerCase()}. Let me guide you through some regulation techniques...</p>
+                </div>
+            `;
+            messagesContainer.appendChild(veraResponse);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }, 1000);
+    }
+}
+
+function submitBodyCheck() {
+    const input = document.getElementById('bodyCheckInput');
+    if (input && input.value.trim()) {
+        console.log('📝 Body check submitted:', input.value);
+        alert('Thank you for sharing! VERA is processing your body awareness...');
+        input.value = '';
+    }
+}
+
+// Make sure VERACore is available globally
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = VERACore;
+}

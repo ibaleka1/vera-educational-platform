@@ -16,6 +16,30 @@
         <canvas id="neuralCanvas"></canvas>
     </div>
 
+    <!-- Presentation Demo Controls -->
+    <div id="demoControls" class="demo-controls">
+        <div class="demo-header">
+            <h3>VERA Presentation Demo</h3>
+            <div class="device-indicator" id="deviceIndicator">Desktop</div>
+        </div>
+        
+        <div class="demo-sections">
+            <button onclick="presentationDemo.showOverview()" class="demo-btn">Platform Overview</button>
+            <button onclick="presentationDemo.showBreathing()" class="demo-btn">Breathing</button>
+            <button onclick="presentationDemo.showGrounding()" class="demo-btn">Grounding</button>
+            <button onclick="presentationDemo.showJournal()" class="demo-btn">Journal</button>
+            <button onclick="presentationDemo.showChat()" class="demo-btn">AI Chat</button>
+            <button onclick="presentationDemo.showDashboard()" class="demo-btn">Analytics</button>
+            <button onclick="presentationDemo.showPricing()" class="demo-btn">Pricing</button>
+        </div>
+        
+        <div class="demo-actions">
+            <button onclick="presentationDemo.simulateUserJourney()" class="demo-action-btn">User Journey</button>
+            <button onclick="presentationDemo.highlightFeatures()" class="demo-action-btn">Highlight Features</button>
+            <button onclick="presentationDemo.toggleDemoMode()" class="demo-toggle-btn" id="demoToggle">Demo Mode: ON</button>
+        </div>
+    </div>
+
     <!-- Main App Container -->
     <div class="app-container">
         <!-- Side Navigation Panel -->
@@ -223,5 +247,6 @@
     <script src="js/enhanced-chat.js"></script>
     <script src="js/personalized-dashboard.js"></script>
     <script src="js/trial-management.js"></script>
+    <script src="js/presentation-demo.js"></script>
 </body>
 </html>
