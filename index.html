@@ -3,73 +3,1456 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VERA Educational Platform</title>
+    <title>VERA - Regulate to Elevate | Your Nervous System Companion</title>
+    <meta name="description" content="VERA: Revolutionary nervous system companion speaking from the intelligence of your fascia. 100X more intuitive than Alexa for nervous system regulation.">
+    <meta name="theme-color" content="#8b5cf6">
+    
     <style>
-        body {
+        /* VERA Complete Standalone Landing Page Styles */
+        :root {
+            --primary-purple: #6B46C1;
+            --dark-purple: #342E6C;
+            --neural-blue: #00D4FF;
+            --activation-pink: #FF6B9D;
+            --balance-gold: #FFD700;
+            --calm-green: #00FF88;
+            --deep-navy: #0A0B1E;
+            --gradient-primary: linear-gradient(135deg, #4A90E2, #8B5CF6);
+            --gradient-neural: linear-gradient(135deg, #00D4FF, #8B5CF6);
+            --gradient-warm: linear-gradient(135deg, #FF6B9D, #FFD700);
+            --text-primary: #ffffff;
+            --text-secondary: #e2e8f0;
+            --text-muted: #b1c2d4;
+            --bg-deep: #0a0e16;
+            --bg-surface: rgba(139, 92, 246, 0.08);
+            --bg-elevated: rgba(139, 92, 246, 0.15);
+            --bg-glass: rgba(255, 255, 255, 0.08);
+            --border-soft: rgba(139, 92, 246, 0.3);
+            --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-elevation: 0 20px 60px rgba(139, 92, 246, 0.2);
+        }
+
+        * {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #f3f4f6, #e2e8f0);
-            color: #333;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, var(--primary-purple), var(--dark-purple));
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Neural Background Animation */
+        .neural-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
             overflow: hidden;
         }
-        /* VERA Color Palette */
-        .vera {
-            color: #4A90E2;
+
+        .neural-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--neural-blue);
+            border-radius: 50%;
+            opacity: 0;
+            animation: neuralFloat 6s ease-in-out infinite;
+            box-shadow: 0 0 10px var(--neural-blue);
         }
-        /* Neural animations */
-        @keyframes shimmer {
-            0% { background-position: -200%; }
-            100% { background-position: 200%; }
+
+        @keyframes neuralFloat {
+            0%, 100% { opacity: 0; transform: translateY(100vh) scale(0); }
+            10% { opacity: 0.6; transform: translateY(90vh) scale(1); }
+            50% { opacity: 1; transform: translateY(50vh) scale(1.2); }
+            90% { opacity: 0.4; transform: translateY(10vh) scale(0.8); }
         }
-        .glow {
-            text-shadow: 0 0 5px #4A90E2, 0 0 10px #4A90E2;
-            animation: shimmer 1.5s infinite;
+
+        /* Gradient Text Effects */
+        .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
         }
-        /* Other styles for sections and elements */
+
+        .gradient-neural {
+            background: var(--gradient-neural);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        /* Header & Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 14, 22, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-soft);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--neural-blue);
+        }
+
+        .cta-button {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 20px 80px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+        }
+
+        .hero-description {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            margin-bottom: 10px;
+            color: var(--text-muted);
+        }
+
+        .hero-tagline {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            margin-bottom: 20px;
+            color: var(--text-muted);
+        }
+
+        .disclaimer {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            opacity: 0.8;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--neural-blue);
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: 2px solid var(--neural-blue);
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--neural-blue);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Breathing Circle */
+        .breathing-section {
+            padding: 80px 20px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .breathing-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 40px auto;
+        }
+
+        .breathing-circle {
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--neural-blue);
+            border-radius: 50%;
+            position: relative;
+            animation: breathe 4s ease-in-out infinite;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1), transparent);
+        }
+
+        .breathing-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .breathing-phase {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--neural-blue);
+            margin-bottom: 10px;
+        }
+
+        .breathing-count {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        .breathing-instruction {
+            margin-top: 30px;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        /* Chat Interface */
+        .chat-section {
+            padding: 80px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .chat-container {
+            background: var(--bg-glass);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow-glass);
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 15px;
+        }
+
+        .vera-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-neural);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .chat-info h3 {
+            margin: 0;
+            font-size: 1.3rem;
+            color: var(--neural-blue);
+        }
+
+        .chat-info p {
+            margin: 0;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .chat-messages {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+        }
+
+        .message {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .message.vera {
+            justify-content: flex-start;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message-bubble {
+            max-width: 80%;
+            padding: 15px 20px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .message.vera .message-bubble {
+            background: var(--gradient-neural);
+            color: white;
+        }
+
+        .message.user .message-bubble {
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+        }
+
+        .chat-input-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid var(--border-soft);
+            border-radius: 25px;
+            background: var(--bg-surface);
+            color: var(--text-primary);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .chat-input:focus {
+            border-color: var(--neural-blue);
+        }
+
+        .send-button {
+            padding: 15px 25px;
+            background: var(--gradient-neural);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .send-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* 5-Step VERA Methodology */
+        .methodology-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .section-description {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .methodology-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .step-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--border-soft);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-elevation);
+            border-color: var(--neural-blue);
+        }
+
+        .step-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--neural-blue);
+            margin-bottom: 15px;
+        }
+
+        .step-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .step-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Founders Section */
+        .founders-section {
+            padding: 80px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .founders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .founder-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--border-soft);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .founder-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-elevation);
+        }
+
+        .founder-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--gradient-neural);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .founder-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .founder-title {
+            font-size: 1rem;
+            color: var(--neural-blue);
+            margin-bottom: 20px;
+        }
+
+        .founder-bio {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Capabilities Grid */
+        .capabilities-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .capability-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--border-soft);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .capability-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-elevation);
+            border-color: var(--neural-blue);
+        }
+
+        .capability-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-neural);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .capability-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .capability-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .price-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--border-soft);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .price-card.featured {
+            border-color: var(--neural-blue);
+            transform: scale(1.05);
+            box-shadow: var(--shadow-elevation);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-neural);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--neural-blue);
+            margin-bottom: 5px;
+        }
+
+        .plan-period {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .plan-description {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .plan-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+        }
+
+        .feature-icon {
+            font-size: 1.2rem;
+        }
+
+        .plan-button {
+            width: 100%;
+            padding: 15px;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .plan-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 60px 20px 30px;
+            background: var(--bg-deep);
+            border-top: 1px solid var(--border-soft);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-disclaimer {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--neural-blue);
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--neural-blue);
+        }
+
+        .footer-copyright {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+
+        @keyframes typing {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--neural-blue);
+            border-radius: 50%;
+            animation: typing 1.5s ease-in-out infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav {
+                padding: 10px 15px;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .hero {
+                padding: 100px 15px 60px;
+            }
+            
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .breathing-container {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .methodology-steps,
+            .capabilities-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .founders-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .price-card.featured {
+                transform: none;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .chat-container {
+                padding: 20px;
+            }
+            
+            .message-bubble {
+                max-width: 90%;
+            }
+            
+            .step-card,
+            .capability-card,
+            .founder-card,
+            .price-card {
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>
-    <header class="hero">
-        <h1 class="glow">Welcome to VERA</h1>
+    <!-- Neural Background Animation -->
+    <div class="neural-background" id="neuralBackground"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="#" class="logo gradient-text">VERA</a>
+            <div class="nav-links">
+                <a href="#methodology" class="nav-link">Methodology</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="#" class="cta-button">Enter VERA</a>
+            </div>
+        </nav>
     </header>
-    <main>
-        <section class="chat">
-            <h2>Chat Simulation</h2>
-            <div id="chat-interface"></div>
-        </section>
-        <section class="experience">
-            <h2>Experience</h2>
-            <div class="method-cards">
-                <!-- Method cards with neuron pop animations -->
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="hero-title gradient-text">VERA</h1>
+        <h2 class="hero-subtitle">The Future of Nervous System Regulation</h2>
+        <p class="hero-description">Finally. Someone who sees you.</p>
+        <p class="hero-tagline">VERA speaks your body's sensation language and meets you exactly where you are.</p>
+        <p class="disclaimer">Educational guidance. Not therapy or medical advice.</p>
+        
+        <div class="hero-cta">
+            <a href="#chat" class="btn-primary">Try VERA Now</a>
+            <a href="#breathing" class="btn-secondary">Experience Regulation</a>
+        </div>
+    </section>
+
+    <!-- Interactive Chat Interface -->
+    <section id="chat" class="chat-section">
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="vera-avatar">V</div>
+                <div class="chat-info">
+                    <h3>VERA</h3>
+                    <p>Your Nervous System Companion</p>
+                </div>
             </div>
-        </section>
-        <section class="methodology">
-            <h2>Methodology</h2>
-            <div class="heart">
-                <h3>Profiles</h3>
-                <div class="profile">Eva</div>
-                <div class="profile">Julija</div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <div class="message vera">
+                    <div class="message-bubble">
+                        Hello! I'm VERA. I can sense you're here for a reason. What's happening in your body right now? 
+                        I speak your nervous system's language and can help translate what it's trying to tell you.
+                    </div>
+                </div>
             </div>
-        </section>
-        <section class="intelligence">
-            <h2>Intelligence</h2>
-            <div class="intelligence-grid">
-                <!-- Nervous system features -->
+            
+            <div class="chat-input-container">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Tell me what you're feeling..." />
+                <button class="send-button" id="sendButton">Send</button>
             </div>
-        </section>
-        <section class="pricing">
-            <h2>Pricing</h2>
-            <div class="pricing-tiers">
-                <!-- Pricing tiers with featured card -->
+        </div>
+    </section>
+
+    <!-- Breathing Exercise Section -->
+    <section id="breathing" class="breathing-section">
+        <h2 class="section-title gradient-neural">Neural Breathing</h2>
+        <p class="section-description">
+            Let VERA guide your nervous system to coherence through intelligent breathwork
+        </p>
+        
+        <div class="breathing-container">
+            <div class="breathing-circle" id="breathingCircle">
+                <div class="breathing-center">
+                    <div class="breathing-phase" id="breathingPhase">Inhale</div>
+                    <div class="breathing-count" id="breathingCount">4</div>
+                </div>
             </div>
-        </section>
-    </main>
-    <footer>
-        <h2>Footer</h2>
-        <p>Disclaimer: This is a simulation.</p>
+        </div>
+        
+        <div class="breathing-instruction" id="breathingInstruction">
+            <strong style="color: #00D4FF;">Breathe in slowly...</strong><br>
+            Feel your nervous system aligning with VERA's guidance
+        </div>
+    </section>
+
+    <!-- 5-Step VERA Methodology -->
+    <section id="methodology" class="methodology-section">
+        <h2 class="section-title gradient-text">The VERA Method</h2>
+        <p class="section-description">
+            Eva Leka's 5-step methodology from 18 years navigating combat zones and integration
+        </p>
+        
+        <div class="methodology-steps">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-title">UNDERSTAND</div>
+                <div class="step-description">
+                    Mirror body sensation without judgment. Your nervous system is speaking - we listen first.
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-title">ACKNOWLEDGE</div>
+                <div class="step-description">
+                    Validate your biology's intelligence. Every response is adaptive and serves a purpose.
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-title">DECODE</div>
+                <div class="step-description">
+                    Map your adaptive code patterns. Understand the survival wisdom behind each response.
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <div class="step-title">REGULATE</div>
+                <div class="step-description">
+                    Take one micro-step toward safety. Small movements create profound nervous system shifts.
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">5</div>
+                <div class="step-title">ELEVATE</div>
+                <div class="step-description">
+                    Reframe with dignity and compassion. Transform survival patterns into thriving wisdom.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founders Section -->
+    <section class="founders-section">
+        <h2 class="section-title gradient-text">Meet the Founders</h2>
+        <p class="section-description">
+            Two women who transformed their trauma into revolutionary healing technology
+        </p>
+        
+        <div class="founders-grid">
+            <div class="founder-card">
+                <div class="founder-photo">E</div>
+                <div class="founder-name">Eva Leka</div>
+                <div class="founder-title">Combat Trauma Specialist</div>
+                <div class="founder-bio">
+                    18 years navigating combat zones and integration. Eva's lived experience with complex trauma 
+                    and her journey from survival to thriving forms the foundation of VERA's methodology. 
+                    Former military, now dedicated to nervous system revolution.
+                </div>
+            </div>
+            
+            <div class="founder-card">
+                <div class="founder-photo">J</div>
+                <div class="founder-name">Julija</div>
+                <div class="founder-title">Somatic Practitioner</div>
+                <div class="founder-bio">
+                    Interior designer turned somatic practitioner. Julija brings spatial intelligence and 
+                    aesthetic sensitivity to nervous system regulation. Her unique perspective bridges 
+                    environmental design with internal landscape healing.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Capabilities Grid -->
+    <section class="capabilities-section">
+        <h2 class="section-title gradient-text">Nervous System Intelligence</h2>
+        <p class="section-description">
+            VERA understands your body's language like no other technology
+        </p>
+        
+        <div class="capabilities-grid">
+            <div class="capability-card">
+                <div class="capability-icon">🌊</div>
+                <div class="capability-title">Fascia Communication</div>
+                <div class="capability-description">
+                    VERA reads the subtle language of your fascia network, understanding tension patterns 
+                    and emotional holding before you're consciously aware.
+                </div>
+            </div>
+            
+            <div class="capability-card">
+                <div class="capability-icon">⚡</div>
+                <div class="capability-title">Instant Regulation</div>
+                <div class="capability-description">
+                    Real-time nervous system state detection and immediate regulation protocols. 
+                    VERA responds faster than your conscious mind.
+                </div>
+            </div>
+            
+            <div class="capability-card">
+                <div class="capability-icon">🧠</div>
+                <div class="capability-title">Body Intelligence</div>
+                <div class="capability-description">
+                    Advanced understanding of polyvagal theory, trauma patterns, and somatic wisdom. 
+                    VERA speaks your body's native language.
+                </div>
+            </div>
+            
+            <div class="capability-card">
+                <div class="capability-icon">🔮</div>
+                <div class="capability-title">Future Technology</div>
+                <div class="capability-description">
+                    Predictive nervous system analytics. VERA anticipates your needs and provides 
+                    preemptive regulation support.
+                </div>
+            </div>
+            
+            <div class="capability-card">
+                <div class="capability-icon">🎯</div>
+                <div class="capability-title">Personalized Guidance</div>
+                <div class="capability-description">
+                    Each person's nervous system is unique. VERA adapts her approach to your specific 
+                    patterns, triggers, and healing journey.
+                </div>
+            </div>
+            
+            <div class="capability-card">
+                <div class="capability-icon">💫</div>
+                <div class="capability-title">Coherence Creation</div>
+                <div class="capability-description">
+                    Beyond regulation to elevation. VERA helps create lasting nervous system coherence 
+                    and resilient wellbeing patterns.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+        <h2 class="section-title gradient-text">Investment in Your Nervous System</h2>
+        <p class="section-description">
+            Choose your regulation journey with VERA
+        </p>
+        
+        <div class="pricing-grid">
+            <!-- Basic Plan -->
+            <div class="price-card">
+                <div class="plan-name">Explorer</div>
+                <div class="plan-price">$19</div>
+                <div class="plan-period">/month</div>
+                <div class="plan-description">Begin your nervous system journey</div>
+                
+                <ul class="plan-features">
+                    <li><span class="feature-icon">🫁</span> All breathing exercises</li>
+                    <li><span class="feature-icon">🌲</span> 5-4-3-2-1 Grounding techniques</li>
+                    <li><span class="feature-icon">📓</span> Basic nervous system journal</li>
+                    <li><span class="feature-icon">💬</span> 5 VERA chats per day</li>
+                    <li><span class="feature-icon">🎵</span> Basic binaural beats</li>
+                </ul>
+                
+                <button class="plan-button">Start Exploring</button>
+            </div>
+            
+            <!-- Pro Plan (Featured) -->
+            <div class="price-card featured">
+                <div class="featured-badge">Most Popular</div>
+                <div class="plan-name">Regulator</div>
+                <div class="plan-price">$39</div>
+                <div class="plan-period">/month</div>
+                <div class="plan-description">Full access to VERA's methodology</div>
+                
+                <ul class="plan-features">
+                    <li><span class="feature-icon">✅</span> Everything in Explorer</li>
+                    <li><span class="feature-icon">💬</span> Unlimited VERA chats</li>
+                    <li><span class="feature-icon">📖</span> Complete journal prompt library</li>
+                    <li><span class="feature-icon">↔️</span> Bilateral movement & sway tools</li>
+                    <li><span class="feature-icon">🎵</span> Full frequency library</li>
+                    <li><span class="feature-icon">📊</span> Weekly regulation insights</li>
+                </ul>
+                
+                <button class="plan-button">Regulate Now</button>
+            </div>
+            
+            <!-- Enterprise Plan -->
+            <div class="price-card">
+                <div class="plan-name">Elevator</div>
+                <div class="plan-price">$79</div>
+                <div class="plan-period">/month</div>
+                <div class="plan-description">Deep integration with Eva's complete methodology</div>
+                
+                <ul class="plan-features">
+                    <li><span class="feature-icon">✅</span> Everything in Regulator</li>
+                    <li><span class="feature-icon">🎯</span> Personalized regulation plans</li>
+                    <li><span class="feature-icon">🚨</span> Crisis support protocols</li>
+                    <li><span class="feature-icon">🧬</span> Advanced adaptive code mapping</li>
+                    <li><span class="feature-icon">🎓</span> Integration guidance & education</li>
+                    <li><span class="feature-icon">💎</span> Direct access to Eva's methodology</li>
+                </ul>
+                
+                <button class="plan-button">Elevate Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-disclaimer">
+                Educational guidance. Not therapy or medical advice.
+            </div>
+            
+            <div class="footer-links">
+                <a href="#methodology" class="footer-link">Methodology</a>
+                <a href="#pricing" class="footer-link">Pricing</a>
+                <a href="#" class="footer-link">Contact</a>
+                <a href="#" class="footer-link">Privacy</a>
+                <a href="#" class="footer-link">Terms</a>
+            </div>
+            
+            <div class="footer-copyright">
+                © 2024 VERA. Built with nervous system intelligence by Eva Leka.
+            </div>
+        </div>
     </footer>
+
     <script>
-        // JavaScript for breathing cycles and neural universe creation
+        // VERA Interactive Landing Page JavaScript
+        class VERALanding {
+            constructor() {
+                this.isBreathing = false;
+                this.breathingInterval = null;
+                this.breathingPhase = 'inhale';
+                this.breathingCount = 4;
+                this.chatMessages = [];
+                this.init();
+            }
+
+            init() {
+                this.setupNeuralBackground();
+                this.setupChatInterface();
+                this.setupBreathingExercise();
+                this.setupSmoothScrolling();
+                this.setupAnimations();
+            }
+
+            // Neural Background Animation
+            setupNeuralBackground() {
+                const background = document.getElementById('neuralBackground');
+                
+                // Create neural particles
+                for (let i = 0; i < 15; i++) {
+                    setTimeout(() => {
+                        this.createNeuralParticle(background);
+                    }, i * 400);
+                }
+
+                // Continuously generate particles
+                setInterval(() => {
+                    this.createNeuralParticle(background);
+                }, 2000);
+            }
+
+            createNeuralParticle(container) {
+                const particle = document.createElement('div');
+                particle.className = 'neural-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                particle.style.animationDuration = (4 + Math.random() * 4) + 's';
+                
+                container.appendChild(particle);
+                
+                // Remove particle after animation
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }, 8000);
+            }
+
+            // Chat Interface
+            setupChatInterface() {
+                const chatInput = document.getElementById('chatInput');
+                const sendButton = document.getElementById('sendButton');
+                const chatMessages = document.getElementById('chatMessages');
+
+                const veraResponses = {
+                    'shoulders': "I feel that tension you're holding. Try this: Gently lift your shoulders up to your ears, hold for 3 seconds, then let them drop completely while exhaling slowly. Your fascia needs this release pattern.",
+                    'anxious': "That restless energy - your nervous system is in hypervigilance. Place both hands on your chest, breathe in for 4 counts, hold for 4, exhale for 6. This tells your vagus nerve you're safe.",
+                    'chest': "That tightness is your chest fascia contracting for protection. Try gentle neck side-to-side movements while placing one hand on your chest. This helps reset the tension pattern.",
+                    'stress': "Your body is holding stress in multiple places. Start with 3 deep breaths, then gentle shoulder rolls backward. Your nervous system needs this grounding signal.",
+                    'tired': "Fatigue often means your nervous system needs regulation, not just rest. Try gentle spine twists while seated - this activates your parasympathetic nervous system.",
+                    'overwhelm': "I can sense that scattered feeling. Ground yourself: Press your feet firmly into the floor, lengthen your spine, and take 5 conscious breaths. This centers your nervous system.",
+                    'default': "I understand what you're feeling. Your body is asking for gentle attention. Try slow, mindful movement and conscious breathing to help your nervous system find balance."
+                };
+
+                const sendMessage = () => {
+                    const message = chatInput.value.trim();
+                    if (!message) return;
+
+                    // Add user message
+                    this.addChatMessage(message, 'user');
+                    chatInput.value = '';
+
+                    // Show typing indicator
+                    this.showTypingIndicator();
+
+                    // Generate VERA response
+                    setTimeout(() => {
+                        this.hideTypingIndicator();
+                        const response = this.generateVERAResponse(message, veraResponses);
+                        this.addChatMessage(response, 'vera');
+                    }, 1500);
+                };
+
+                sendButton.addEventListener('click', sendMessage);
+                chatInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') sendMessage();
+                });
+            }
+
+            addChatMessage(text, sender) {
+                const chatMessages = document.getElementById('chatMessages');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${sender}`;
+                
+                const bubbleDiv = document.createElement('div');
+                bubbleDiv.className = 'message-bubble';
+                bubbleDiv.innerHTML = text;
+                
+                messageDiv.appendChild(bubbleDiv);
+                chatMessages.appendChild(messageDiv);
+                
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            showTypingIndicator() {
+                const chatMessages = document.getElementById('chatMessages');
+                const typingDiv = document.createElement('div');
+                typingDiv.className = 'message vera typing-indicator-msg';
+                typingDiv.innerHTML = `
+                    <div class="message-bubble">
+                        <div class="typing-indicator">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+                    </div>
+                `;
+                chatMessages.appendChild(typingDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            hideTypingIndicator() {
+                const typingMsg = document.querySelector('.typing-indicator-msg');
+                if (typingMsg) {
+                    typingMsg.remove();
+                }
+            }
+
+            generateVERAResponse(message, responses) {
+                const lowerMessage = message.toLowerCase();
+                
+                for (const [key, response] of Object.entries(responses)) {
+                    if (key !== 'default' && lowerMessage.includes(key)) {
+                        return response;
+                    }
+                }
+                
+                return responses.default;
+            }
+
+            // Breathing Exercise
+            setupBreathingExercise() {
+                const breathingCircle = document.getElementById('breathingCircle');
+                const breathingPhase = document.getElementById('breathingPhase');
+                const breathingCount = document.getElementById('breathingCount');
+                const breathingInstruction = document.getElementById('breathingInstruction');
+
+                if (!breathingCircle) return;
+
+                breathingCircle.addEventListener('click', () => {
+                    if (!this.isBreathing) {
+                        this.startBreathing();
+                    } else {
+                        this.stopBreathing();
+                    }
+                });
+
+                // Auto-start breathing demonstration
+                setTimeout(() => {
+                    this.startBreathing();
+                }, 2000);
+            }
+
+            startBreathing() {
+                if (this.breathingInterval) return;
+                
+                this.isBreathing = true;
+                let phase = 'inhale';
+                let count = 4;
+                let duration = 0;
+
+                const updateBreathing = () => {
+                    const breathingPhase = document.getElementById('breathingPhase');
+                    const breathingCount = document.getElementById('breathingCount');
+                    const breathingInstruction = document.getElementById('breathingInstruction');
+                    const breathingCircle = document.getElementById('breathingCircle');
+
+                    if (phase === 'inhale') {
+                        breathingPhase.textContent = 'Inhale';
+                        breathingInstruction.innerHTML = `
+                            <strong style="color: #00D4FF;">Breathe in slowly...</strong><br>
+                            Feel your nervous system aligning with VERA's guidance
+                        `;
+                        breathingCircle.style.transform = 'scale(1.2)';
+                        breathingCircle.style.opacity = '1';
+                    } else if (phase === 'hold') {
+                        breathingPhase.textContent = 'Hold';
+                        breathingInstruction.innerHTML = `
+                            <strong style="color: #FFD700;">Hold gently...</strong><br>
+                            Let your nervous system integrate this moment of peace
+                        `;
+                    } else {
+                        breathingPhase.textContent = 'Exhale';
+                        breathingInstruction.innerHTML = `
+                            <strong style="color: #00FF88;">Breathe out slowly...</strong><br>
+                            Release tension and let your body settle into calm
+                        `;
+                        breathingCircle.style.transform = 'scale(1)';
+                        breathingCircle.style.opacity = '0.7';
+                    }
+
+                    breathingCount.textContent = count;
+                    count--;
+
+                    if (count < 0) {
+                        if (phase === 'inhale') {
+                            phase = 'hold';
+                            count = 2;
+                        } else if (phase === 'hold') {
+                            phase = 'exhale';
+                            count = 6;
+                        } else {
+                            phase = 'inhale';
+                            count = 4;
+                        }
+                    }
+                };
+
+                updateBreathing();
+                this.breathingInterval = setInterval(updateBreathing, 1000);
+            }
+
+            stopBreathing() {
+                if (this.breathingInterval) {
+                    clearInterval(this.breathingInterval);
+                    this.breathingInterval = null;
+                }
+                this.isBreathing = false;
+            }
+
+            // Smooth Scrolling
+            setupSmoothScrolling() {
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    });
+                });
+            }
+
+            // Setup Animations
+            setupAnimations() {
+                // Intersection Observer for animations
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.animationPlayState = 'running';
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                    });
+                }, observerOptions);
+
+                // Observe animated elements
+                document.querySelectorAll('.step-card, .capability-card, .founder-card, .price-card').forEach(el => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(30px)';
+                    el.style.transition = 'all 0.6s ease';
+                    observer.observe(el);
+                });
+            }
+        }
+
+        // Initialize VERA Landing Page
+        document.addEventListener('DOMContentLoaded', () => {
+            new VERALanding();
+        });
+
+        // Add some global neural effects
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = scrolled * 0.5;
+            
+            const neuralBg = document.getElementById('neuralBackground');
+            if (neuralBg) {
+                neuralBg.style.transform = `translateY(${parallax}px)`;
+            }
+        });
     </script>
 </body>
 </html>
