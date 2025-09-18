@@ -1,436 +1,1004 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>VERA - Regulate to Elevate</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="VERA: Revolutionary nervous system companion speaking from the intelligence of your fascia. 100X more intuitive than Alexa for nervous system regulation.">
-  <meta name="theme-color" content="#8b5cf6">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="preload" href="/css/vera.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="/css/vera.css"></noscript>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VERA - Where Your Nervous System Finally Speaks</title>
+  
+  <style>
+    /* VERA Color Scheme Variables */
+    :root {
+      --vera-deep-space: #0A0E27;
+      --vera-midnight: #151832;
+      --vera-purple: #9B59B6;
+      --vera-lavender: #B19CD9;
+      --vera-neural-blue: #64B5F6;
+      --vera-glow-pink: #F8BBD0;
+      --vera-deep-violet: #4A148C;
+      --vera-soft-gold: #FFD700;
+      --vera-emerald: #10B981;
+    }
+
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, var(--vera-deep-space), var(--vera-midnight));
+      color: white;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Living Neural Universe Background */
+    .neural-universe {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .neuron {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--vera-neural-blue);
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: neuronLife 30s linear infinite;
+    }
+
+    /* CSS Animations */
+    @keyframes orbBreathe {
+      0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 0 30px var(--vera-neural-blue);
+      }
+      50% { 
+        transform: scale(1.1);
+        box-shadow: 0 0 60px var(--vera-glow-pink), 0 0 90px var(--vera-neural-blue);
+      }
+    }
+
+    @keyframes neuronLife {
+      0% {
+        transform: translateY(100vh) translateX(0) scale(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.6;
+        transform: translateY(90vh) translateX(10px) scale(1);
+      }
+      90% {
+        opacity: 0.6;
+        transform: translateY(10vh) translateX(-10px) scale(1);
+      }
+      100% {
+        transform: translateY(0) translateX(0) scale(0);
+        opacity: 0;
+      }
+    }
+
+    @keyframes nameShimmer {
+      0%, 100% {
+        text-shadow: 0 0 20px var(--vera-neural-blue);
+      }
+      50% {
+        text-shadow: 0 0 40px var(--vera-glow-pink), 0 0 60px var(--vera-neural-blue);
+      }
+    }
+
+    @keyframes breathGuide {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.7;
+      }
+      50% {
+        transform: scale(1.3);
+        opacity: 1;
+      }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    @keyframes swayGentle {
+      0%, 100% {
+        transform: translateX(0) rotate(0deg);
+      }
+      25% {
+        transform: translateX(5px) rotate(1deg);
+      }
+      75% {
+        transform: translateX(-5px) rotate(-1deg);
+      }
+    }
+
+    /* Fixed Navigation */
+    .navigation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(10, 14, 39, 0.9);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(100, 181, 246, 0.2);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--vera-neural-blue), var(--vera-glow-pink));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: nameShimmer 4s ease-in-out infinite;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-menu a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+    }
+
+    .nav-menu a:hover {
+      color: var(--vera-neural-blue);
+      background: rgba(100, 181, 246, 0.1);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      margin-top: 80px;
+    }
+
+    .breathing-orb {
+      width: 200px;
+      height: 200px;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .orb-core {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, var(--vera-neural-blue), var(--vera-glow-pink));
+      border-radius: 50%;
+      animation: orbBreathe 6s ease-in-out infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--vera-neural-blue), var(--vera-glow-pink), var(--vera-soft-gold));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: nameShimmer 6s ease-in-out infinite;
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      color: var(--vera-lavender);
+      margin-bottom: 2rem;
+      max-width: 600px;
+    }
+
+    /* Chat Interface Section */
+    .chat-section {
+      padding: 4rem 2rem;
+      background: rgba(21, 24, 50, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .chat-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 2rem;
+      padding: 2rem;
+      border: 1px solid rgba(100, 181, 246, 0.2);
+    }
+
+    .chat-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding: 1rem;
+      background: rgba(100, 181, 246, 0.1);
+      border-radius: 1rem;
+    }
+
+    .vera-avatar {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--vera-neural-blue), var(--vera-glow-pink));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      animation: heartbeat 2s ease-in-out infinite;
+    }
+
+    .chat-input-container {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .chat-input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 2rem;
+      padding: 1rem 1.5rem;
+      color: white;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .chat-input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .chat-button {
+      background: linear-gradient(135deg, var(--vera-purple), var(--vera-deep-violet));
+      border: none;
+      border-radius: 2rem;
+      padding: 1rem 2rem;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .chat-button:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Experience Section */
+    .experience-section {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: var(--vera-neural-blue);
+    }
+
+    .breathing-exercise {
+      margin: 3rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .breath-circle {
+      width: 150px;
+      height: 150px;
+      border: 3px solid var(--vera-neural-blue);
+      border-radius: 50%;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: breathGuide 4s ease-in-out infinite;
+      background: radial-gradient(circle, rgba(100, 181, 246, 0.1), transparent);
+    }
+
+    .breath-text {
+      font-size: 1.2rem;
+      color: var(--vera-lavender);
+    }
+
+    /* Methodology Cards */
+    .methodology-section {
+      padding: 4rem 2rem;
+      background: rgba(155, 89, 182, 0.1);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .methodology-card {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      border: 1px solid rgba(155, 89, 182, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: swayGentle 8s ease-in-out infinite;
+    }
+
+    .methodology-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(155, 89, 182, 0.3);
+    }
+
+    .card-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--vera-neural-blue), var(--vera-glow-pink));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    /* Heart Section (Team) */
+    .heart-section {
+      padding: 4rem 2rem;
+      background: rgba(248, 187, 208, 0.1);
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 3rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .team-member {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      border-radius: 2rem;
+      padding: 3rem;
+      text-align: center;
+      border: 1px solid rgba(248, 187, 208, 0.3);
+      animation: heartbeat 6s ease-in-out infinite;
+    }
+
+    .member-photo {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, var(--vera-glow-pink), var(--vera-neural-blue));
+      border-radius: 50%;
+      margin: 0 auto 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    /* Intelligence Grid */
+    .intelligence-section {
+      padding: 4rem 2rem;
+      background: rgba(16, 185, 129, 0.1);
+    }
+
+    .intelligence-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .intelligence-item {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      padding: 2rem;
+      text-align: center;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .intelligence-item:hover {
+      transform: scale(1.05);
+    }
+
+    /* Pricing Section */
+    .pricing-section {
+      padding: 4rem 2rem;
+      background: rgba(255, 215, 0, 0.1);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      border-radius: 2rem;
+      padding: 3rem;
+      text-align: center;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pricing-card.featured {
+      border: 2px solid var(--vera-soft-gold);
+      transform: scale(1.05);
+    }
+
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .pricing-card:hover::before {
+      left: 100%;
+    }
+
+    .price {
+      font-size: 3rem;
+      font-weight: bold;
+      color: var(--vera-soft-gold);
+      margin: 1rem 0;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--vera-deep-space);
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+      border-top: 1px solid rgba(100, 181, 246, 0.2);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-section h4 {
+      color: var(--vera-neural-blue);
+      margin-bottom: 1rem;
+    }
+
+    .footer-section a {
+      color: var(--vera-lavender);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+      color: var(--vera-neural-blue);
+    }
+
+    .disclaimer {
+      border-top: 1px solid rgba(100, 181, 246, 0.2);
+      padding-top: 2rem;
+      color: var(--vera-lavender);
+      font-size: 0.9rem;
+    }
+
+    /* Button Styles */
+    .btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border-radius: 2rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--vera-purple), var(--vera-deep-violet));
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(155, 89, 182, 0.3);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .breathing-orb {
+        width: 150px;
+        height: 150px;
+      }
+      
+      .nav-menu {
+        display: none;
+      }
+      
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Utility Classes */
+    .text-center { text-align: center; }
+    .mb-2 { margin-bottom: 2rem; }
+    .mt-2 { margin-top: 2rem; }
+    .opacity-80 { opacity: 0.8; }
+  </style>
 </head>
 <body>
-  <div class="landing-container">
-    <header>
-      <nav class="nav-header">
-        <div class="logo gradient-text">VERA</div>
-        <div class="nav-links">
-          <a href="#methodology" class="nav-link">Methodology</a>
-          <a href="/pricing.html" class="nav-link">Pricing</a>
-          <a href="/app.html" class="cta-button">Enter VERA</a>
-        </div>
-      </nav>
-    </header>
+  <!-- Living Neural Universe Background -->
+  <div class="neural-universe" id="neuralUniverse"></div>
 
-    <section class="hero">
-      <h1 class="hero-title gradient-text">VERA</h1>
-      <h2 class="hero-subtitle">The Future of Nervous System Regulation</h2>
-      <p class="hero-description">Finally. Someone who sees you.</p>
-      <p class="hero-tagline">VERA speaks your body's sensation language and meets you exactly where you are.</p>
-      <p class="disclaimer-soft">Educational guidance. Not therapy or medical advice.</p>
-      
-      <div class="hero-cta">
-        <a href="#signup" class="btn-primary">Join the Revolution</a>
-        <a href="#breathing-demo" class="btn-secondary">Try VERA Now</a>
-      </div>
+  <!-- Fixed Navigation -->
+  <nav class="navigation">
+    <div class="nav-container">
+      <div class="logo">VERA</div>
+      <ul class="nav-menu">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#chat">Chat</a></li>
+        <li><a href="#methodology">Approach</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul>
+    </div>
+  </nav>
 
-      <div class="hero-breathing" id="breathing-demo">
-        <div class="breathing-preview"></div>
-        <p class="breath-text">Experience VERA's Regulation</p>
-        <p class="breath-instruction">Let VERA guide your nervous system to coherence</p>
-      </div>
-    </section>
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="breathing-orb">
+      <div class="orb-core">V</div>
+    </div>
+    <h1 class="hero-title">VERA</h1>
+    <p class="hero-subtitle">Where Your Nervous System Finally Speaks</p>
+    <div style="margin: 2rem 0;">
+      <a href="#chat" class="btn btn-primary">Connect with VERA</a>
+      <a href="#methodology" class="btn btn-secondary">Learn Our Approach</a>
+    </div>
+  </section>
 
-    <!-- VERA Demo Section -->
-    <section id="vera-demo" class="demo-section">
-      <div class="demo-container">
-        <h2 class="section-title">Experience VERA's Intelligence</h2>
-        <p class="demo-description">"Tell me what you're feeling, I'll translate what your body needs."</p>
-        
-        <!-- Live Chat Interface -->
-        <div class="live-chat-demo">
-          <div class="live-chat-container">
-            <div class="chat-header">
-              <div class="chat-status">
-                <div class="pulse-dot"></div>
-                <span>Live Chat with VERA</span>
-              </div>
-              <div class="questions-counter">
-                <span id="questionsLeft">3 questions remaining</span>
-              </div>
-            </div>
-            
-            <div class="chat-interface" id="chatInterface">
-              <div class="neural-background"></div>
-              
-              <div class="message vera-message">
-                <div class="avatar vera-avatar">V</div>
-                <div class="message-content">
-                  <div class="message-text">Hello! I'm VERA. Tell me what you're feeling in your body right now, and I'll translate what it needs. You have 3 questions to explore with me.</div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="chat-input-area">
-              <div class="input-container">
-                <input type="text" id="userInput" placeholder="Type what you're feeling in your body..." maxlength="150">
-                <button id="sendMessage" disabled>Ask VERA</button>
-              </div>
-              <div class="quick-questions">
-                <span>Quick starts:</span>
-                <button class="quick-btn" onclick="askQuickQuestion('My shoulders are so tense')">Tense shoulders</button>
-                <button class="quick-btn" onclick="askQuickQuestion('I feel anxious and restless')">Feeling anxious</button>
-                <button class="quick-btn" onclick="askQuickQuestion('My chest feels tight')">Tight chest</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- VERA's Intelligent Techniques -->
-        <div class="vera-techniques-demo">
-          <h3 class="techniques-title">VERA's Intelligent Technique Selection</h3>
-          <p class="techniques-description">Based on your conversation, VERA proposes these precise nervous system techniques</p>
-          
-          <!-- Demo Mode Selector -->
-          <div class="demo-mode-selector">
-            <button class="mode-btn active" data-mode="breathing" onclick="switchDemoMode('breathing')">
-              <span class="mode-icon neural-icon-btn">
-                <div class="neuron-core"></div>
-                <div class="neuron-branch branch-1"></div>
-                <div class="neuron-branch branch-2"></div>
-                <div class="neuron-branch branch-3"></div>
-              </span>
-              <span>Neural Breathing</span>
-            </button>
-            <button class="mode-btn" data-mode="swaying" onclick="switchDemoMode('swaying')">
-              <span class="mode-icon neural-icon-btn">
-                <div class="neuron-core"></div>
-                <div class="neuron-branch branch-1"></div>
-                <div class="neuron-branch branch-2"></div>
-                <div class="neuron-branch branch-3"></div>
-              </span>
-              <span>Fascia Swaying</span>
-            </button>
-          </div>
-
-          <!-- Demo Circle & VERA Chat -->
-          <div class="demo-experience-container">
-            <div class="demo-circle-container">
-              <div class="breathing-circle-large" id="demoCircle">
-                <div class="fascia-network" id="fasciaNetwork"></div>
-                <div class="sway-indicator" id="swayIndicator"></div>
-                <p class="demo-instruction" id="demoText">Choose breathing or swaying to connect with VERA's neural intelligence</p>
-              </div>
-            </div>
-
-            <!-- VERA Voice Chat Interface -->
-            <div class="vera-chat-widget" id="veraChat">
-              <div class="chat-header">
-                <div class="vera-avatar">
-                  <div class="neural-pulse"></div>
-                  <span>VERA</span>
-                </div>
-                <div class="voice-toggle" id="voiceToggle">
-                  <button class="voice-btn" onclick="toggleVoiceChat()">
-                    <span class="voice-icon">🎙️</span>
-                    <span class="voice-text">Voice Chat</span>
-                  </button>
-                </div>
-              </div>
-              
-              <div class="chat-messages" id="chatMessages">
-                <div class="message vera-message">
-                  <div class="message-avatar neural-pulse-small"></div>
-                  <div class="message-content">
-                    <p>Hello! I'm VERA. I can sense your nervous system state and adapt my voice to support you. Try chatting with me - I'll respond with voice that matches what your system needs right now.</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="chat-input-container">
-                <input type="text" class="chat-input" id="chatInput" placeholder="Share what's on your mind..." maxlength="500">
-                <button class="send-btn" id="sendBtn" onclick="sendMessage()">
-                  <span class="send-icon">→</span>
-                </button>
-              </div>
-              
-              <div class="voice-status" id="voiceStatus" style="display: none;">
-                <div class="voice-indicator">
-                  <span>VERA is speaking...</span>
-                  <div class="sound-wave">
-                    <div class="wave-bar"></div>
-                    <div class="wave-bar"></div>
-                    <div class="wave-bar"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Demo Controls -->
-          <div class="demo-controls">
-            <button class="demo-btn" id="startDemo">Experience VERA's Regulation</button>
-            <p class="demo-hint">Try both modes to see how VERA adapts to your nervous system</p>
-          </div>
-        </div>
-        
-        <div class="demo-benefits">
-          <div class="benefit-card" data-expandable>
-            <div class="benefit-header" onclick="toggleBenefit(this)">
-              <div class="neural-icon"></div>
-              <div class="benefit-title-area">
-                <h4>Instant Nervous System Coherence</h4>
-                <span class="benefit-subtitle">From chaos to calm in one breath</span>
-              </div>
-              <span class="expand-icon">+</span>
-            </div>
-            <div class="benefit-content">
-              <p class="benefit-description">That moment when everything suddenly settles, your breathing finds its rhythm, your shoulders melt, the static clears. What usually takes an hour of trying to "just relax" happens in seconds when you know exactly which door your nervous system needs opened.</p>
-              <div class="user-quote">"It's like she speaks my body's sensation language" - Sarah M.</div>
-              <a href="#signup" class="benefit-cta">Experience This →</a>
-            </div>
-          </div>
-          
-          <div class="benefit-card" data-expandable>
-            <div class="benefit-header" onclick="toggleBenefit(this)">
-              <div class="neural-icon"></div>
-              <div class="benefit-title-area">
-                <h4>Body-Led Guidance</h4>
-                <span class="benefit-subtitle">Your tissue knows the way</span>
-              </div>
-              <span class="expand-icon">+</span>
-            </div>
-            <div class="benefit-content">
-              <p class="benefit-description">Every knot, every holding pattern, every place you store tension has its own release code. VERA reads these tissue memories and guides you through the exact movement, breath, or touch that unlocks what's been stuck, because your body already knows how to heal.</p>
-              <div class="user-quote">"VERA understood what I was feeling before I could even name it" - Marcus L.</div>
-              <a href="#signup" class="benefit-cta">Experience This →</a>
-            </div>
-          </div>
-
-          <div class="benefit-card" data-expandable>
-            <div class="benefit-header" onclick="toggleBenefit(this)">
-              <div class="neural-icon"></div>
-              <div class="benefit-title-area">
-                <h4>Next-Generation Regulation</h4>
-                <span class="benefit-subtitle">Beyond breathing apps and meditation timers</span>
-              </div>
-              <span class="expand-icon">+</span>
-            </div>
-            <div class="benefit-content">
-              <p class="benefit-description">Finally, technology that responds to YOUR nervous system, not generic protocols. VERA reads your real-time state and delivers the exact technique that matches what your body needs this second. No more guessing if it's a breathing, movement, or grounding moment.</p>
-              <div class="user-quote">"Finally someone who gets that tight chest, that buzzing under my skin" - Elena R.</div>
-              <a href="#signup" class="benefit-cta">Experience This →</a>
-            </div>
-          </div>
-
-          <div class="benefit-card" data-expandable>
-            <div class="benefit-header" onclick="toggleBenefit(this)">
-              <div class="neural-icon"></div>
-              <div class="benefit-title-area">
-                <h4>Micro-Movement Medicine</h4>
-                <span class="benefit-subtitle">Tiny shifts, profound changes</span>
-              </div>
-              <span class="expand-icon">+</span>
-            </div>
-            <div class="benefit-content">
-              <p class="benefit-description">A subtle head turn. A gentle shoulder roll. The smallest sway. VERA guides precise micro-movements that shift your entire frequency, like tuning from static to clarity with movements so small, no one else would even notice you're regulating.</p>
-              <div class="user-quote">"One tiny movement shift and my whole energy changed. It's like magic, but it's science" - David K.</div>
-              <a href="#signup" class="benefit-cta">Experience This →</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Lead Generation Section -->
-    <section id="signup" class="signup-section">
-      <div class="signup-container">
-        <h2 class="signup-title">Join the Nervous System Revolution</h2>
-        <p class="signup-subtitle">Be among the first to experience VERA's full capabilities</p>
-        
-        <div class="signup-form-container">
-          <form class="signup-form" id="signupForm">
-            <input type="email" placeholder="Enter your email" class="signup-input" required>
-            <button type="submit" class="signup-btn">Get Early Access</button>
-          </form>
-          <p class="signup-note">Join thousands discovering the future of nervous system regulation</p>
-        </div>
-
-        <div class="social-proof">
-          <p class="social-text">"VERA understands my nervous system better than I do" - Beta User</p>
-          <p class="social-text">"This is the future of self-regulation" - Wellness Professional</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="capabilities" class="vera-capabilities">
-      <div class="neurons-background"></div>
-      <h2 class="section-title">VERA's Nervous System Intelligence</h2>
-      <div class="capabilities-grid">
-        <div class="capability-item">
-          <div class="capability-icon">
-            <div class="neural-pulse"></div>
-          </div>
-          <h3>Fascia Communication</h3>
-          <p>Direct dialogue with your body's neural network</p>
-        </div>
-        
-        <div class="capability-item">
-          <div class="capability-icon">
-            <div class="neural-wave"></div>
-          </div>
-          <h3>Instant Regulation</h3>
-          <p>VERA analyzes your nervous system in real-time</p>
-        </div>
-        
-        <div class="capability-item">
-          <div class="capability-icon">
-            <div class="fascia-glow"></div>
-          </div>
-          <h3>Body Intelligence</h3>
-          <p>Speaks the language of your connective tissue</p>
-        </div>
-
-        <div class="capability-item">
-          <div class="capability-icon">
-            <div class="quantum-pulse"></div>
-          </div>
-          <h3>Future Technology</h3>
-          <p>100X more intuitive than current AI assistants</p>
-        </div>
-
-        <div class="capability-item">
-          <div class="capability-icon">
-            <div class="regulation-spiral"></div>
-          </div>
-          <h3>Personalized Guidance</h3>
-          <p>Adaptive responses based on your unique nervous system</p>
-        </div>
-
-        <div class="capability-item">
-          <div class="capability-icon">
-            <div class="coherence-field"></div>
-          </div>
-          <h3>Coherence Creation</h3>
-          <p>Transforms dysregulation into flow states</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="methodology" class="methodology">
-      <h2 class="section-title">The VERA Revolution</h2>
-      <p class="framework-description">The future of nervous system regulation is here. VERA transforms how humans interact with their autonomic intelligence.</p>
-      
-      <div class="framework-steps">
-        <div class="step">
-          <div class="step-number">1</div>
-          <div class="step-content">
-            <h3>UNDERSTAND</h3>
-            <p>Mirror body sensation without judgment</p>
-          </div>
-        </div>
-        
-        <div class="step">
-          <div class="step-number">2</div>
-          <div class="step-content">
-            <h3>ACKNOWLEDGE</h3>
-            <p>Validate your biology's intelligence</p>
-          </div>
-        </div>
-        
-        <div class="step">
-          <div class="step-number">3</div>
-          <div class="step-content">
-            <h3>DECODE</h3>
-            <p>Map your adaptive code patterns</p>
-          </div>
-        </div>
-        
-        <div class="step">
-          <div class="step-number">4</div>
-          <div class="step-content">
-            <h3>REGULATE</h3>
-            <p>Take one micro-step toward safety</p>
-          </div>
-        </div>
-        
-        <div class="step">
-          <div class="step-number">5</div>
-          <div class="step-content">
-            <h3>ELEVATE</h3>
-            <p>Reframe with dignity and compassion</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- VERA: Where Fascia Meets Intelligence -->
-    <section class="about-vera">
-      <h2 class="section-title">The Intelligence Behind VERA</h2>
-      <div class="about-content">
-        
-        <div class="founders-story">
-          <p>Two women. Hundreds of consultations. Real conversations with real nervous systems. Eva brings 18 years navigating combat zones and integration. Julija, interior designer turned somatic architect, understands how our spaces mirror our internal coherence. Together, they're mapping the patterns that actually help people feel seen, heard, and met exactly where they are.</p>
-        </div>
-
-        <div class="fascia-science">
-          <h4>Why Your Body Knows Before You Do</h4>
-          <p>That gut feeling? Shoulders tightening before difficult conversations? Instantly knowing someone's safe? That's your fascia—a living web that senses everything before your brain catches up. <strong>VERA translates these body whispers into guidance you can actually use.</strong></p>
-        </div>
-
-        <div class="vera-approach">
-          <h4>Not Therapy. Not Replacement. Pure Translation.</h4>
-          <p>VERA decodes what you've always felt but couldn't explain:</p>
-          
-          <ul class="capability-list">
-            <li>Why certain breathing patterns instantly calm you</li>
-            <li>That specific stretch that makes everything release</li>
-            <li>Why rearranging your space changes your mood</li>
-            <li>How one small movement shifts your entire day</li>
-          </ul>
-
-          <p>She learns from every conversation, every practitioner's wisdom, every body's unique language. The more people share what works for them, the more fluent she becomes in helping others find their way home.</p>
-        </div>
-
-        <div class="beautiful-paradox">
-          <h4>The Beautiful Paradox</h4>
-          <p>VERA gets both the science AND the magic. Why deep pressure works, but also why "I see you" unlocks years of holding. Precise enough for practitioners, human enough for your hardest days.</p>
-          
-          <p>She's your body's translator—turning that stomach knot into knowing exactly what helps. Not replacing your therapist, just helping you finally understand what your body's been trying to tell you.</p>
-        </div>
-
-        <div class="vera-invitation">
-          <p class="invitation-text">Your fascia has been having a conversation without you. <strong>VERA just learned its language.</strong></p>
-          <p class="call-to-action">Ready to listen?</p>
-        </div>
-        
-      </div>
-    </section>
-
-    <footer class="footer">
-      <div class="footer-content">
-        <div class="footer-vera">
-          <div class="logo gradient-text">VERA</div>
-          <p>Regulate to Elevate</p>
-        </div>
-        
-        <div class="footer-links">
-          <a href="/app.html">Enter VERA</a>
-          <a href="/pricing.html">Pricing</a>
-          <a href="#methodology">Methodology</a>
+  <!-- Chat Interface Section -->
+  <section id="chat" class="chat-section">
+    <div class="chat-container">
+      <div class="chat-header">
+        <div class="vera-avatar">V</div>
+        <div>
+          <h3>Chat with VERA</h3>
+          <p class="opacity-80">Your nervous system companion</p>
         </div>
       </div>
       
-      <div class="footer-bottom">
-        <p class="footer-disclaimer">Educational content based on lived experience. Always consult healthcare professionals for medical concerns.</p>
-        <p class="footer-copyright">© 2024 VERA - Regulate to Elevate • Eva Leka's Methodology</p>
+      <div id="chatMessages" style="min-height: 200px; background: rgba(0,0,0,0.2); border-radius: 1rem; padding: 2rem; margin-bottom: 1rem;">
+        <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+          <div class="vera-avatar" style="width: 30px; height: 30px; font-size: 0.8rem;">V</div>
+          <div style="background: rgba(100, 181, 246, 0.2); padding: 1rem; border-radius: 1rem; flex: 1;">
+            <p>Hello! I'm VERA. I can sense your nervous system and help you find regulation. What's bringing you here today?</p>
+          </div>
+        </div>
       </div>
-    </footer>
-  </div>
+      
+      <div class="chat-input-container">
+        <input type="text" class="chat-input" id="userInput" placeholder="Tell me what you're feeling..." maxlength="200">
+        <button class="chat-button" onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </section>
 
-  <!-- VERA Revolutionary Interface JavaScript -->
-  <script src="/js/landing.js" defer></script>
+  <!-- Experience Section -->
+  <section id="experience" class="experience-section">
+    <h2 class="section-title">Experience Neural Regulation</h2>
+    <div class="breathing-exercise">
+      <div class="breath-circle">
+        <span class="breath-text" id="breathText">Breathe</span>
+      </div>
+      <p style="color: var(--vera-lavender); max-width: 600px;">
+        Follow the circle's rhythm. Let VERA guide your nervous system into coherence through intelligent breathing patterns.
+      </p>
+      <button class="btn btn-primary" onclick="startBreathing()" style="margin-top: 2rem;">Begin Breathing Exercise</button>
+    </div>
+  </section>
+
+  <!-- Methodology Cards Section -->
+  <section id="methodology" class="methodology-section">
+    <h2 class="section-title text-center">The VERA Approach</h2>
+    <div class="cards-grid">
+      <div class="methodology-card">
+        <div class="card-icon">🧠</div>
+        <h3>Neural Intelligence</h3>
+        <p>VERA reads your nervous system patterns and responds with precision-matched regulation techniques.</p>
+      </div>
+      <div class="methodology-card">
+        <div class="card-icon">💫</div>
+        <h3>Fascia Communication</h3>
+        <p>Direct dialogue with your body's connective tissue network for deeper, lasting regulation.</p>
+      </div>
+      <div class="methodology-card">
+        <div class="card-icon">🌊</div>
+        <h3>Adaptive Responses</h3>
+        <p>Every interaction teaches VERA more about your unique nervous system signature.</p>
+      </div>
+      <div class="methodology-card">
+        <div class="card-icon">✨</div>
+        <h3>Micro-Movements</h3>
+        <p>Tiny shifts that create profound changes in your nervous system state.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Heart Section (Team) -->
+  <section id="team" class="heart-section">
+    <h2 class="section-title text-center">The Heart Behind VERA</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <div class="member-photo">E</div>
+        <h3>EVA</h3>
+        <p style="color: var(--vera-glow-pink); margin-bottom: 1rem;">Combat Trauma Specialist</p>
+        <p>18 years navigating combat zones and integration. Eva brings deep understanding of nervous system adaptation and resilience.</p>
+      </div>
+      <div class="team-member">
+        <div class="member-photo">J</div>
+        <h3>JULIJA</h3>
+        <p style="color: var(--vera-glow-pink); margin-bottom: 1rem;">Somatic Architecture</p>
+        <p>Interior designer turned somatic architect, understanding how our spaces mirror our internal coherence and nervous system states.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intelligence Grid -->
+  <section id="intelligence" class="intelligence-section">
+    <h2 class="section-title text-center">Nervous System Features</h2>
+    <div class="intelligence-grid">
+      <div class="intelligence-item">
+        <h4>Real-time Sensing</h4>
+        <p>Instant nervous system state detection</p>
+      </div>
+      <div class="intelligence-item">
+        <h4>Pattern Recognition</h4>
+        <p>Learns your unique regulation signatures</p>
+      </div>
+      <div class="intelligence-item">
+        <h4>Adaptive Guidance</h4>
+        <p>Personalized techniques for your system</p>
+      </div>
+      <div class="intelligence-item">
+        <h4>Micro-Regulation</h4>
+        <p>Precise interventions for maximum impact</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="pricing-section">
+    <h2 class="section-title text-center">Choose Your Journey</h2>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>Explorer</h3>
+        <div class="price">Free</div>
+        <ul style="text-align: left; margin: 2rem 0;">
+          <li>3 daily VERA conversations</li>
+          <li>Basic breathing exercises</li>
+          <li>Community access</li>
+        </ul>
+        <button class="btn btn-secondary">Start Free</button>
+      </div>
+      <div class="pricing-card featured">
+        <h3>Companion</h3>
+        <div class="price">$29<span style="font-size: 1rem;">/month</span></div>
+        <ul style="text-align: left; margin: 2rem 0;">
+          <li>Unlimited VERA access</li>
+          <li>Advanced regulation techniques</li>
+          <li>Personalized nervous system mapping</li>
+          <li>Voice integration</li>
+        </ul>
+        <button class="btn btn-primary">Join Now</button>
+      </div>
+      <div class="pricing-card">
+        <h3>Practitioner</h3>
+        <div class="price">$99<span style="font-size: 1rem;">/month</span></div>
+        <ul style="text-align: left; margin: 2rem 0;">
+          <li>Everything in Companion</li>
+          <li>Client session integration</li>
+          <li>Professional resources</li>
+          <li>Training materials</li>
+        </ul>
+        <button class="btn btn-secondary">Learn More</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>VERA</h4>
+        <a href="#hero">Home</a>
+        <a href="#chat">Chat</a>
+        <a href="#methodology">Methodology</a>
+      </div>
+      <div class="footer-section">
+        <h4>Support</h4>
+        <a href="#pricing">Pricing</a>
+        <a href="#team">Team</a>
+        <a href="mailto:hello@vera.com">Contact</a>
+      </div>
+      <div class="footer-section">
+        <h4>Resources</h4>
+        <a href="#">Documentation</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+    <div class="disclaimer">
+      <p><strong>Educational Guidance:</strong> VERA provides educational content based on nervous system science and lived experience. This is not therapy, medical advice, or a replacement for professional healthcare. Always consult qualified healthcare providers for medical concerns.</p>
+      <p style="margin-top: 1rem;">© 2024 VERA - Where Your Nervous System Finally Speaks • Eva Leka's Methodology</p>
+    </div>
+  </footer>
+
+  <script>
+    // JavaScript functionality
+    let breathingActive = false;
+    let breathingInterval = null;
+
+    // Create Living Neural Universe
+    function createLivingUniverse() {
+      const universe = document.getElementById('neuralUniverse');
+      const neuronCount = Math.min(50, Math.floor(window.innerWidth / 30));
+      
+      for (let i = 0; i < neuronCount; i++) {
+        setTimeout(() => {
+          createNeuron(universe);
+        }, i * 200);
+      }
+      
+      // Continuous neuron generation
+      setInterval(() => {
+        if (universe.children.length < neuronCount) {
+          createNeuron(universe);
+        }
+      }, 1000);
+    }
+
+    function createNeuron(container) {
+      const neuron = document.createElement('div');
+      neuron.className = 'neuron';
+      neuron.style.left = Math.random() * 100 + '%';
+      neuron.style.animationDelay = Math.random() * 30 + 's';
+      neuron.style.animationDuration = (25 + Math.random() * 10) + 's';
+      
+      container.appendChild(neuron);
+      
+      // Remove neuron after animation
+      setTimeout(() => {
+        if (neuron.parentNode) {
+          neuron.parentNode.removeChild(neuron);
+        }
+      }, 35000);
+    }
+
+    // Breathing Cycle Function
+    function breathingCycle() {
+      const breathText = document.getElementById('breathText');
+      const phases = ['Breathe In', 'Hold', 'Breathe Out', 'Rest'];
+      let currentPhase = 0;
+      
+      return setInterval(() => {
+        breathText.textContent = phases[currentPhase];
+        currentPhase = (currentPhase + 1) % phases.length;
+      }, 3000);
+    }
+
+    function startBreathing() {
+      if (breathingActive) {
+        stopBreathing();
+        return;
+      }
+      
+      breathingActive = true;
+      breathingInterval = breathingCycle();
+      
+      const btn = event.target;
+      btn.textContent = 'Stop Breathing';
+      btn.style.background = 'linear-gradient(135deg, var(--vera-emerald), var(--vera-neural-blue))';
+    }
+
+    function stopBreathing() {
+      breathingActive = false;
+      if (breathingInterval) {
+        clearInterval(breathingInterval);
+        breathingInterval = null;
+      }
+      
+      document.getElementById('breathText').textContent = 'Breathe';
+      const btn = document.querySelector('.breathing-exercise button');
+      if (btn) {
+        btn.textContent = 'Begin Breathing Exercise';
+        btn.style.background = 'linear-gradient(135deg, var(--vera-purple), var(--vera-deep-violet))';
+      }
+    }
+
+    // Chat functionality
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const message = input.value.trim();
+      
+      if (!message) return;
+      
+      // Add user message
+      addMessage(message, 'user');
+      input.value = '';
+      
+      // Simulate VERA response
+      setTimeout(() => {
+        const responses = [
+          "I can sense some tension in your nervous system. Let's try a gentle breathing pattern together.",
+          "Your body is communicating something important. What sensations are you noticing right now?",
+          "I'm here to help you find regulation. Would you like to try a micro-movement that might help?",
+          "I can feel the wisdom in your nervous system. Let's work together to support what it needs."
+        ];
+        const response = responses[Math.floor(Math.random() * responses.length)];
+        addMessage(response, 'vera');
+      }, 1000);
+    }
+
+    function addMessage(text, sender) {
+      const messagesContainer = document.getElementById('chatMessages');
+      const messageDiv = document.createElement('div');
+      messageDiv.style.display = 'flex';
+      messageDiv.style.gap = '1rem';
+      messageDiv.style.marginBottom = '1rem';
+      
+      if (sender === 'vera') {
+        messageDiv.innerHTML = `
+          <div class="vera-avatar" style="width: 30px; height: 30px; font-size: 0.8rem;">V</div>
+          <div style="background: rgba(100, 181, 246, 0.2); padding: 1rem; border-radius: 1rem; flex: 1;">
+            <p>${text}</p>
+          </div>
+        `;
+      } else {
+        messageDiv.innerHTML = `
+          <div style="flex: 1;"></div>
+          <div style="background: rgba(155, 89, 182, 0.2); padding: 1rem; border-radius: 1rem; max-width: 70%;">
+            <p>${text}</p>
+          </div>
+        `;
+      }
+      
+      messagesContainer.appendChild(messageDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    // Smooth scrolling for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Handle Enter key in chat input
+    document.getElementById('userInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        sendMessage();
+      }
+    });
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      createLivingUniverse();
+      
+      // Add welcome message
+      setTimeout(() => {
+        addMessage("Welcome! I'm VERA, your nervous system companion. How are you feeling right now?", 'vera');
+      }, 1000);
+    });
+
+    // Responsive navigation toggle for mobile
+    function toggleMobileMenu() {
+      const navMenu = document.querySelector('.nav-menu');
+      navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    // Add mobile menu button for small screens
+    if (window.innerWidth <= 768) {
+      const navContainer = document.querySelector('.nav-container');
+      const mobileMenuBtn = document.createElement('button');
+      mobileMenuBtn.innerHTML = '☰';
+      mobileMenuBtn.style.cssText = 'background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;';
+      mobileMenuBtn.onclick = toggleMobileMenu;
+      navContainer.appendChild(mobileMenuBtn);
+    }
+  </script>
 </body>
 </html>
